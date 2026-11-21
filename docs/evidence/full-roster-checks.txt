@@ -1,0 +1,34 @@
+TESTS
+[09:31:04] [Server thread/INFO] [minecraft/GameTestServer]: All 7 required tests passed :)
+[09:31:06] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+BUILD SUCCESSFUL in 27s
+
+REPRO
+BUILD SUCCESSFUL in 14s
+
+SERVER
+[09:32:17] [Server thread/INFO] [minecraft/DedicatedServer]: Done (2.689s)! For help, type "help"
+[09:35:08] [Server thread/INFO] [minecraft/MinecraftServer]: Dev joined the game
+[09:41:57] [Server thread/INFO] [minecraft/MinecraftServer]: Observer joined the game
+[09:44:53] [Server thread/INFO] [minecraft/MinecraftServer]: Dim minecraft:overworld (minecraft:overworld): Mean tick time: 2.466 ms. Mean TPS: 20.000
+[09:44:53] [Server thread/INFO] [minecraft/MinecraftServer]: Dim minecraft:the_end (minecraft:the_end): Mean tick time: 0.010 ms. Mean TPS: 20.000
+[09:44:53] [Server thread/INFO] [minecraft/MinecraftServer]: Dim minecraft:the_nether (minecraft:the_nether): Mean tick time: 0.005 ms. Mean TPS: 20.000
+[09:44:53] [Server thread/INFO] [minecraft/MinecraftServer]: Overall: Mean tick time: 3.125 ms. Mean TPS: 20.000
+[09:44:53] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[09:45:18] [Server thread/INFO] [minecraft/MinecraftServer]: [Not Secure] [Server] QA_THIRTEEN_UNLOADED
+[09:45:49] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[09:45:51] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+
+RESTART
+[09:46:25] [Server thread/INFO] [minecraft/DedicatedServer]: Done (2.896s)! For help, type "help"
+[09:46:35] [Server thread/INFO] [minecraft/MinecraftServer]: Dev joined the game
+[09:46:47] [Server thread/INFO] [minecraft/MinecraftServer]: Observer joined the game
+[09:48:33] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[09:48:35] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+
+JUnit: 3 tests, 0 skipped, 0 failures, 0 errors.
+Assets: 13 species, 199 bones, 420 boxes; validation passed.
+JAR: two recompiled/reobfuscated builds compare byte-for-byte equal.
+SHA-256: cb5ecdaccb1654e08757a5711f8669c02d2e7732f8ccbf989ea44bb1117eb0b9
+Persistence: all 13 fresh records equal before/after actual chunk unload and server restart.
+Cleanup: server and both production clients exited with status 0.
