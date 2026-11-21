@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'net.minecraftforge.gradle' version '6.0.54'
+}
+group = 'com.forgottenisland'
+version = '0.1.0'
+base { archivesName = 'forgotten-island' }
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    copyIdeResources = true
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'info'
+            property 'forge.enabledGameTestNamespaces', 'forgottenisland'
+            mods { forgottenisland { source sourceSets.main } }
+        }
+        client { }
+        server { workingDirectory project.file('run-server'); args '--nogui' }
+        gameTestServer { workingDirectory project.file('run-gametest') }
+    }
+}
+repositories { mavenCentral() }
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.10'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+test { useJUnitPlatform() }
+// Keep the isolated development server's ordinary console usable for test fixtures.
+tasks.withType(JavaExec).configureEach { if (name == 'runServer') standardInput = System.in }
+jar {
+    manifest.attributes('Specification-Title': 'Forgotten Island', 'Specification-Version': '1',
+        'Implementation-Title': 'Forgotten Island', 'Implementation-Version': project.version)
+    finalizedBy 'reobfJar'
+}

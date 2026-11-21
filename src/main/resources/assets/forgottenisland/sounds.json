@@ -1,0 +1,119 @@
+{
+  "bakunawa_call": {
+    "subtitle": "subtitles.forgottenisland.bakunawa",
+    "sounds": [
+      {
+        "name": "forgottenisland:bakunawa_call",
+        "attenuation_distance": 32
+      }
+    ]
+  },
+  "raww_call": {
+    "subtitle": "subtitles.forgottenisland.raww",
+    "sounds": [
+      {
+        "name": "forgottenisland:raww_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "manang_call": {
+    "subtitle": "subtitles.forgottenisland.manang",
+    "sounds": [
+      {
+        "name": "forgottenisland:manang_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "sarimanok_call": {
+    "subtitle": "subtitles.forgottenisland.sarimanok",
+    "sounds": [
+      {
+        "name": "forgottenisland:sarimanok_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "datu_call": {
+    "subtitle": "subtitles.forgottenisland.datu",
+    "sounds": [
+      {
+        "name": "forgottenisland:datu_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "duwende_call": {
+    "subtitle": "subtitles.forgottenisland.duwende",
+    "sounds": [
+      {
+        "name": "forgottenisland:duwende_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "bungi_call": {
+    "subtitle": "subtitles.forgottenisland.bungi",
+    "sounds": [
+      {
+        "name": "forgottenisland:bungi_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "batiba_call": {
+    "subtitle": "subtitles.forgottenisland.batiba",
+    "sounds": [
+      {
+        "name": "forgottenisland:batiba_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "mermahn_call": {
+    "subtitle": "subtitles.forgottenisland.mermahn",
+    "sounds": [
+      {
+        "name": "forgottenisland:mermahn_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "zippy_call": {
+    "subtitle": "subtitles.forgottenisland.zippy",
+    "sounds": [
+      {
+        "name": "forgottenisland:zippy_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "tikbalang_call": {
+    "subtitle": "subtitles.forgottenisland.tikbalang",
+    "sounds": [
+      {
+        "name": "forgottenisland:tikbalang_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "sarangay_call": {
+    "subtitle": "subtitles.forgottenisland.sarangay",
+    "sounds": [
+      {
+        "name": "forgottenisland:sarangay_call",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "flamingchef_call": {
+    "subtitle": "subtitles.forgottenisland.flamingchef",
+    "sounds": [
+      {
+        "name": "forgottenisland:flamingchef_call",
+        "attenuation_distance": 16
+      }
+    ]
+  }
+}

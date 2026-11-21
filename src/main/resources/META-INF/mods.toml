@@ -1,0 +1,21 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="See LICENSE and docs/asset-licenses.md"
+[[mods]]
+modId="forgottenisland"
+version="0.1.0"
+displayName="Forgotten Island: Wild Companions"
+authors="Forgotten Island mod contributors"
+description='''Whimsical companions inspired by Forgotten Island and Philippine folklore. An unofficial fan mod with original models, textures and sounds.'''
+[[dependencies.forgottenisland]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.10,48)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.forgottenisland]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"
