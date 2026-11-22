@@ -58,9 +58,7 @@ jobs:
           version-type: ${{ steps.release.outputs.release_type }}
           changelog-file: build/curseforge-publish/changelog.md
           loaders: forge
-          environment: |
-            client
-            server
+          environment: 'client | server'
           game-versions: 1.20.1
           java: '17'
           retry-attempts: 1
