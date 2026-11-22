@@ -27,6 +27,7 @@ public final class AdventureContent {
     public static final RegistryObject<SoundEvent> FESTIVAL=ForgottenIsland.SOUNDS.register("festival_ambience",()->SoundEvent.createVariableRangeEvent(ForgottenIsland.id("festival_ambience")));
     public static final RegistryObject<SoundEvent> BOSS_WARNING=sound("boss_warning"),SHRIEK=sound("manang_shriek"),BOSS_IMPACT=sound("boss_impact"),MOON_DEVOUR=sound("moon_devour"),BOSS_RELEASE=sound("boss_release"),WEAKPOINT=sound("weakpoint");
     public static final RegistryObject<SoundEvent> CAVE_AMBIENCE=sound("cave_ambience"),MOUNTAIN_AMBIENCE=sound("mountain_ambience"),COAST_AMBIENCE=sound("coast_ambience");
+    public static final RegistryObject<SoundEvent> BAKUNAWA_ROAR=sound("bakunawa_roar");
     public static final RegistryObject<EntityType<IslandBoss>> MANANG_BOSS=boss(BossKind.MANANG),BAKUNAWA_BOSS=boss(BossKind.BAKUNAWA);
     private static RegistryObject<SoundEvent> sound(String id){return ForgottenIsland.SOUNDS.register(id,()->SoundEvent.createVariableRangeEvent(ForgottenIsland.id(id)));}
     private static RegistryObject<EntityType<IslandBoss>> boss(BossKind kind) {
@@ -40,6 +41,7 @@ public final class AdventureContent {
     public static void creative(net.minecraft.world.item.CreativeModeTab.Output out) {
         out.accept(STAR_NECKLACE.get());out.accept(PAROL_ITEM.get());out.accept(LANTERN_ITEM.get());
         out.accept(MANANG_WINGS.get());out.accept(CRYSTAL_SWORD.get());out.accept(BAKUNAWA_SKULL.get());
+        com.forgottenisland.arsenal.ArsenalContent.creative(out);
     }
     private AdventureContent() {}
 }

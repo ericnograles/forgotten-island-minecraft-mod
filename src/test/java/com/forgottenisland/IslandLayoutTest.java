@@ -18,6 +18,8 @@ class IslandLayoutTest {
     @Test void destinationsHaveDistinctElevationsAndEnoughCombatSpace(){
         assertEquals(104,IslandLayout.height(535,-215));assertTrue(IslandLayout.cavern(475,190));
         assertTrue(IslandLayout.market(310,65));
+        assertFalse(IslandLayout.land(820,-180),"Bakunawa's untouched northern bay must remain ocean");
+        assertTrue(IslandLayout.land(820,-149),"The full combat arena must remain dry");
         for(int dx=-84;dx<=84;dx++)for(int dz=-84;dz<=84;dz++)if(dx*dx+dz*dz<=84*84)assertEquals(64,IslandLayout.height(820+dx,-65+dz));
     }
 }

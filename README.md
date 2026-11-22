@@ -1,8 +1,8 @@
 # Forgotten Island: Wild Companions
 
-Version **0.3.0** adds a craftable Homeward Star Necklace, an eastern island expansion with a festival quarter, Batiba's cave, Manang's mountain and a wider Bakunawa coast, plus Bite and Eat, Tentacles and Holy Beam. All thirteen original companions remain available.
+Version **0.4.0** adds the drawing-inspired black/red Bakunawa boss, eleven animated attacks, ocean-rise and split/explosion cinematics, three craftable swords with Sneak abilities, spiked Crystal Armor, and a horned egg that hatches a growing friendly Bakunawa. The necklace, expanded island, stomach adventure and all thirteen companions remain available.
 
-The release passes the build, 13 unit tests, 26 Forge GameTests and asset validation, with packaged single-player and two-client demonstrations. See the [0.3 evidence ledger](docs/adventure-tranche3.md) for captures, save-upgrade checks, performance snapshots and assistance used. Earlier [0.2 evidence](docs/adventure-development.md) describes the previous release. Full unassisted Survival acquisition/progression and a fresh 0.3 solo/cooperative victory balance review remain assigned to human testers.
+See the [0.4 design and verification ledger](docs/adventure-tranche4.md) for exact damage, recipes, armor behavior, growth, test results and playtest assistance. Previous [0.3 evidence](docs/adventure-tranche3.md) covers the island expansion and save upgrades. Full unassisted Survival progression and fresh solo/cooperative balance review remain assigned to human testers.
 
 An unofficial Minecraft Java mod inspired by DreamWorks' *Forgotten Island* and Philippine folklore. **Thirteen playable creatures** with original models, companion abilities and three rideable creatures. See [the verification ledger](docs/verification.md) for automated tests, single-player and multiplayer evidence, and remaining limits.
 
@@ -13,7 +13,7 @@ The current build includes **thirteen creatures**: Bakunawa, Raww, Manang, Sarim
 Requires **Minecraft Java Edition 1.20.1**, **Java 17**, and **Forge 47.4.10** (the pinned test version). No animation or other mod dependencies are required. The declared Forge range is 47.4.10–47.x; other Forge releases have not been tested.
 
 1. Install the matching [official Forge client](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html).
-2. Copy `forgotten-island-0.3.0.jar` from the release archive (or `build/libs` after building the source) into that Minecraft profile's `mods` folder.
+2. Copy `forgotten-island-0.4.0.jar` from the release archive (or `build/libs` after building the source) into that Minecraft profile's `mods` folder.
 3. Launch the Forge profile. Put the same JAR on a Forge server and every connecting client for multiplayer.
 4. In Survival, craft the field guide and follow the portal plan below. For the original companion showcase, use the **Forgotten Island** tab on the second Creative-tab page.
 
@@ -50,7 +50,9 @@ Enter an arena in Survival to awaken its boss. Party health scales at awakening 
 Bring enchanted armor, a sword, food and healing supplies. The **previous 0.2** verified victories used Protection II diamond armor, a Sharpness III diamond sword, a shield and ordinary golden apples. These are obtainable before either boss; iron-only victory has not been established. Learn the warning patterns and move back into melee reach after knockback.
 
 - **Manang** stands about 4.7 blocks tall while joined. Her upper body separates for Shadow Dive, Shriek and Wing Cut. Leave the marked circle, jump over the expanding ring, or move out of her facing arc. Strike the lower body when her wings fold after an attack. The second half of the fight accelerates her pattern.
-- **Bakunawa** retains the articulated sea-serpent body, three accessible moon anchors, Moonfall, Lunar Tide and Eclipse Breath. New attacks alternate into the encounter: **Bite and Eat** visibly lunges into an amber warning circle and swallows connected targets; **Tentacles** rise from five blue circles, strike for 7 damage before normal mitigation and withdraw; **Holy Beam** charges a white/gold line, discharges once, and recovers. Anchors turn gold during recovery. At half health, attacks accelerate.
+- **Bakunawa** rises with an articulated black/red body, angular horns, visible fangs and luminous eyes. Chomp/swallowing, Moon Rocks and Fireballs deal **9 HP**; Tentacles **7**; Tail Whip and Horn Slash **5**; Atomic Breath **1 HP each second** during its three-second discharge. Golden Ward grants **five seconds of invincibility**. Holy Beam, Lunar Tide and Eclipse Breath remain. Ground warnings, visible projectiles and sweeping limbs share the server's hit timing. Strike the three gold moon anchors during recovery. Phase II accelerates the pattern.
+
+Newly generated northern coast stays ocean for the rise. Previously expanded terrain and player construction are preserved. Use a client/server view distance of at least **10 chunks** (12 recommended) for the full coastal backdrop; the encounter remains playable at shorter distances.
 
 Swallowed players explore a sealed ribbed interior with a rising passage and three luminous Memory Crystals. Breaking all three is the only normal escape and ejects all swallowed fighters together, safely back into the fight. No special pickaxe, wings or Crystal Sword is required. Everyone inside still counts toward the encounter and rewards. Death, reset, defeat, emergency recovery and stale reconnects are explicit escape safeguards. Offline guests keep durable recovery markers; restart does not erase crystal progress.
 
@@ -69,9 +71,25 @@ Rewards appear on the south dais only after the defeated scene finishes. Each Su
 
 Effects are confined to the arenas and participants. Attacks never set block fire or destroy terrain; the market residents remain peaceful and protected. A full trading economy and quest system are outside this expansion.
 
+## Crystal arsenal and hatching
+
+Craft a Prismatic Crystal from two amethyst shards, a prismarine crystal, a diamond and blaze powder. Combine three Prismatic Crystals with a netherite sword and a spider eye (Crystal), lapis lazuli (Sapphire Soul), or blaze rod (Phoenix). Exact grids are in the field guide and [0.4 crafting reference](docs/adventure-tranche4.md#equipment-and-crafting).
+
+| Sword | Fully charged base melee damage | Press Sneak while held |
+| --- | ---: | --- |
+| Crystal | 6,000 | Fire/poison burst within six blocks; 10-second cooldown |
+| Sapphire Soul | 1,000 | Reveal enemies within 32 blocks for eight seconds; 15-second cooldown |
+| Phoenix | 2,600 | Launch a fireball; five-second cooldown |
+
+Release Sneak between activations. Abilities ignore players and friendly companions. Cooldowns persist through saves and death. These deliberately powerful, craftable weapons can defeat bosses very quickly.
+
+Crystal Armor uses four Prismatic Crystals around each matching netherite piece. Armor strengths are **100 / 900 / 250 / 69** (helmet/chest/legs/boots), totaling **1,319**. Full strength is honored beyond Minecraft's attribute cap, while ordinary armor reduction remains capped at 80%. Holy Beam bypasses it. Repair armor with Prismatic Crystals; Mending works. These are crafting recipes and consume the old equipment, including its enchantments.
+
+Craft the horned Bakunawa egg from five prismarine crystals, an amethyst shard and a chicken egg. Place it with open space above: it cracks over **60 loaded seconds**, then hatches already bonded to its placer. A blocked egg waits. The baby grows for **20 loaded minutes**; feeding prismarine crystals speeds growth. Adults can be ridden. Ownership, incubation and age survive saves.
+
 ## Original companions
 
-Right-click an egg to spawn its creature. Give it three of its favorite gift to befriend it; each creature tells you what it likes when you interact. In Creative, the Showcase Wand befriends instantly and demonstrates its ability on the next use. It cannot take another player's companion.
+Right-click a companion egg to spawn its creature. Bakunawa uses the hatching process above. Give it three of its favorite gift to befriend it; each creature tells you what it likes when you interact. In Creative, the Showcase Wand befriends instantly and demonstrates its ability on the next use. It cannot take another player's companion.
 
 | Action | Control |
 |---|---|
@@ -127,6 +145,7 @@ python3 -m venv .tools-venv
 .tools-venv/bin/python tools/generate_assets.py
 .tools-venv/bin/python tools/generate_adventure_assets.py
 .tools-venv/bin/python tools/generate_tranche_assets.py
+.tools-venv/bin/python tools/generate_tranche4_assets.py
 .tools-venv/bin/python tools/validate_assets.py
 .tools-venv/bin/python tools/validate_adventure_assets.py
 ```

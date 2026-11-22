@@ -1,0 +1,28 @@
+{
+  "tests": 13,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.forgottenisland.StarPatternTest",
+      "tests": 2
+    },
+    {
+      "name": "com.forgottenisland.IslandLayoutTest",
+      "tests": 2
+    },
+    {
+      "name": "com.forgottenisland.StomachStateTest",
+      "tests": 3
+    },
+    {
+      "name": "com.forgottenisland.EncounterStateTest",
+      "tests": 3
+    },
+    {
+      "name": "com.forgottenisland.CompanionRulesTest",
+      "tests": 3
+    }
+  ]
+}

@@ -58,11 +58,11 @@ public final class BossEncounters {
                 }
             }
             active=state.stage()!=EncounterState.Stage.READY&&state.stage()!=EncounterState.Stage.COMPLETE;
-            if(active&&r.loadTicks>=40&&level.areEntitiesLoaded(new ChunkPos(BlockPos.containing(kind.origin())).toLong())) {
+            if(active&&r.loadTicks>=40&&level.areEntitiesLoaded(new ChunkPos(BlockPos.containing(kind.actorOrigin())).toLong())) {
                 IslandBoss actor=state.actor()!=null&&level.getEntity(state.actor()) instanceof IslandBoss boss?boss:null;
                 if(actor==null) {
                     actor=(kind==BossKind.MANANG?AdventureContent.MANANG_BOSS:AdventureContent.BAKUNAWA_BOSS).get().create(level);
-                    if(actor!=null){actor.setUUID(state.actor());actor.moveTo(kind.origin().x,kind.origin().y,kind.origin().z,0,0);actor.sync(state);level.addFreshEntity(actor);}
+                    if(actor!=null){actor.setUUID(state.actor());actor.moveTo(kind.actorOrigin().x,kind.actorOrigin().y,kind.actorOrigin().z,0,0);actor.sync(state);level.addFreshEntity(actor);}
                 }
                 state.tick(kind.entranceLength,kind.defeatLength);data.setDirty();
                 if(actor!=null)actor.sync(state);

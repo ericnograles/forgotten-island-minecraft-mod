@@ -1,0 +1,17 @@
+{
+  "version": "0.4.0",
+  "minecraft": "1.20.1",
+  "forge": "47.4.10",
+  "java": "17.0.15",
+  "jar": "forgotten-island-0.4.0.jar",
+  "sha256": "ec32b02bc1ee95a110ec54707017cd67f42858af22b0f8dd093886ef0164fc2e",
+  "bytes": 1793282,
+  "native_final_build": [
+    "two-client dedicated server",
+    "singleplayer reload and flight"
+  ],
+  "automated": {
+    "junit": 13,
+    "forge_gametests": 36
+  }
+}

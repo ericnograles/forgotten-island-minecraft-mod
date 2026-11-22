@@ -30,7 +30,8 @@ public class CreatureModel extends EntityModel<IslandCreature> {
         MeshDefinition mesh=new MeshDefinition();
         Map<String,PartDefinition> bones=new HashMap<>();
         bones.put("root",mesh.getRoot().addOrReplaceChild("body_root",CubeListBuilder.create(),PartPose.offset(0,24,0)));
-        try(var reader=new InputStreamReader(Minecraft.getInstance().getResourceManager().getResourceOrThrow(ForgottenIsland.id("models/creature/"+s.id+".json")).open(),StandardCharsets.UTF_8)) {
+        String modelId=boss&&s==Species.BAKUNAWA?"bakunawa_boss":s.id;
+        try(var reader=new InputStreamReader(Minecraft.getInstance().getResourceManager().getResourceOrThrow(ForgottenIsland.id("models/creature/"+modelId+".json")).open(),StandardCharsets.UTF_8)) {
             JsonObject model=JsonParser.parseReader(reader).getAsJsonObject();
             for(JsonElement element:model.getAsJsonArray("bones")) {
                 JsonObject bone=element.getAsJsonObject();String name=bone.get("name").getAsString();
