@@ -1,0 +1,72 @@
+name: Publish release to CurseForge
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing published GitHub release tag
+        required: true
+        type: string
+      dry_run:
+        description: Verify the release without uploading
+        default: true
+        type: boolean
+
+permissions:
+  contents: write # Add a publication receipt to the existing GitHub release.
+
+concurrency:
+  group: curseforge-release-${{ github.event.release.tag_name || inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'ericnograles/forgotten-island-minecraft-mod'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+      CURSEFORGE_PROJECT_ID: ${{ vars.CURSEFORGE_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Check publisher configuration
+        if: ${{ !inputs.dry_run }}
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+        run: |
+          test -n "$CURSEFORGE_TOKEN" || { echo 'Set the CURSEFORGE_TOKEN repository secret'; exit 1; }
+          [[ "$CURSEFORGE_PROJECT_ID" =~ ^[0-9]+$ ]] || { echo 'Set the numeric CURSEFORGE_PROJECT_ID repository variable'; exit 1; }
+      - name: Download and verify the published JAR
+        id: release
+        run: python3 tools/publishing/release.py prepare
+      - name: Submit the verified JAR to CurseForge
+        id: publish
+        if: ${{ !inputs.dry_run && steps.release.outputs.already_published != 'true' }}
+        uses: Kira-NT/mc-publish@c23376546a97f5ba7984e94445da359459b14419 # v3
+        with:
+          curseforge-id: ${{ vars.CURSEFORGE_PROJECT_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          files: ${{ steps.release.outputs.jar }}
+          name: Forgotten Island ${{ steps.release.outputs.version }} - Forge 1.20.1
+          version: ${{ steps.release.outputs.version }}
+          version-type: ${{ steps.release.outputs.release_type }}
+          changelog-file: build/curseforge-publish/changelog.md
+          loaders: forge
+          environment: |
+            client
+            server
+          game-versions: 1.20.1
+          java: '17'
+          retry-attempts: 1
+          fail-mode: fail
+      - name: Save publication receipt
+        if: ${{ !inputs.dry_run && steps.release.outputs.already_published != 'true' }}
+        env:
+          CURSEFORGE_FILE_ID: ${{ steps.publish.outputs.curseforge-version }}
+        run: python3 tools/publishing/release.py record

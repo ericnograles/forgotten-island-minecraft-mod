@@ -1,0 +1,13 @@
+Forgotten Island 0.4.0 - Forge 1.20.1
+
+- Redesigned Bakunawa with eleven animated attacks and new entrance/defeat cinematics.
+- Craftable Crystal, Sapphire Soul, and Phoenix swords with Sneak abilities.
+- Craftable Crystal Armor with strengths 100 / 900 / 250 / 69.
+- Horned Bakunawa egg with incubation, bonded hatchlings, feeding, growth, and adult flight/swimming.
+- Five new field-guide pages. All thirteen companions, travel, destinations, and rewards remain available.
+
+Requires Minecraft Java 1.20.1, Forge 47.4.10, and Java 17. Install the same version on server and clients. No additional mod dependencies. Back up existing worlds before updating.
+
+Playtest build: automated checks and assisted native checks passed; unassisted progression and wider balance review remain open.
+
+Full release notes: https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/tag/v0.4.0
