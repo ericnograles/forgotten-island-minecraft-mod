@@ -1,5 +1,7 @@
 # Asset provenance
 
+The CurseForge listing icon at `docs/branding/curseforge-icon.png` is an original AI-generated promotional illustration made with the built-in image generation tool. Its prompt is preserved in `docs/branding/icon-prompt.txt`. It depicts a stylized friendly serpent, island, and star lantern; it is not an in-game screenshot or a film asset, and it is not bundled into the mod JAR.
+
 All shipped creature meshes, UV atlases, item icons, the memory-mote sprite, animation code, and synthesized Ogg calls were authored for this project. Their editable sources are `assets-src/models/*.json`, `assets-src/palettes.json`, `tools/generate_assets.py`, and `CreatureModel.java`. They use the project MIT license, subject to underlying character/trademark rights described in LICENSE.
 
 No film frames, film audio, actors' voices, soundtrack recordings, downloaded fan models, or vanilla-mob recolors are included. Publicity stills were inspected as references, not copied into game resources. Attribution and visual-reference links are in creature-roster.md.

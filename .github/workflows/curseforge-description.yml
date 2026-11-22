@@ -1,0 +1,32 @@
+name: Sync CurseForge player guide
+
+on:
+  push:
+    branches: [main]
+    paths: ['docs/curseforge/description.html']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: curseforge-description
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: >-
+      github.repository == 'ericnograles/forgotten-island-minecraft-mod' &&
+      (github.event_name == 'workflow_dispatch' || vars.CURSEFORGE_DESCRIPTION_SYNC_ENABLED == 'true')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Update the CurseForge description
+        env:
+          CURSEFORGE_PROJECT_ID: ${{ vars.CURSEFORGE_PROJECT_ID }}
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+        run: python3 tools/publishing/sync_description.py

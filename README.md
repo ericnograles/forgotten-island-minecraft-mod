@@ -1,5 +1,7 @@
 # Forgotten Island: Wild Companions
 
+The [CurseForge player guide](docs/curseforge/description.html) collects the installation, companions, controls, recipes, and boss instructions used by the listing. Maintainers can find release synchronization instructions in [CurseForge publishing](docs/curseforge/PUBLISHING.md).
+
 Version **0.4.0** adds the drawing-inspired black/red Bakunawa boss, eleven animated attacks, ocean-rise and split/explosion cinematics, three craftable swords with Sneak abilities, spiked Crystal Armor, and a horned egg that hatches a growing friendly Bakunawa. The necklace, expanded island, stomach adventure and all thirteen companions remain available.
 
 See the [0.4 design and verification ledger](docs/adventure-tranche4.md) for exact damage, recipes, armor behavior, growth, test results and playtest assistance. Previous [0.3 evidence](docs/adventure-tranche3.md) covers the island expansion and save upgrades. Full unassisted Survival progression and fresh solo/cooperative balance review remain assigned to human testers.
