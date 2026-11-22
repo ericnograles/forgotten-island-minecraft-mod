@@ -116,9 +116,9 @@ public final class TrancheGameTests {
         var data=IslandSavedData.get(l.getServer());data.registerNecklacePortal(center);var otherHome=center.offset(200,0,0);data.link(other.getUUID(),otherHome);
         l.setBlockAndUpdate(center,AdventureContent.STAR_PORTAL.get().defaultBlockState());p.setPos(center.getCenter().add(0,-.3,0));p.setDeltaMovement(0,-.1,0);
         AdventureContent.STAR_PORTAL.get().entityInside(l.getBlockState(center),l,center,p);IslandTravel.finishTick(l.getServer());
-        h.assertTrue(p.level().dimension()==AdventureContent.ISLAND,"Downward portal contact did not travel");
+        h.assertTrue(p.level().dimension()==AdventureContent.HIGHLANDS,"Downward portal contact did not travel");
         h.assertTrue(data.departure(p.getUUID()).orElseThrow().equals(center)&&data.departure(other.getUUID()).orElseThrow().equals(otherHome),"Travel mixed personal departures");
-        IslandTravel.through(p,IslandTravel.RETURN_STAR);h.assertTrue(p.level().dimension()==AdventureContent.ISLAND,"Travel cooldown was ignored");
+        IslandTravel.through(p,IslandTravel.RETURN_STAR);h.assertTrue(p.level().dimension()==AdventureContent.HIGHLANDS,"Travel cooldown was ignored");
         IslandTravel.home(p);h.assertTrue(p.level().dimension()==Level.OVERWORLD&&p.position().distanceTo(center.getCenter())<20,"Emergency return lost necklace destination");h.succeed();
     }
     @GameTest(template="empty",timeoutTicks=200)

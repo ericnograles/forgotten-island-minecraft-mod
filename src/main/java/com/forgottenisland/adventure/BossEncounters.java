@@ -21,74 +21,109 @@ import java.util.*;
 
 @Mod.EventBusSubscriber(modid=ForgottenIsland.ID)
 public final class BossEncounters {
-    private static final TicketType<Integer> TICKET=TicketType.create("forgottenisland_encounter",Integer::compare,40);
-    private static final Map<ServerLevel,EnumMap<BossKind,Runtime>> RUNTIME=new HashMap<>();
+    private static final TicketType<String> TICKET=TicketType.create("forgottenisland_encounter",String::compareTo,40);
+    private static final Map<ServerLevel,Map<String,Runtime>> RUNTIME=new HashMap<>();
     private static final class Runtime {
         final ServerBossEvent meter;
-        int emptyTicks,loadTicks;
+        int emptyTicks;
+        long nextPlacement;
+        String obstruction;
         Runtime(BossKind kind){meter=new ServerBossEvent(Component.literal(kind.title),kind==BossKind.MANANG?BossEvent.BossBarColor.PURPLE:BossEvent.BossBarColor.BLUE,BossEvent.BossBarOverlay.PROGRESS);}
     }
     @SubscribeEvent public static void stopped(ServerStoppedEvent e){RUNTIME.keySet().removeIf(l->l.getServer()==e.getServer());}
+    static boolean overlaps(IslandSavedData data,ServerLevel level,BossKind kind,BlockPos center){
+        var arenas=new ArrayList<>(data.tests.values());
+        for(var k:BossKind.values())arenas.add(Arena.island(k));
+        return arenas.stream().anyMatch(a->a.dimension()==level.dimension()&&Math.hypot(a.center().getX()-center.getX(),a.center().getZ()-center.getZ())<a.kind().radius+kind.radius+8);
+    }
+    static void start(ServerLevel level,Arena a,IslandSavedData data,List<ServerPlayer> guests){
+        var state=data.encounter(a.id());
+        if(!state.start(a.kind().baseHealth,guests.stream().map(ServerPlayer::getUUID).toList(),UUID.randomUUID()))return;
+        if(a.direct())state.directForm(a.kind()==BossKind.BAKUNAWA);
+        level.getChunk(a.center());
+        spawn(level,a,state);
+        data.setDirty();
+    }
+    private static IslandBoss spawn(ServerLevel level,Arena a,EncounterState state){
+        var actor=(a.kind()==BossKind.MANANG?AdventureContent.MANANG_BOSS:AdventureContent.BAKUNAWA_BOSS).get().create(level);
+        if(actor==null)return null;
+        actor.setUUID(state.actor());actor.bind(a);actor.moveTo(Vec3.atBottomCenterOf(a.center()));actor.sync(state);
+        return level.addFreshEntity(actor)?actor:null;
+    }
     @SubscribeEvent public static void tick(TickEvent.ServerTickEvent e) {
         if(e.phase!=TickEvent.Phase.END)return;
-        var level=e.getServer().getLevel(AdventureContent.ISLAND);if(level==null)return;
-        var data=IslandSavedData.get(e.getServer());
-        var runtime=RUNTIME.computeIfAbsent(level,k->new EnumMap<>(BossKind.class));
-        for(var kind:BossKind.values()) {
-            var r=runtime.computeIfAbsent(kind,Runtime::new);var state=data.encounter(kind.id);
-            var players=e.getServer().getPlayerList().getPlayers().stream().filter(p->p.isAlive()&&!p.isCreative()&&!p.isSpectator()&&
-                (p.level()==level&&kind.inside(p.position())||kind==BossKind.BAKUNAWA&&BakunawaStomach.participating(p,state.attempt()))).toList();
-            r.emptyTicks=players.isEmpty()?r.emptyTicks+1:0;
-            boolean active=state.stage()!=EncounterState.Stage.READY&&state.stage()!=EncounterState.Stage.COMPLETE;
-            if(!players.isEmpty()||active) {
-                // Ephemeral tickets expire after retreat. No permanent chunk forcing survives a restart.
-                level.getChunkSource().addRegionTicket(TICKET,new ChunkPos(kind.center),4,kind.ordinal());
-                level.getChunk(kind.center);r.loadTicks++;
-            } else r.loadTicks=0;
-            if(state.stage()==EncounterState.Stage.READY&&!players.isEmpty()&&r.loadTicks>=40) {
-                state.start(kind.baseHealth,players.stream().map(ServerPlayer::getUUID).toList(),UUID.randomUUID());data.setDirty();
-                if(kind==BossKind.BAKUNAWA)BakunawaStomach.prepare(e.getServer());
+        var server=e.getServer();var data=IslandSavedData.get(server);
+        var arenas=new ArrayList<>(data.tests.values());
+        for(var k:BossKind.values()){
+            var a=Arena.island(k);
+            arenas.add(data.legacyVictories.contains(k.id)?new Arena(k.id,k,AdventureContent.ISLAND,k.center,0,false):a);
+        }
+        for(var a:arenas){var l=server.getLevel(a.dimension());if(l!=null)update(l,a,data);}
+    }
+    static void update(ServerLevel level,Arena a,IslandSavedData data){
+        var kind=a.kind();var state=data.encounter(a.id());
+        var runtime=RUNTIME.computeIfAbsent(level,k->new HashMap<>());
+        var r=runtime.computeIfAbsent(a.id(),k->new Runtime(kind));
+        var players=level.getServer().getPlayerList().getPlayers().stream().filter(p->p.isAlive()&&!p.isSpectator()&&
+            (p.level()==level&&a.contains(p.position())||kind==BossKind.BAKUNAWA&&BakunawaStomach.participating(p,a.id(),state.attempt()))).toList();
+        boolean approach=level.players().stream().anyMatch(p->!p.isSpectator()&&p.distanceToSqr(Vec3.atCenterOf(a.center()))<Math.pow(kind.radius+36,2));
+        boolean active=state.stage()!=EncounterState.Stage.READY&&state.stage()!=EncounterState.Stage.COMPLETE;
+        var chunk=new ChunkPos(a.center());
+        if(level.getServer().getPlayerList().getPlayers().isEmpty()){
+            level.getChunkSource().removeRegionTicket(TICKET,chunk,2,a.id());r.meter.removeAllPlayers();return;
+        }
+        if(active||approach&&state.stage()==EncounterState.Stage.READY)level.getChunkSource().addRegionTicket(TICKET,chunk,2,a.id());
+        if(state.stage()==EncounterState.Stage.READY&&approach&&(level.getGameTime()>=r.nextPlacement||!players.isEmpty()&&r.emptyTicks==0)){
+            r.obstruction=BossEggItem.placement(level,kind,a.center());
+            r.nextPlacement=level.getGameTime()+40;
+        }
+        if(state.stage()==EncounterState.Stage.READY&&!players.isEmpty()){
+            if(r.obstruction!=null){if(level.getGameTime()%40==0||r.emptyTicks==0)for(var p:players)p.displayClientMessage(Component.literal(r.obstruction),false);r.emptyTicks=1;return;}
+            start(level,a,data,players);
+        }
+        if(state.stage()==EncounterState.Stage.READY)return;
+        if(state.stage()!=EncounterState.Stage.COMPLETE){
+            if(players.isEmpty())r.emptyTicks++;else r.emptyTicks=0;
+            if(state.stage()!=EncounterState.Stage.DEFEAT&&r.emptyTicks>=200){
+                var actor=level.getEntity(state.actor());if(actor!=null)actor.discard();
+                if(kind==BossKind.BAKUNAWA)data.interior(a.id()).release();
+                state.retry();r.meter.removeAllPlayers();level.getChunkSource().removeRegionTicket(TICKET,chunk,2,a.id());
+                if(a.testing()){data.removeTest(a);runtime.remove(a.id());}data.setDirty();return;
             }
-            if(state.stage()==EncounterState.Stage.COMBAT||state.stage()==EncounterState.Stage.ENTRANCE) {
-                for(var p:players)if(!state.participants().contains(p.getUUID())){state.join(p.getUUID());data.setDirty();}
-                if(r.emptyTicks>=200) {
-                    if(kind==BossKind.BAKUNAWA)BakunawaStomach.release(e.getServer());
-                    var actor=state.actor()==null?null:level.getEntity(state.actor());if(actor!=null)actor.discard();
-                    state.retry();data.setDirty();r.meter.removeAllPlayers();continue;
+            for(var p:players)if(!state.participants().contains(p.getUUID())){state.join(p.getUUID());data.setDirty();}
+            if(level.areEntitiesLoaded(chunk.toLong())){
+                var actor=level.getEntity(state.actor()) instanceof IslandBoss boss?boss:spawn(level,a,state);
+                if(actor!=null){
+                    boolean fighting=players.stream().anyMatch(p->!p.isCreative());
+                    if(state.stage()!=EncounterState.Stage.COMBAT||fighting){state.tick(kind.entranceLength,kind.defeatLength);data.setDirty();}
+                    actor.sync(state);
                 }
-            }
-            active=state.stage()!=EncounterState.Stage.READY&&state.stage()!=EncounterState.Stage.COMPLETE;
-            if(active&&r.loadTicks>=40&&level.areEntitiesLoaded(new ChunkPos(BlockPos.containing(kind.actorOrigin())).toLong())) {
-                IslandBoss actor=state.actor()!=null&&level.getEntity(state.actor()) instanceof IslandBoss boss?boss:null;
-                if(actor==null) {
-                    actor=(kind==BossKind.MANANG?AdventureContent.MANANG_BOSS:AdventureContent.BAKUNAWA_BOSS).get().create(level);
-                    if(actor!=null){actor.setUUID(state.actor());actor.moveTo(kind.actorOrigin().x,kind.actorOrigin().y,kind.actorOrigin().z,0,0);actor.sync(state);level.addFreshEntity(actor);}
-                }
-                state.tick(kind.entranceLength,kind.defeatLength);data.setDirty();
-                if(actor!=null)actor.sync(state);
-            }
-            if(state.stage()==EncounterState.Stage.COMPLETE&&(!players.isEmpty()||r.loadTicks>0)) {
-                if(kind==BossKind.BAKUNAWA)BakunawaStomach.release(e.getServer());
-                finish(level,kind,state,data);
-                var actor=state.actor()==null?null:level.getEntity(state.actor());if(actor!=null)actor.discard();
-            }
-            if(state.stage()==EncounterState.Stage.READY||state.stage()==EncounterState.Stage.COMPLETE)r.meter.removeAllPlayers();
-            else {
-                var ids=new HashSet<UUID>();for(var p:players){ids.add(p.getUUID());r.meter.addPlayer(p);}
-                for(var p:List.copyOf(r.meter.getPlayers()))if(!ids.contains(p.getUUID()))r.meter.removePlayer(p);
-                r.meter.setProgress(state.maxHealth()>0?state.health()/state.maxHealth():0);
-                String phase=state.cinematic()?(state.stage()==EncounterState.Stage.ENTRANCE?"AWAKENING":"RELEASE"):(state.phase()==1?"I · WATCH THE WARNINGS":"II · "+(kind==BossKind.MANANG?"SEVERED FURY":"ECLIPSE"));
-                r.meter.setName(Component.literal(kind.title+"  |  "+phase));
             }
         }
+        if(state.stage()==EncounterState.Stage.COMPLETE){
+            if(kind==BossKind.BAKUNAWA&&data.interior(a.id()).crystals()!=0){data.interior(a.id()).release();data.setDirty();}
+            var actor=state.actor()==null?null:level.getEntity(state.actor());if(actor!=null)actor.discard();
+            if(a.testing()){data.removeTest(a);runtime.remove(a.id());}
+            else if(!players.isEmpty()||active)finish(level,kind,state,data);
+            level.getChunkSource().removeRegionTicket(TICKET,chunk,2,a.id());r.meter.removeAllPlayers();return;
+        }
+        var ids=new HashSet<UUID>();for(var p:players){ids.add(p.getUUID());r.meter.addPlayer(p);}
+        for(var p:List.copyOf(r.meter.getPlayers()))if(!ids.contains(p.getUUID()))r.meter.removePlayer(p);
+        r.meter.setProgress(state.health()/state.maxHealth());
+        String label=switch(state.stage()){
+            case ENTRANCE -> "AWAKENING"; case TRANSFORM -> "METAMORPHOSIS"; case DEFEAT -> "RELEASE";
+            default -> state.phase()==1?"I · WATCH THE WARNINGS":kind==BossKind.MANANG?"II · SEVERED FURY":"II · LIGHTNING";
+        };
+        r.meter.setName(Component.literal(kind.title+"  |  "+label));
     }
     static void finish(ServerLevel level,BossKind kind,EncounterState state,IslandSavedData data) {
         if(state.stage()!=EncounterState.Stage.COMPLETE)return;
         BlockPos altar=data.rewardDais(kind);
         if(!data.exitBuilt(kind.id)){
+            BlockPos base=rewardSite(level,kind);
             BlockPos open=null;
             for(int rise=0;rise<=3&&open==null;rise++)for(int dx:new int[]{0,-14,14}){
-                var candidate=kind.altar().offset(dx,rise,0);
+                var candidate=base.offset(dx,rise,0);
                 for(int x=(candidate.getX()-5)>>4;x<=(candidate.getX()+5)>>4;x++)for(int z=(candidate.getZ()-6)>>4;z<=(candidate.getZ()+6)>>4;z++)IslandWorld.initialize(level,level.getChunk(x,z));
                 if(clearDais(level,candidate)){open=candidate;break;}
             }
@@ -129,9 +164,14 @@ public final class BossEncounters {
             if(online!=null)online.sendSystemMessage(Component.literal(kind.title.split(" · ")[0]+" defeated. Your reward waits on the south dais; only you can collect it. You can share it afterward."));
         }
     }
-    private static boolean clearDais(ServerLevel level,BlockPos altar){
+    static BlockPos rewardSite(ServerLevel level,BossKind kind){
+        if(level.dimension()!=AdventureContent.HIGHLANDS||kind!=BossKind.BAKUNAWA)return kind.altar();
+        var site=kind.altar().south(1);
+        return new BlockPos(site.getX(),MountainTerrain.height(site.getX(),site.getZ())+2,site.getZ());
+    }
+    static boolean clearDais(ServerLevel level,BlockPos altar){
         for(int x=-5;x<=5;x++)for(int z=-6;z<=6;z++){
-            if(IslandSavedData.get(level.getServer()).protectedColumn(altar.getX()+x,altar.getZ()+z))return false;
+            if(level.dimension()==AdventureContent.ISLAND&&IslandSavedData.get(level.getServer()).protectedColumn(altar.getX()+x,altar.getZ()+z))return false;
             var floor=level.getBlockState(altar.offset(x,-1,z));
             if(!floor.isAir()&&!floor.is(Blocks.SMOOTH_QUARTZ)&&!floor.is(Blocks.DEEPSLATE_TILES)&&!floor.is(Blocks.PURPLE_TERRACOTTA)&&!floor.is(Blocks.POLISHED_ANDESITE))return false;
             for(int y=0;y<=3;y++)if(!level.getBlockState(altar.offset(x,y,z)).isAir())return false;
@@ -139,8 +179,10 @@ public final class BossEncounters {
         return true;
     }
     @SubscribeEvent public static void protectScene(LivingAttackEvent e) {
-        if(!(e.getEntity() instanceof ServerPlayer p)||p.level().dimension()!=AdventureContent.ISLAND)return;
-        for(var kind:BossKind.values())if(kind.inside(p.position())&&IslandSavedData.get(p.server).encounter(kind.id).cinematic()){e.setCanceled(true);return;}
+        if(!(e.getEntity() instanceof ServerPlayer p))return;
+        var data=IslandSavedData.get(p.server);
+        var arenas=new ArrayList<>(data.tests.values());for(var k:BossKind.values())arenas.add(Arena.island(k));
+        for(var a:arenas)if(p.level().dimension()==a.dimension()&&a.contains(p.position())&&data.encounter(a.id()).cinematic()){e.setCanceled(true);return;}
     }
     @SubscribeEvent public static void pickup(PlayerEvent.ItemPickupEvent e) {
         if(!(e.getEntity() instanceof ServerPlayer p))return;

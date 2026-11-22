@@ -16,6 +16,10 @@ public final class BossPart extends PartEntity<IslandBoss> {
     @Override protected void readAdditionalSaveData(CompoundTag tag) {}
     @Override protected void addAdditionalSaveData(CompoundTag tag) {}
     @Override public EntityDimensions getDimensions(Pose pose){return size==null?EntityDimensions.fixed(1,1):size;}
+    void place(net.minecraft.world.phys.Vec3 at){
+        setPos(at);
+        setBoundingBox(size.scale((float)getParent().sizeFactor()).makeBoundingBox(at));
+    }
     @Override public boolean isPickable(){return getParent().stage()==EncounterState.Stage.COMBAT;}
     @Override public boolean canBeCollidedWith(){return getParent().stage()==EncounterState.Stage.COMBAT;}
     @Override public boolean hurt(DamageSource source,float amount){return getParent().hurtPart(source,amount,weak);}

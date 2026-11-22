@@ -96,6 +96,7 @@ public class CreatureModel extends EntityModel<IslandCreature> {
                 y("tail",idle*.12f);x("tail",act*.3f);
             }
             case MANANG -> {
+                ManangFace.animate(p("upper"),age,act,Mth.clamp(yaw*.009f,-.22f,.22f));
                 p("upper").y-=act*9; p("lower").y+=act*2;
                 z("upper/wing_left",Mth.sin(age*.25f)*.3f+act*.35f);
                 z("upper/wing_right",-Mth.sin(age*.25f)*.3f-act*.35f);

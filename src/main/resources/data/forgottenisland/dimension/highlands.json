@@ -1,0 +1,10 @@
+{
+  "type": "forgottenisland:highlands",
+  "generator": {
+    "type": "forgottenisland:mountains",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "forgottenisland:festival_island"
+    }
+  }
+}

@@ -78,3 +78,17 @@ for suffix in ('','_glow'):
 info=sf.info(assets/'sounds/bakunawa_roar.ogg')
 assert info.channels==1 and info.samplerate==22050 and 3.9<=info.duration<=4.1
 print('PASS: 0.4 arsenal art and nine recipes, four horned egg stages, wearable armor, boss skeleton/UVs/emissive atlas and original roar.')
+new_dimension=json.loads((root/'data/forgottenisland/dimension/highlands.json').read_text())
+assert new_dimension['generator']['type']=='forgottenisland:mountains'
+assert json.loads((root/'data/forgottenisland/dimension_type/highlands.json').read_text())['height']==320
+manang=json.loads((assets/'models/creature/manang.json').read_text())
+parts={b['name'] for b in manang['bones']}
+assert {'jaw','crown','brow_left','eye_right','fang_right','tusk_left','tip_right','mantle_left','spar_right'}<=parts
+assert {'stormwing_left','wingtip_right'}<=parents
+for suffix in ('','_glow'):
+    with Image.open(assets/f'textures/entity/bakunawa_storm{suffix}.png') as im:assert im.size==(1024,128)
+for name in ('bakunawa_boss','phase_two_bakunawa_boss','manang_boss','separated_manang_boss'):
+    key=f'{name}_spawn_egg'
+    assert (assets/f'models/item/{key}.json').is_file() and (assets/f'textures/item/{key}.png').is_file()
+    assert not (root/f'data/forgottenisland/recipes/{key}.json').exists()
+print('PASS: 0.5 highland generator data, facial rig, storm wings and emissive atlas, four independent boss egg assets.')

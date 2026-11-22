@@ -20,12 +20,12 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid=ForgottenIsland.ID)
 public final class AdventureEvents {
-    private static final java.util.Map<ServerLevel,java.util.Queue<net.minecraft.world.level.ChunkPos>> PENDING=new java.util.concurrent.ConcurrentHashMap<>();
+    private static final java.util.Map<ServerLevel,java.util.Set<net.minecraft.world.level.ChunkPos>> PENDING=new java.util.concurrent.ConcurrentHashMap<>();
     static boolean constructionPending(ServerLevel level,net.minecraft.world.level.ChunkPos pos) {
         var queue=PENDING.get(level);return queue!=null&&queue.contains(pos);
     }
     @SubscribeEvent public static void noExplodingBeds(PlayerInteractEvent.RightClickBlock e) {
-        if(e.getLevel().dimension()!=AdventureContent.ISLAND)return;
+        if(e.getLevel().dimension()!=AdventureContent.ISLAND&&e.getLevel().dimension()!=AdventureContent.HIGHLANDS)return;
         var block=e.getLevel().getBlockState(e.getPos()).getBlock();
         if(block instanceof net.minecraft.world.level.block.BedBlock||block instanceof net.minecraft.world.level.block.RespawnAnchorBlock) {
             e.setCanceled(true);e.setCancellationResult(InteractionResult.FAIL);
@@ -33,8 +33,11 @@ public final class AdventureEvents {
         }
     }
     @SubscribeEvent public static void chunkLoad(ChunkEvent.Load e) {
-        if(e.getLevel() instanceof ServerLevel level&&level.dimension()==AdventureContent.ISLAND&&e.getChunk() instanceof LevelChunk chunk)
-            PENDING.computeIfAbsent(level,k->new java.util.concurrent.ConcurrentLinkedQueue<>()).add(chunk.getPos());
+        if(e.getLevel() instanceof ServerLevel level&&e.getChunk() instanceof LevelChunk chunk&&(level.dimension()==AdventureContent.ISLAND&&IslandWorld.legacyChunk(chunk.getPos())||level.dimension()==AdventureContent.HIGHLANDS&&IslandExpansion.settlementChunk(chunk.getPos())))
+            PENDING.computeIfAbsent(level,k->java.util.concurrent.ConcurrentHashMap.newKeySet()).add(chunk.getPos());
+    }
+    @SubscribeEvent public static void chunkUnload(ChunkEvent.Unload event){
+        if(event.getLevel() instanceof ServerLevel l){var pending=PENDING.get(l);if(pending!=null)pending.remove(event.getChunk().getPos());}
     }
     @SubscribeEvent public static void buildChunks(TickEvent.ServerTickEvent e) {
         if(e.phase!=TickEvent.Phase.END)return;
@@ -43,15 +46,16 @@ public final class AdventureEvents {
         PENDING.forEach((level,queue)->{
             if(level.getServer()!=e.getServer())return;
             long deadline=System.nanoTime()+6_000_000;
-            for(int n=0;n<4;n++) {
+            var positions=queue.iterator();
+            for(int n=0;n<4&&positions.hasNext();n++) {
                 if(n>0&&System.nanoTime()>deadline)break;
-                var pos=queue.poll();if(pos==null)break;
+                var pos=positions.next();
                 var data=IslandSavedData.get(e.getServer());
-                if(data.chunkBuilt(pos.toLong())&&data.expanded(pos.toLong()))continue;
+                if(level.dimension()==AdventureContent.HIGHLANDS?data.settled(pos.toLong()):data.chunkBuilt(pos.toLong())&&data.expanded(pos.toLong())){positions.remove();continue;}
                 var chunk=level.getChunkSource().getChunkNow(pos.x,pos.z);
-                if(chunk!=null)IslandWorld.initialize(level,chunk);
+                if(chunk!=null){positions.remove();IslandWorld.initialize(level,chunk);}
                 // Load fires before FULL promotion; retain work without forcing or blocking chunk loads.
-                else queue.add(pos);
+
             }
         });
     }
@@ -61,6 +65,19 @@ public final class AdventureEvents {
         StarNecklaceItem.clear(e.getServer());
     }
     @SubscribeEvent public static void commands(RegisterCommandsEvent e) {
+        for(boolean legacy:new boolean[]{true,false}){
+            e.getDispatcher().register(Commands.literal("island").then(Commands.literal(legacy?"harbor":"market").executes(c->{
+                var p=c.getSource().getPlayerOrException();
+                if(p.level().dimension()!=AdventureContent.ISLAND&&p.level().dimension()!=AdventureContent.HIGHLANDS)return 0;
+                var l=p.server.getLevel(legacy?AdventureContent.ISLAND:AdventureContent.HIGHLANDS);
+                var at=legacy?IslandTravel.ARRIVAL:IslandTravel.MARKET_ENTRY;
+                if(l==null)return 0;
+                IslandWorld.initialize(l,l.getChunk(at.getX()>>4,at.getZ()>>4));
+                var landing=IslandTravel.safeNear(l,at);
+                if(landing.isEmpty())return 0;
+                BakunawaStomach.transfer(p,l,landing.get());return 1;
+            })));
+        }
         e.getDispatcher().register(Commands.literal("island").then(Commands.literal("home").executes(c->{
             var p=c.getSource().getPlayerOrException();
             if(!IslandTravel.home(p))c.getSource().sendFailure(Component.literal("Emergency home travel is available only on Forgotten Island."));
@@ -101,9 +118,9 @@ public final class AdventureEvents {
     }
     @SubscribeEvent public static void playerTick(TickEvent.PlayerTickEvent e) {
         if(e.phase==TickEvent.Phase.END&&e.player instanceof ServerPlayer p&&p.level().dimension()==AdventureContent.ISLAND&&p.getY()<0)IslandTravel.home(p);
-        if(e.phase!=TickEvent.Phase.END||!(e.player instanceof ServerPlayer p)||p.level().dimension()!=AdventureContent.ISLAND||p.tickCount%320!=0)return;
+        if(e.phase!=TickEvent.Phase.END||!(e.player instanceof ServerPlayer p)||(p.level().dimension()!=AdventureContent.ISLAND&&p.level().dimension()!=AdventureContent.HIGHLANDS)||p.tickCount%320!=0)return;
         int x=p.getBlockX(),z=p.getBlockZ();
-        var sound=IslandLayout.cavern(x,z)?AdventureContent.CAVE_AMBIENCE.get():IslandLayout.mountain(x,z)<160?AdventureContent.MOUNTAIN_AMBIENCE.get():x>600?AdventureContent.COAST_AMBIENCE.get():IslandLayout.market(x,z)||Math.abs(x)<38&&Math.abs(z)<60?AdventureContent.FESTIVAL.get():net.minecraft.sounds.SoundEvents.AMBIENT_CAVE.value();
+        var sound=IslandLayout.cavern(x,z)?AdventureContent.CAVE_AMBIENCE.get():IslandLayout.mountain(x,z)<160?AdventureContent.MOUNTAIN_AMBIENCE.get():IslandLayout.coast(x,z)<150?AdventureContent.COAST_AMBIENCE.get():IslandLayout.market(x,z)||Math.abs(x)<38&&Math.abs(z)<60?AdventureContent.FESTIVAL.get():net.minecraft.sounds.SoundEvents.AMBIENT_CAVE.value();
         p.playNotifySound(sound,net.minecraft.sounds.SoundSource.AMBIENT,.45f,1);
     }
 }

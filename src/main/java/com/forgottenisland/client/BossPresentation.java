@@ -51,11 +51,11 @@ public final class BossPresentation {
         while(SKIP.consumeClick())if(scene!=null){skipped.add(scene.key);restore(mc);}
         if(mc.level==null||mc.player==null){restore(mc);skipped.clear();nearby=null;return;}
         nearby=null;
-        for(var entity:mc.level.entitiesForRendering())if(entity instanceof IslandBoss boss&&boss.kind.inside(mc.player.position())) {
+        for(var entity:mc.level.entitiesForRendering())if(entity instanceof IslandBoss boss&&boss.inside(mc.player.position())) {
             if(nearby==null||boss.distanceToSqr(mc.player)<nearby.distanceToSqr(mc.player))nearby=boss;
         }
-        if(scene!=null&&(mc.screen!=null||scene.level!=mc.level||!mc.player.isAlive()||scene.boss.isRemoved()||!scene.key.equals(key(scene.boss))||!scene.boss.kind.inside(mc.player.position())||++scene.elapsed>Math.max(scene.boss.kind.entranceLength,scene.boss.kind.defeatLength)+40)){skipped.add(scene.key);restore(mc);}
-        if(scene==null&&mc.screen==null&&nearby!=null&&mc.player.isAlive()&&!mc.player.isCreative()&&!mc.player.isSpectator()
+        if(scene!=null&&(mc.screen!=null||scene.level!=mc.level||!mc.player.isAlive()||scene.boss.isRemoved()||!scene.key.equals(key(scene.boss))||!scene.boss.inside(mc.player.position())||++scene.elapsed>Math.max(scene.boss.kind.entranceLength,scene.boss.kind.defeatLength)+40)){skipped.add(scene.key);restore(mc);}
+        if(scene==null&&mc.screen==null&&nearby!=null&&mc.player.isAlive()&&!mc.player.isSpectator()
             &&(nearby.stage()==EncounterState.Stage.ENTRANCE||nearby.stage()==EncounterState.Stage.DEFEAT)
             &&AdventureClientConfig.CINEMATICS.get()!=AdventureClientConfig.Cinematics.OFF&&!skipped.contains(key(nearby)))scene=new Scene(mc,nearby);
         if(scene!=null&&scene.mode==AdventureClientConfig.Cinematics.FULL)camera(mc,scene,0);
@@ -76,19 +76,19 @@ public final class BossPresentation {
     private static void camera(Minecraft mc,Scene s,float partial) {
         var b=s.boss;boolean entrance=b.stage()==EncounterState.Stage.ENTRANCE;
         double t=Mth.clamp((b.clock()+partial)/(entrance?b.kind.entranceLength:b.kind.defeatLength),0,1),ease=t*t*(3-2*t);
-        Vec3 center=Vec3.atBottomCenterOf(b.kind.center),position,look;
+        Vec3 center=Vec3.atBottomCenterOf(b.center()),position,look;
         if(b.kind==BossKind.MANANG) {
             if(entrance){double a=-.9+ease*1.45;position=center.add(Math.sin(a)*(13-ease*4),4.8+ease*2,Math.cos(a)*(13-ease*4));look=center.add(0,3+b.separation()*.5,0);}
             else {position=center.add(8-ease*4,5+ease*2,10+ease*4);look=center.add(0,3-ease,0);}
         } else {
-            double clock=b.clock()+partial;var origin=b.kind.origin();
-            if(entrance&&clock<40){position=origin.add(28,7,35);look=origin.add(0,0,-8);}
+            double clock=b.clock()+partial;var origin=b.origin();
+            if(entrance&&clock<40){position=origin.add(28,7,35);look=b.headPoint(partial);}
             else if(entrance&&clock<174){
                 double reveal=BakunawaMoves.smooth((clock-40)/100);position=origin.add(48-reveal*8,12+reveal*12,85+reveal*15);look=b.headPoint(partial).add(0,-3,0);
             }else if(entrance&&clock<200){
                 position=mc.player.getEyePosition().add(mc.player.getLookAngle().multiply(1,0,1).normalize().scale(4)).add(0,.25,0);look=mc.player.getEyePosition().add(0,-.2,0);
             }else if(entrance){position=origin.add(34,18,110);look=b.headPoint(partial);}
-            else if(clock<170){position=origin.add(46-ease*12,25,105);look=b.headPoint(partial).add(0,-3,0);}
+            else if(clock<170){position=origin.add(78-ease*6,29+ease*5,26);look=b.bodyPoint(3,partial).add(0,2,-3);}
             else {position=mc.player.position().add(5,3,7);look=mc.player.getEyePosition();}
             if(entrance&&clock<65){double shake=Math.sin(clock*2.3)*.08;position=position.add(shake,Math.cos(clock*1.8)*.05,0);}
         }
@@ -142,7 +142,7 @@ public final class BossPresentation {
     @SubscribeEvent public static void overlay(RenderGuiEvent.Post e) {
         var mc=Minecraft.getInstance();if(mc.player==null)return;var g=e.getGuiGraphics();int w=mc.getWindow().getGuiScaledWidth(),h=mc.getWindow().getGuiScaledHeight();
         if(scene==null&&mc.hitResult instanceof net.minecraft.world.phys.EntityHitResult hit&&hit.getEntity() instanceof BossPart part&&part.weak) {
-            g.drawCenteredString(mc.font,(part.getParent().kind==BossKind.MANANG?"Lower body":"Moon anchor")+(part.getParent().exposed()?" · EXPOSED":" · SHIELDED"),w/2,h/2+18,part.getParent().exposed()?0xffffdf8b:0xffbbbcdf);
+            g.drawCenteredString(mc.font,(part.getParent().kind==BossKind.MANANG?"Lower body":"Jaw")+(part.getParent().exposed()?" · EXPOSED":" · SHIELDED"),w/2,h/2+18,part.getParent().exposed()?0xffffdf8b:0xffbbbcdf);
         }
         if(scene!=null) {
             boolean entrance=scene.boss.stage()==EncounterState.Stage.ENTRANCE;

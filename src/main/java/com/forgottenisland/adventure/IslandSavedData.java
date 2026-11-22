@@ -12,12 +12,35 @@ public final class IslandSavedData extends SavedData {
     private final Set<BlockPos> portals = new HashSet<>();
     private final Set<BlockPos> necklacePortals = new HashSet<>();
     private final Map<Long, BlockPos> portalCells = new HashMap<>();
+    private final Set<Long> settlements=new HashSet<>();
+    boolean settled(long pos){return settlements.contains(pos);}
+    void markSettled(long pos){settlements.add(pos);setDirty();}
     private final Set<Long> builtChunks = new HashSet<>();
     private final Set<Long> expandedChunks = new HashSet<>();
     private final Set<Long> protectedColumns = new HashSet<>();
     public boolean protectedColumn(int x,int z){return protectedColumns.contains(BlockPos.asLong(x,0,z));}
     public void protectColumn(int x,int z){protectedColumns.add(BlockPos.asLong(x,0,z));setDirty();}
     private final Map<String,EncounterState> encounters = new HashMap<>();
+    static final int MAX_TEST_ARENAS=12;
+    final Map<String,Arena> tests=new LinkedHashMap<>();
+    private final Map<String,StomachState> interiors=new HashMap<>();
+    final Set<Integer> builtRooms=new HashSet<>();
+    final Set<String> legacyVictories=new HashSet<>();
+    Arena arena(String id){
+        for(var kind:BossKind.values())if(kind.id.equals(id))return Arena.island(kind);
+        return tests.get(id);
+    }
+    Arena addTest(BossKind kind,net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> level,BlockPos center,boolean direct){
+        for(int slot=1;slot<=MAX_TEST_ARENAS;slot++){
+            int candidate=slot;
+            if(tests.values().stream().anyMatch(a->a.slot()==candidate))continue;
+            var a=new Arena(UUID.randomUUID().toString(),kind,level,center.immutable(),slot,direct);
+            tests.put(a.id(),a);setDirty();return a;
+        }
+        return null;
+    }
+    StomachState interior(String id){return id.equals(BossKind.BAKUNAWA.id)?stomach:interiors.computeIfAbsent(id,k->new StomachState());}
+    void removeTest(Arena a){tests.remove(a.id());encounters.remove(a.id());interiors.remove(a.id());setDirty();}
     private final Set<String> exits = new HashSet<>();
     private final Map<String,BlockPos> rewardDais=new HashMap<>();
     public BlockPos rewardDais(BossKind kind){return rewardDais.getOrDefault(kind.id,kind.altar());}
@@ -56,6 +79,7 @@ public final class IslandSavedData extends SavedData {
         }
         for(long center:tag.getLongArray("Portals")) data.registerPortal(BlockPos.of(center));
         for(long center:tag.getLongArray("NecklacePortals")) data.registerNecklacePortal(BlockPos.of(center));
+        for(long chunk:tag.getLongArray("Settlements"))data.settlements.add(chunk);
         for(long chunk:tag.getLongArray("BuiltChunks")) data.builtChunks.add(chunk);
         for(long chunk:tag.getLongArray("ExpandedChunks")) data.expandedChunks.add(chunk);
         for(long column:tag.getLongArray("ProtectedColumns"))data.protectedColumns.add(column);
@@ -77,7 +101,25 @@ public final class IslandSavedData extends SavedData {
             var collected=new HashSet<String>();for(Tag t:e.getList("Collected",Tag.TAG_STRING))collected.add(t.getAsString());
             data.restoreEncounter(boss,new EncounterState.Snapshot(stage,e.getInt("Ticks"),e.getInt("Attempt"),e.getInt("Phase"),e.getFloat("Health"),e.getFloat("MaxHealth"),e.hasUUID("Actor")?e.getUUID("Actor"):null,players,delivered,collected));
         }
-        data.setDirty(false);
+        for(Tag t:tag.getList("TestArenas",Tag.TAG_COMPOUND)){
+            var e=(CompoundTag)t;var key=net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION,new net.minecraft.resources.ResourceLocation(e.getString("Level")));
+            var a=new Arena(e.getUUID("Id").toString(),BossKind.valueOf(e.getString("Kind")),key,BlockPos.of(e.getLong("Center")),e.getInt("Slot"),e.getBoolean("Direct"));
+            data.tests.put(a.id(),a);
+            var g=new HashMap<UUID,Integer>();var room=e.getCompound("Room");
+            for(Tag guest:room.getList("Guests",Tag.TAG_COMPOUND)){var member=(CompoundTag)guest;g.put(member.getUUID("Id"),member.getInt("Attempt"));}
+            data.interior(a.id()).restore(room.getInt("Attempt"),room.getInt("Crystals"),g);
+        }
+        for(int i:tag.getIntArray("BuiltRooms"))data.builtRooms.add(i);
+        for(Tag key:tag.getList("LegacyVictories",Tag.TAG_STRING))data.legacyVictories.add(key.getAsString());
+        if(tag.getInt("Version")<3){
+            for(var kind:BossKind.values()){
+                var state=data.encounter(kind.id);
+                if(state.stage()==EncounterState.Stage.COMPLETE||state.stage()==EncounterState.Stage.DEFEAT)data.legacyVictories.add(kind.id);
+                else state.retry();
+            }
+            data.stomach.release();
+        }
+        data.setDirty(tag.getInt("Version")<3);
         return data;
     }
     @Override public CompoundTag save(CompoundTag tag) {
@@ -86,6 +128,7 @@ public final class IslandSavedData extends SavedData {
         tag.put("Departures",links);
         tag.putLongArray("Portals",portals.stream().mapToLong(BlockPos::asLong).toArray());
         tag.putLongArray("NecklacePortals",necklacePortals.stream().mapToLong(BlockPos::asLong).toArray());
+        tag.putLongArray("Settlements",settlements.stream().mapToLong(Long::longValue).toArray());
         tag.putLongArray("BuiltChunks",builtChunks.stream().mapToLong(Long::longValue).toArray());
         tag.putLongArray("ExpandedChunks",expandedChunks.stream().mapToLong(Long::longValue).toArray());
         tag.putLongArray("ProtectedColumns",protectedColumns.stream().mapToLong(Long::longValue).toArray());
@@ -105,7 +148,17 @@ public final class IslandSavedData extends SavedData {
         tag.putBoolean("StomachBuilt",stomachBuilt);
         var guests=new ListTag();stomach.guests().forEach((id,attempt)->{var e=new CompoundTag();e.putUUID("Id",id);e.putInt("Attempt",attempt);guests.add(e);});stomachTag.put("Guests",guests);tag.put("Stomach",stomachTag);
         var exitTags=new ListTag();for(String exit:exits)exitTags.add(StringTag.valueOf(exit));tag.put("Exits",exitTags);
-        tag.putInt("Version",2);
+        var arenas=new ListTag();
+        for(var a:tests.values()){
+            var e=new CompoundTag();e.putUUID("Id",UUID.fromString(a.id()));e.putString("Kind",a.kind().name());e.putString("Level",a.dimension().location().toString());
+            e.putLong("Center",a.center().asLong());e.putInt("Slot",a.slot());e.putBoolean("Direct",a.direct());
+            var room=interior(a.id());var r=new CompoundTag();r.putInt("Attempt",room.attempt());r.putInt("Crystals",room.crystals());var members=new ListTag();
+            room.guests().forEach((id,attempt)->{var g=new CompoundTag();g.putUUID("Id",id);g.putInt("Attempt",attempt);members.add(g);});
+            r.put("Guests",members);e.put("Room",r);arenas.add(e);
+        }
+        tag.put("TestArenas",arenas);tag.putIntArray("BuiltRooms",new ArrayList<>(builtRooms));
+        var history=new ListTag();for(String id:legacyVictories)history.add(StringTag.valueOf(id));tag.put("LegacyVictories",history);
+        tag.putInt("Version",3);
         return tag;
     }
 }

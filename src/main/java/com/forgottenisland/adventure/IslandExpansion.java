@@ -59,6 +59,10 @@ public final class IslandExpansion {
             if(IslandLayout.land(x,z)&&!IslandLayout.market(x,z)&&IslandLayout.coast(x,z)>=88&&!IslandLayout.cavern(x,z)
                 &&IslandLayout.path(x,z).distance()>9&&IslandLayout.mountain(x,z)>34&&Math.floorMod(x*29+z*131,653)==0)
                 palm(w,x,IslandLayout.height(x,z)+1,z,IslandLayout.mountain(x,z)<140);
+        landmarks(w,level,chunk);
+        IslandSavedData.get(level.getServer()).markExpanded(chunk.getPos().toLong());chunk.setUnsaved(true);
+    }
+    private static void landmarks(Writer w,ServerLevel level,LevelChunk chunk){
         for(int row=0;row<4;row++)for(int side:new int[]{-1,1})for(int lane=0;lane<2;lane++)
             stall(w,310+side*(18+lane*30),29+row*24,COLORS[(row+lane*2+(side==1?1:0))%6]);
         // Festival stage, woven canopy and long strings of parol lights.
@@ -70,7 +74,7 @@ public final class IslandExpansion {
         for(int z:new int[]{16,112})for(int x=250;x<=370;x++){
             w.set(x,75,z,Blocks.OAK_FENCE);if(x%4==0)w.set(x,74,z,COLORS[Math.floorMod(x/4,6)]);
         }
-        sign(w,246,65,65,"FESTIVAL QUARTER","16 food & craft stalls","West: old harbor","East: three trails");
+        sign(w,246,65,65,"FESTIVAL QUARTER","16 food & craft stalls",level.dimension()==AdventureContent.HIGHLANDS?"/island harbor":"West: old harbor","East: three trails");
         sign(w,397,65,35,"TRAIL JUNCTION","↑ Twilight Mountain","→ Moonbreak Coast","↓ Batiba's cave");
         sign(w,475,67,136,"MEMORY HOLLOW","Batiba lives within","Follow violet lights","Look in side alcoves");
         sign(w,535,105,-177,"TWILIGHT SUMMIT","Manang's roost","Independent challenge","Retreat down lanterns");
@@ -96,8 +100,28 @@ public final class IslandExpansion {
             if(w.writable(x,z))IslandWorld.resident(level,chunk,100+i,Species.values()[new int[]{1,5,6,3,9,10,11,12}[i%8]],new BlockPos(x,65,z));
         }
         if(w.writable(475,199))IslandWorld.resident(level,chunk,150,Species.BATIBA,new BlockPos(475,67,199));
-        IslandSavedData.get(level.getServer()).markExpanded(chunk.getPos().toLong());chunk.setUnsaved(true);
     }
+    static void highlands(ServerLevel level,LevelChunk chunk){
+        var data=IslandSavedData.get(level.getServer());
+        if(!settlementChunk(chunk.getPos())||data.settled(chunk.getPos().toLong()))return;
+        var w=new Writer(level,chunk);
+        landmarks(w,level,chunk);
+        var star=IslandTravel.MARKET_STAR;
+        for(var c:StarPattern.FRAME)w.set(star.getX()+c.x(),64,star.getZ()+c.z(),AdventureContent.PAROL_STONE.get());
+        for(var c:StarPattern.OPENING)w.set(star.getX()+c.x(),64,star.getZ()+c.z(),AdventureContent.STAR_PORTAL.get());
+        sign(w,819,MountainTerrain.height(819,-21)+1,-21,"BREACH OVERLOOK","Ocean to the north","Descend to center","Strike the tired jaw");
+        // Bunting and hanging lights cross the space between the stalls.
+        for(int z:new int[]{28,52,76})for(int x=286;x<=334;x++){
+            int y=75+(int)(Math.abs(x-310)/7.);
+            if(x==286||x==334)for(int h=65;h<y;h++)w.set(x,h,z,Blocks.STRIPPED_JUNGLE_LOG);
+            w.set(x,y,z,Blocks.DARK_OAK_FENCE);
+            if(x%4==0){w.set(x,y-1,z,COLORS[Math.floorMod(x/4+z,6)]);w.set(x,y-2,z,AdventureContent.PAROL.get());}
+        }
+        sign(w,312,65,91,"HOMEWARD STAR","Jump into the light","Return to your","Overworld portal");
+        sign(w,315,65,59,"EAST TO TRAILS","Summit 535, -215","Coast 820, -65","Cave 475, 190");
+        data.markSettled(chunk.getPos().toLong());chunk.setUnsaved(true);
+    }
+    static boolean settlementChunk(ChunkPos pos){return pos.x>=15&&pos.x<=52&&pos.z>=-16&&pos.z<=13;}
     private static void stall(Writer w,int x,int z,Block color){
         for(int dx=-5;dx<=5;dx++)for(int dz=-4;dz<=4;dz++){
             w.set(x+dx,64,z+dz,Blocks.JUNGLE_PLANKS);w.set(x+dx,71+(Math.abs(dx)<3?1:0),z+dz,(dx&1)==0?color:Blocks.WHITE_WOOL);
@@ -125,13 +149,10 @@ public final class IslandExpansion {
         final ServerLevel level;final ChunkPos chunk;final boolean[] clear=new boolean[256];
         Writer(ServerLevel level,LevelChunk chunk){
             this.level=level;this.chunk=chunk.getPos();
+            if(level.dimension()==AdventureContent.HIGHLANDS){java.util.Arrays.fill(clear,true);return;}
             // Compare the entire editable height, not just the surface: underwater and sky builds count.
             for(int dx=0;dx<16;dx++)for(int dz=0;dz<16;dz++){
-                int x=this.chunk.getMinBlockX()+dx,z=this.chunk.getMinBlockZ()+dz;boolean pristine=x>=176;
-                for(int y=0;pristine&&y<level.getMaxBuildHeight();y++){
-                    var state=chunk.getBlockState(new BlockPos(x,y,z));
-                    pristine=y==0?state.is(Blocks.BEDROCK):y<56?state.is(Blocks.STONE):y<63?state.is(Blocks.WATER)&&state.getFluidState().isSource():state.isAir();
-                }
+                int x=this.chunk.getMinBlockX()+dx,z=this.chunk.getMinBlockZ()+dz;boolean pristine=x>=176&&IslandWorld.pristineColumn(chunk,x,z);
                 clear[dx*16+dz]=pristine;
                 if(!pristine&&IslandLayout.land(x,z))IslandSavedData.get(level.getServer()).protectColumn(x,z);
             }

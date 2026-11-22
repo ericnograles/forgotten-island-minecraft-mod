@@ -19,29 +19,49 @@ public final class BossRenderer extends MobRenderer<IslandBoss,BossModel> {
         super(context,new BossModel(context.bakeLayer(BossModel.layer(kind))),kind==BossKind.MANANG?1.4f:7);
         if(kind==BossKind.BAKUNAWA)addLayer(new net.minecraft.client.renderer.entity.layers.RenderLayer<IslandBoss,BossModel>(this){
             @Override public void render(PoseStack pose,MultiBufferSource buffers,int light,IslandBoss boss,float swing,float amount,float partial,float age,float yaw,float pitch){
-                getParentModel().renderToBuffer(pose,buffers.getBuffer(RenderType.eyes(ForgottenIsland.id("textures/entity/bakunawa_boss_glow.png"))),15728880,OverlayTexture.NO_OVERLAY,1,1,1,1);
+                getParentModel().renderToBuffer(pose,buffers.getBuffer(RenderType.eyes(ForgottenIsland.id(boss.phase()==2?"textures/entity/bakunawa_storm_glow.png":"textures/entity/bakunawa_boss_glow.png"))),15728880,OverlayTexture.NO_OVERLAY,1,1,1,1);
             }
         });
     }
-    @Override public ResourceLocation getTextureLocation(IslandBoss boss){return ForgottenIsland.id("textures/entity/"+(boss.kind==BossKind.BAKUNAWA?"bakunawa_boss":boss.kind.species.id)+".png");}
+    @Override public ResourceLocation getTextureLocation(IslandBoss boss){return ForgottenIsland.id("textures/entity/"+(boss.kind==BossKind.BAKUNAWA?(boss.phase()==2?"bakunawa_storm":"bakunawa_boss"):boss.kind.species.id)+".png");}
     @Override protected float getWhiteOverlayProgress(IslandBoss boss,float partial){return boss.kind==BossKind.BAKUNAWA&&boss.stage()==EncounterState.Stage.DEFEAT&&boss.clock()>=60&&boss.clock()<86?(float)Math.sin((boss.clock()+partial-60)/26*Math.PI):0;}
     @Override protected void scale(IslandBoss boss,PoseStack pose,float partial){float s=boss.kind==BossKind.MANANG?1.6f:9;pose.scale(s,s,s);}
     @Override protected boolean shouldShowName(IslandBoss boss){return false;}
-    @Override public boolean shouldRender(IslandBoss boss,Frustum frustum,double x,double y,double z){return frustum.isVisible(new AABB(boss.kind.center).inflate(boss.kind.radius+80,100,boss.kind.radius+80));}
+    @Override public boolean shouldRender(IslandBoss boss,Frustum frustum,double x,double y,double z){return frustum.isVisible(new AABB(boss.center()).inflate(boss.kind.radius+80,100,boss.kind.radius+80));}
     @Override public void render(IslandBoss boss,float yaw,float partial,PoseStack pose,MultiBufferSource buffers,int light) {
         super.render(boss,yaw,partial,pose,buffers,light);
         if(boss.kind!=BossKind.BAKUNAWA||boss.stage()==EncounterState.Stage.COMPLETE)return;
         moon(boss,partial,pose,buffers);
         cinematicWaves(boss,partial,pose,buffers);
         attacks(boss,partial,pose,buffers,light);
-        for(int i=0;i<3;i++) {
-            var p=boss.weakPoint(i).subtract(boss.position());pose.pushPose();pose.translate(p.x-1,p.y,p.z-1);pose.scale(2,1,2);
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.CHISELED_QUARTZ_BLOCK.defaultBlockState(),pose,buffers,light,OverlayTexture.NO_OVERLAY);
-            pose.popPose();pose.pushPose();pose.translate(p.x,p.y+1.7+Math.sin((boss.tickCount+partial)*.08+i)*.15,p.z);
-            pose.mulPose(Axis.YP.rotationDegrees((boss.tickCount+partial)*1.5f));pose.mulPose(Axis.ZP.rotationDegrees(45));pose.scale(1.2f,1.2f,1.2f);pose.translate(-.5,-.5,-.5);
-            var block=boss.exposed()?AdventureContent.PAROL.get():Blocks.AMETHYST_BLOCK;
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(block.defaultBlockState(),pose,buffers,15728880,OverlayTexture.NO_OVERLAY);pose.popPose();
+        if(boss.phase()==2)storm(boss,partial,pose,buffers);
+    }
+    private static void bolt(PoseStack pose,MultiBufferSource buffers,net.minecraft.world.phys.Vec3 from,net.minecraft.world.phys.Vec3 to,float width,int seed){
+        var v=buffers.getBuffer(RenderType.lightning());var last=from;
+        for(int j=1;j<=6;j++){
+            var point=from.lerp(to,j/6.).add(j==6?0:Math.sin(seed+j*16)*.7,0,j==6?0:Math.cos(seed+j*14)*.7);
+            for(var delta:java.util.List.of(new net.minecraft.world.phys.Vec3(width,0,0),new net.minecraft.world.phys.Vec3(0,width,width))){
+                for(var q:java.util.List.of(last.subtract(delta),point.subtract(delta),point.add(delta),last.add(delta)))
+                    v.vertex(pose.last().pose(),(float)q.x,(float)q.y,(float)q.z).color(1f,.88f,.12f,.94f).endVertex();
+            }
+            last=point;
         }
+    }
+    private void storm(IslandBoss b,float partial,PoseStack pose,MultiBufferSource buffers){
+        if(b.stage()==EncounterState.Stage.DEFEAT&&b.clock()>=130)return;
+        int seed=b.clock()/3;
+        if(AdventureClientConfig.CINEMATICS.get()==AdventureClientConfig.Cinematics.FULL){
+            int i=Math.floorMod(seed,7);
+            bolt(pose,buffers,b.bodyPoint(i,partial).subtract(b.position()).add(-2,4,0),b.bodyPoint(i+2,partial).subtract(b.position()).add(3,3,0),.22f,seed);
+        }
+        if(b.stage()!=EncounterState.Stage.COMBAT)return;
+        int t=b.localClock();
+        if(b.attack()==11)for(int i=0;i<3;i++){
+            int impact=52+i*8;var point=b.strikePoint(i).subtract(b.position());
+            if(t<impact)ring(pose,buffers,point,3,.12f,1,.81f,.05f,.9f,0);
+            if(t>=impact&&t<impact+5)bolt(pose,buffers,point.add(1,28,0),point,.42f,seed+i);
+        }
+        if(b.attack()==12&&t<=65)bolt(pose,buffers,b.mouth().subtract(b.position()),b.beamEnd().subtract(b.position()),t<60?.09f:.57f,seed);
     }
     private void attacks(IslandBoss boss,float partial,PoseStack pose,MultiBufferSource buffers,int light){
         if(boss.stage()!=EncounterState.Stage.COMBAT)return;
@@ -92,10 +112,12 @@ public final class BossRenderer extends MobRenderer<IslandBoss,BossModel> {
     }
     private void cinematicWaves(IslandBoss boss,float partial,PoseStack pose,MultiBufferSource buffers){
         float t=boss.clock()+partial;
-        if(boss.stage()==EncounterState.Stage.ENTRANCE&&t>=24&&t<125){
-            for(int i=0;i<3;i++){float radius=((t-24+i*12)%48)*.7f;ring(pose,buffers,boss.kind.origin().subtract(boss.position()).add(0,-.8,-8),radius,.22f,.65f,.9f,1,.45f*(1-radius/34),0);}
+        if(boss.stage()==EncounterState.Stage.ENTRANCE&&t<125){
+            for(int i=0;i<3;i++){float radius=((t+i*12)%48)*.7f;ring(pose,buffers,boss.origin().subtract(boss.position()).add(0,-2,22),radius,.22f,.65f,.9f,1,.45f*(1-radius/34),0);}
         }else if(boss.stage()==EncounterState.Stage.DEFEAT&&t>=130&&t<168){
-            ring(pose,buffers,boss.headPoint(partial).subtract(boss.position()),(t-130)*2,.6f,1,.8f,.4f,1-(t-130)/38,0);
+            var center=boss.bodyPoint(4,partial).subtract(boss.position());
+            float elapsed=t-130,alpha=1-elapsed/38;
+            for(int axis=0;axis<3;axis++)ring(pose,buffers,center,1+elapsed*1.1f,1.25f,1,.78f,.28f,alpha,axis);
         }
     }
     private static void ring(PoseStack pose,MultiBufferSource buffers,net.minecraft.world.phys.Vec3 center,float radius,float width,float r,float g,float b,float alpha,int axis){

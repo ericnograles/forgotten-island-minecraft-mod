@@ -22,6 +22,7 @@ public final class CrystalSwordDamage {
             PRIMARY.put(p.getUUID(),new Hit((e.getTarget() instanceof BossPart part?part.getParent():e.getTarget()).getUUID(),p.level().getGameTime()));
     }
     @SubscribeEvent(priority=EventPriority.HIGHEST) public static void correctAttributeCap(LivingHurtEvent e) {
+        if(e.getEntity() instanceof IslandBoss)return;
         if(!e.getSource().is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK)||!(e.getSource().getDirectEntity() instanceof Player p)||p.level().isClientSide||!(p.getMainHandItem().getItem() instanceof ArsenalSwordItem sword))return;
         Hit hit=PRIMARY.get(p.getUUID());
         if(hit==null||hit.tick!=p.level().getGameTime()||!hit.target.equals(e.getEntity().getUUID()))return;

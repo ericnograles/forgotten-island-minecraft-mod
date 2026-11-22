@@ -66,8 +66,8 @@
   "item.forgottenisland.star_necklace": "Homeward Star Necklace",
   "block.forgottenisland.stomach_tissue": "Bakunawa Tissue",
   "block.forgottenisland.stomach_crystal": "Memory Crystal",
-  "death.attack.holy_beam": "%1$s was unmade by Bakunawa\u2019s Holy Beam",
-  "death.attack.holy_beam.player": "%1$s was unmade by Bakunawa\u2019s Holy Beam while fighting %2$s",
+  "death.attack.holy_beam": "%1$s was unmade by Bakunawa’s Holy Beam",
+  "death.attack.holy_beam.player": "%1$s was unmade by Bakunawa’s Holy Beam while fighting %2$s",
   "subtitles.forgottenisland.cave_ambience": "Memory cave echoes",
   "subtitles.forgottenisland.mountain_ambience": "Wind across the twilight ridge",
   "subtitles.forgottenisland.coast_ambience": "Waves roll under the sea arch",
@@ -80,5 +80,9 @@
   "item.forgottenisland.crystal_chestplate": "Crystal Chestplate",
   "item.forgottenisland.crystal_leggings": "Crystal Leggings",
   "item.forgottenisland.crystal_boots": "Crystal Boots",
-  "subtitles.forgottenisland.bakunawa_roar": "Bakunawa roars across the ocean"
+  "subtitles.forgottenisland.bakunawa_roar": "Bakunawa roars across the ocean",
+  "item.forgottenisland.bakunawa_boss_spawn_egg": "Bakunawa Boss Spawn Egg",
+  "item.forgottenisland.phase_two_bakunawa_boss_spawn_egg": "Phase Two Bakunawa Boss Spawn Egg",
+  "item.forgottenisland.manang_boss_spawn_egg": "Manang Boss Spawn Egg",
+  "item.forgottenisland.separated_manang_boss_spawn_egg": "Separated Manang Boss Spawn Egg"
 }

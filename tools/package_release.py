@@ -5,7 +5,7 @@ from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.4.0"
+VERSION = "0.5.0"
 JAR = ROOT / "build" / "libs" / f"forgotten-island-{VERSION}.jar"
 OUTPUT = ROOT / "build" / "distributions"
 SOURCE_ROOTS = (
@@ -14,6 +14,7 @@ SOURCE_ROOTS = (
     "assets-src", "tools", "docs",
 )
 EXCLUDED_PARTS = {"__pycache__", ".DS_Store"}
+PRIVATE_PLANNING_FILES = {ROOT / "docs" / "adventure-tranche5-goal.md"}
 
 
 def files_under(names):
@@ -24,6 +25,8 @@ def files_under(names):
             raise FileNotFoundError(path)
         files.extend(path.rglob("*") if path.is_dir() else [path])
     return sorted(p for p in files if p.is_file()
+                  and p not in PRIVATE_PLANNING_FILES
+                  and not p.match("docs/evidence/adventure/clips/*.log")
                   and not EXCLUDED_PARTS.intersection(p.parts)
                   and not p.is_symlink())
 

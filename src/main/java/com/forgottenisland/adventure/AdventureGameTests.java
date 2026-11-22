@@ -16,25 +16,15 @@ import java.util.UUID;
 @PrefixGameTestTemplate(false)
 public final class AdventureGameTests {
     @GameTest(template="empty",timeoutTicks=600)
-    public static void chunkConstructionWaitsForFullAvailability(GameTestHelper h) {
+    public static void explorationDoesNotJournalDistantChunks(GameTestHelper h) {
         var level=h.getLevel().getServer().getLevel(AdventureContent.ISLAND);
         var data=IslandSavedData.get(level.getServer());
-        int x=1000;
-        while(data.chunkBuilt(net.minecraft.world.level.ChunkPos.asLong(x,1000)))x++;
-        var pos=new net.minecraft.world.level.ChunkPos(x,1000);
-        h.assertTrue(level.getChunkSource().getChunkNow(pos.x,pos.z)==null,"Fixture chunk is already available");
-        // Forge may publish Load before its LevelChunk becomes visible in the FULL cache.
-        AdventureEvents.chunkLoad(new net.minecraftforge.event.level.ChunkEvent.Load(
-            new net.minecraft.world.level.chunk.LevelChunk(level,pos),true));
-        // The GameTest runner does not dispatch the dedicated server's END event; exercise that handler explicitly.
-        h.onEachTick(()->AdventureEvents.buildChunks(new net.minecraftforge.event.TickEvent.ServerTickEvent(
-            net.minecraftforge.event.TickEvent.Phase.END,()->true,level.getServer())));
-        h.startSequence().thenIdle(10).thenExecute(()->{
-            h.assertTrue(!data.chunkBuilt(pos.toLong()),"Unavailable chunk was built or forced to load");
-            h.assertTrue(AdventureEvents.constructionPending(level,pos),"Load event was discarded before FULL availability");
-            level.setChunkForced(pos.x,pos.z,true);level.getChunk(pos.x,pos.z);
-        }).thenWaitUntil(()->h.assertTrue(data.chunkBuilt(pos.toLong()),"Deferred chunk construction was lost"))
-          .thenExecute(()->{level.setChunkForced(pos.x,pos.z,false);h.succeed();});
+        // Remote explorations never enqueue legacy construction or grow the global journal.
+        var pos=new net.minecraft.world.level.ChunkPos(123456,1000);
+        var before=data.chunkBuilt(pos.toLong());
+        AdventureEvents.chunkLoad(new net.minecraftforge.event.level.ChunkEvent.Load(new net.minecraft.world.level.chunk.LevelChunk(level,pos),true));
+        h.assertTrue(!AdventureEvents.constructionPending(level,pos)&&before==data.chunkBuilt(pos.toLong()),"Wilderness added legacy generation work");
+        h.succeed();
     }
     @GameTest(template="empty",timeoutTicks=80)
     public static void starConstructionConsumesExactCostAndRejectsObstructionsAtomically(GameTestHelper h) {
@@ -68,20 +58,25 @@ public final class AdventureGameTests {
           .thenExecute(()->{
         var data=IslandSavedData.get(level.getServer());var prior=data.encounter(kind.id).snapshot();
         var player=net.minecraftforge.common.util.FakePlayerFactory.get(level,new com.mojang.authlib.GameProfile(UUID.randomUUID(),"AnchorTest"));
-        player.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);player.setPos(Vec3.atBottomCenterOf(kind.center).add(0,0,41));
+        player.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);player.setPos(Vec3.atBottomCenterOf(kind.center).add(0,0,7));
         var state=new EncounterState();state.start(kind.baseHealth,java.util.List.of(player.getUUID()),UUID.randomUUID());state.tick(1,1);
         for(int i=0;i<85;i++)state.tick(1,1);data.restoreEncounter(kind.id,state.snapshot());state=data.encounter(kind.id);
         var boss=AdventureContent.BAKUNAWA_BOSS.get().create(level);boss.setUUID(state.actor());boss.moveTo(kind.origin());boss.sync(state);
         h.assertTrue(level.addFreshEntity(boss),"Actor was not added");boss.tick();
         try {
-            var part=boss.getParts()[11];
+            var part=boss.getParts()[1];
             h.assertTrue(level.getEntityOrPart(part.getId())==part,"Attack packet cannot resolve the multipart target id");
-            h.assertTrue(part.getBoundingBox().distanceToSqr(player.getEyePosition())<9,"Ground anchor cannot be reached with ordinary melee");
-            h.assertTrue(part.hurt(level.damageSources().playerAttack(player),6),"Anchor rejected valid Survival damage");
+            h.assertTrue(part.getBoundingBox().distanceToSqr(player.getEyePosition())<9,"Lowered jaw cannot be reached with ordinary melee");
+            h.assertTrue(part.hurt(level.damageSources().playerAttack(player),6),"Jaw rejected valid Survival damage");
             h.assertTrue(state.health()==kind.baseHealth-9,"Multipart damage did not update authoritative health");
-            part.hurt(level.damageSources().playerAttack(player),10000);
-            h.assertTrue(state.stage()==EncounterState.Stage.DEFEAT&&!boss.isRemoved()&&boss.getHealth()>0,"Lethal damage removed actor before its scene");
-            h.assertTrue(!part.hurt(level.damageSources().playerAttack(player),10000)&&state.snapshot().delivered().isEmpty(),"Concurrent lethal hit duplicated transition or delivered early loot");
+            state.recordHealth(1,true);boss.sync(state);boss.invulnerableTime=0;
+            part.hurt(level.damageSources().playerAttack(player),6);
+            h.assertTrue(state.stage()==EncounterState.Stage.TRANSFORM&&state.health()==500,"First bar did not trigger a fresh second form");
+            h.assertTrue(!part.hurt(level.damageSources().playerAttack(player),10000)&&state.snapshot().delivered().isEmpty(),"Concurrent damage crossed transformation");
+            for(int i=0;i<60;i++)state.tick(1,1);
+            state.recordHealth(1,true);boss.sync(state);boss.invulnerableTime=0;
+            part.hurt(level.damageSources().playerAttack(player),6);
+            h.assertTrue(state.stage()==EncounterState.Stage.DEFEAT&&state.phase()==2&&!boss.isRemoved(),"Second bar did not trigger final scene");
             h.succeed();
         } finally {boss.discard();data.restoreEncounter(kind.id,prior);data.setDirty();}
             level.setChunkForced(chunk.x,chunk.z,false);

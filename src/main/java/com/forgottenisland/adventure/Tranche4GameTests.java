@@ -21,7 +21,7 @@ import java.util.*;
 @GameTestHolder(ForgottenIsland.ID)
 @PrefixGameTestTemplate(false)
 public final class Tranche4GameTests {
-    private static ServerPlayer player(ServerLevel level,String name){
+    static ServerPlayer player(ServerLevel level,String name){
         level.getServer().setDifficulty(Difficulty.NORMAL,true);
         var p=new ServerPlayer(level.getServer(),level,new com.mojang.authlib.GameProfile(UUID.randomUUID(),name));
         p.connection=new net.minecraft.server.network.ServerGamePacketListenerImpl(level.getServer(),new net.minecraft.network.Connection(net.minecraft.network.protocol.PacketFlow.SERVERBOUND),p){
@@ -88,7 +88,7 @@ public final class Tranche4GameTests {
     }
     @GameTest(template="empty",timeoutTicks=60)
     public static void wardBlocksBodyHitsForExactlyFiveSeconds(GameTestHelper h){
-        var l=h.getLevel().getServer().getLevel(AdventureContent.ISLAND);var p=player(l,"Ward");var b=boss(l,8,20,p.getUUID());p.setPos(b.weakPoint(0));
+        var l=h.getLevel().getServer().getLevel(AdventureContent.ISLAND);var p=player(l,"Ward");var b=boss(l,8,20,p.getUUID());p.setPos(b.mouth());
         var data=IslandSavedData.get(l.getServer());var previous=data.encounter(BossKind.BAKUNAWA.id).snapshot();
         try{
             data.restoreEncounter(BossKind.BAKUNAWA.id,state(b,8,20,p.getUUID()).snapshot());

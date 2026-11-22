@@ -1,0 +1,281 @@
+{
+  "method": "Same seed, six player teleports, eight-chunk render distance, measured from the client command to the player position update. Save and Quit before both Anvil snapshots. Entries include partial chunks. Timing windows include the three-second capture dwell at each stop.",
+  "coordinates_xz": [
+    [
+      345,
+      142
+    ],
+    [
+      1150,
+      395
+    ],
+    [
+      -1337,
+      2400
+    ],
+    [
+      3060,
+      840
+    ],
+    [
+      50260,
+      1580
+    ],
+    [
+      475,
+      152
+    ]
+  ],
+  "0.4.0": {
+    "version": "4",
+    "world_create_s": 18.35,
+    "market_entry_s": 0.631,
+    "visits_s": [
+      0.52,
+      0.525,
+      0.734,
+      0.423,
+      0.415,
+      0.518
+    ],
+    "elapsed_s": 21.17,
+    "start": {
+      "bytes": 7155712,
+      "chunks": 1735
+    },
+    "end": {
+      "bytes": 39858176,
+      "chunks": 9674
+    },
+    "fps": {
+      "n": 21,
+      "min": 45,
+      "median": 55,
+      "max": 57
+    },
+    "used_client_and_integrated_heap_MiB": {
+      "n": 21,
+      "min": 709,
+      "median": 1098,
+      "max": 1468
+    },
+    "integrated_server_mean_tick_ms": {
+      "n": 21,
+      "min": 1.39,
+      "median": 6.0,
+      "max": 35.47
+    },
+    "new_region_bytes": 32702464,
+    "new_anvil_entries": 7939
+  },
+  "0.5.0": {
+    "version": "5",
+    "world_create_s": 24.53,
+    "market_entry_s": 0.526,
+    "visits_s": [
+      0.307,
+      0.404,
+      0.31,
+      0.309,
+      0.414,
+      0.509
+    ],
+    "elapsed_s": 20.27,
+    "start": {
+      "bytes": 6090752,
+      "chunks": 1477
+    },
+    "end": {
+      "bytes": 39522304,
+      "chunks": 9596
+    },
+    "fps": {
+      "n": 20,
+      "min": 50,
+      "median": 56.0,
+      "max": 56
+    },
+    "used_client_and_integrated_heap_MiB": {
+      "n": 20,
+      "min": 634,
+      "median": 972.5,
+      "max": 1280
+    },
+    "integrated_server_mean_tick_ms": {
+      "n": 20,
+      "min": 1.13,
+      "median": 5.8,
+      "max": 30.57
+    },
+    "new_region_bytes": 33431552,
+    "new_anvil_entries": 8119
+  },
+  "ground_and_air_trials": {
+    "walk": {
+      "before": [
+        280.5,
+        271.0,
+        135.5
+      ],
+      "after": [
+        301.86629237370994,
+        271.0,
+        135.5
+      ],
+      "input_ticks": 100,
+      "seconds_wall": 5.5,
+      "blocks": 21.37
+    },
+    "ground": {
+      "before": [
+        280.5,
+        272.45,
+        135.5
+      ],
+      "after": [
+        351.4460305194328,
+        272.45,
+        135.5
+      ],
+      "input_ticks": 100,
+      "seconds_wall": 5.51,
+      "blocks": 70.95
+    },
+    "air": {
+      "before": [
+        280.5,
+        277.45,
+        135.5
+      ],
+      "after": [
+        333.8974553447604,
+        277.45,
+        135.5
+      ],
+      "input_ticks": 100,
+      "seconds_wall": 5.5,
+      "blocks": 53.4
+    }
+  },
+  "shipping_direct_storm": [
+    {
+      "tick": 2,
+      "hp": 500.0,
+      "fps": 55,
+      "server_used_heap_MiB": 1026.8,
+      "server_mean_tick_ms": 1.609
+    },
+    {
+      "tick": 29,
+      "hp": 500.0,
+      "fps": 55,
+      "server_used_heap_MiB": 1044.3,
+      "server_mean_tick_ms": 1.648
+    },
+    {
+      "tick": 53,
+      "hp": 500.0,
+      "fps": 56,
+      "server_used_heap_MiB": 1060.3,
+      "server_mean_tick_ms": 1.683
+    },
+    {
+      "tick": 77,
+      "hp": 500.0,
+      "fps": 56,
+      "server_used_heap_MiB": 662.4,
+      "server_mean_tick_ms": 1.813
+    },
+    {
+      "tick": 101,
+      "hp": 500.0,
+      "fps": 56,
+      "server_used_heap_MiB": 675.4,
+      "server_mean_tick_ms": 1.774
+    },
+    {
+      "tick": 125,
+      "hp": 500.0,
+      "fps": 56,
+      "server_used_heap_MiB": 688.9,
+      "server_mean_tick_ms": 1.714
+    },
+    {
+      "tick": 149,
+      "hp": 500.0,
+      "fps": 55,
+      "server_used_heap_MiB": 702.4,
+      "server_mean_tick_ms": 1.659
+    },
+    {
+      "tick": 173,
+      "hp": 500.0,
+      "fps": 56,
+      "server_used_heap_MiB": 716.4,
+      "server_mean_tick_ms": 1.531
+    },
+    {
+      "tick": 197,
+      "hp": 500.0,
+      "fps": 55,
+      "server_used_heap_MiB": 731.5,
+      "server_mean_tick_ms": 1.623
+    },
+    {
+      "tick": 221,
+      "hp": 500.0,
+      "fps": 56,
+      "server_used_heap_MiB": 750.9,
+      "server_mean_tick_ms": 1.685
+    },
+    {
+      "tick": 245,
+      "hp": 500.0,
+      "fps": 56,
+      "server_used_heap_MiB": 766.9,
+      "server_mean_tick_ms": 1.736
+    },
+    {
+      "tick": 269,
+      "hp": 500.0,
+      "fps": 56,
+      "server_used_heap_MiB": 779.4,
+      "server_mean_tick_ms": 1.822
+    },
+    {
+      "tick": 293,
+      "hp": 500.0,
+      "fps": 56,
+      "server_used_heap_MiB": 897.9,
+      "server_mean_tick_ms": 1.783
+    }
+  ],
+  "shipping_storm_world_storage": [
+    {
+      "time": 1795381276.8519528,
+      "actors": {
+        "bakunawa_boss": {
+          "stage": 2,
+          "clock": 12,
+          "form": 2,
+          "hp": 500.0
+        }
+      },
+      "anvil_bytes": 46436898,
+      "journal_bytes": 2230
+    },
+    {
+      "time": 1795381288.0640268,
+      "actors": {
+        "bakunawa_boss": {
+          "stage": 2,
+          "clock": 237,
+          "form": 2,
+          "hp": 500.0
+        }
+      },
+      "anvil_bytes": 47346811,
+      "journal_bytes": 2088
+    }
+  ]
+}

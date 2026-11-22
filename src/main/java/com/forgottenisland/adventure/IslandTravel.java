@@ -13,6 +13,7 @@ import java.util.Optional;
 public final class IslandTravel {
     private record Pending(ServerPlayer player,net.minecraft.resources.ResourceKey<Level> dimension,BlockPos portal) {}
     private static final java.util.Map<java.util.UUID,Pending> PENDING=new java.util.HashMap<>();
+    public static final BlockPos MARKET_STAR=new BlockPos(310,64,99), MARKET_ENTRY=new BlockPos(310,65,85);
     public static final BlockPos ARRIVAL=new BlockPos(0,65,40);
     public static final BlockPos RETURN_STAR=new BlockPos(0,64,50);
     private static final String COOLDOWN="ForgottenIslandTravelAfter";
@@ -30,21 +31,21 @@ public final class IslandTravel {
     public static void through(ServerPlayer player,BlockPos portal) {
         long now=player.server.overworld().getGameTime();
         if(!player.isAlive()||player.isSpectator()||player.getPersistentData().getLong(COOLDOWN)>now)return;
-        if(player.level().dimension()==AdventureContent.ISLAND) home(player);
+        if(player.level().dimension()==AdventureContent.ISLAND||player.level().dimension()==AdventureContent.HIGHLANDS) home(player);
         else if(player.level().dimension()==Level.OVERWORLD) {
             var data=IslandSavedData.get(player.server);
             Optional<BlockPos> center=data.portalAt(portal);
             if(center.isEmpty())return;
-            ServerLevel destination=player.server.getLevel(AdventureContent.ISLAND);
+            ServerLevel destination=player.server.getLevel(AdventureContent.HIGHLANDS);
             if(destination==null){player.displayClientMessage(Component.literal("Forgotten Island is unavailable. Check the server datapacks."),false);return;}
             data.link(player.getUUID(),center.get());
-            IslandWorld.prepareArrival(destination);
-            transfer(player,destination,safeNear(destination,ARRIVAL).orElseGet(()->fallback(destination,ARRIVAL)));
-            player.sendSystemMessage(Component.literal("Explore east along the shore to the expanded festival (310, 65). Its lantern junction leads to Batiba's cave, Manang's mountain and Bakunawa's coast. The old district and your builds remain."));
+            IslandWorld.initialize(destination,destination.getChunk(MARKET_ENTRY.getX()>>4,MARKET_ENTRY.getZ()>>4));
+            transfer(player,destination,safeNear(destination,MARKET_ENTRY).orElseGet(()->fallback(destination,MARKET_ENTRY)));
+            player.sendSystemMessage(Component.literal("Welcome to the festival! East junction (400, 35): north to Manang (535, -215), east to Bakunawa (820, -65), south to Batiba (475, 190). /island harbor visits the original island."));
         }
     }
     public static boolean home(ServerPlayer player) {
-        if(player.level().dimension()!=AdventureContent.ISLAND&&player.level().dimension()!=AdventureContent.STOMACH)return false;
+        if(player.level().dimension()!=AdventureContent.ISLAND&&player.level().dimension()!=AdventureContent.HIGHLANDS&&player.level().dimension()!=AdventureContent.STOMACH)return false;
         ServerLevel overworld=player.server.overworld();
         BlockPos origin=IslandSavedData.get(player.server).departure(player.getUUID()).orElse(overworld.getSharedSpawnPos());
         Vec3 destination=safeNear(overworld,origin).orElseGet(()->safeNear(overworld,overworld.getSharedSpawnPos()).orElseGet(()->fallback(overworld,overworld.getSharedSpawnPos())));

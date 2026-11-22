@@ -14,6 +14,9 @@ import net.minecraftforge.registries.*;
 
 public final class AdventureContent {
     public static final ResourceKey<Level> ISLAND = ResourceKey.create(Registries.DIMENSION,ForgottenIsland.id("forgotten_island"));
+    public static final ResourceKey<Level> HIGHLANDS=ResourceKey.create(Registries.DIMENSION,ForgottenIsland.id("highlands"));
+    private static final DeferredRegister<com.mojang.serialization.Codec<? extends net.minecraft.world.level.chunk.ChunkGenerator>> GENERATORS=DeferredRegister.create(Registries.CHUNK_GENERATOR,ForgottenIsland.ID);
+    static { GENERATORS.register("mountains",()->MountainGenerator.CODEC); }
     public static final ResourceKey<Level> STOMACH = ResourceKey.create(Registries.DIMENSION,ForgottenIsland.id("bakunawa_interior"));
     public static final DeferredRegister<Block> BLOCKS=DeferredRegister.create(ForgeRegistries.BLOCKS,ForgottenIsland.ID);
     public static final RegistryObject<Block> PAROL_STONE=BLOCKS.register("parol_stone",()->new StarFrameBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).strength(2).lightLevel(s->7)));
@@ -29,6 +32,11 @@ public final class AdventureContent {
     public static final RegistryObject<SoundEvent> CAVE_AMBIENCE=sound("cave_ambience"),MOUNTAIN_AMBIENCE=sound("mountain_ambience"),COAST_AMBIENCE=sound("coast_ambience");
     public static final RegistryObject<SoundEvent> BAKUNAWA_ROAR=sound("bakunawa_roar");
     public static final RegistryObject<EntityType<IslandBoss>> MANANG_BOSS=boss(BossKind.MANANG),BAKUNAWA_BOSS=boss(BossKind.BAKUNAWA);
+    public static final java.util.List<RegistryObject<Item>> BOSS_EGGS=java.util.List.of(
+        ForgottenIsland.ITEMS.register("bakunawa_boss_spawn_egg",()->new BossEggItem(BossKind.BAKUNAWA,false)),
+        ForgottenIsland.ITEMS.register("phase_two_bakunawa_boss_spawn_egg",()->new BossEggItem(BossKind.BAKUNAWA,true)),
+        ForgottenIsland.ITEMS.register("manang_boss_spawn_egg",()->new BossEggItem(BossKind.MANANG,false)),
+        ForgottenIsland.ITEMS.register("separated_manang_boss_spawn_egg",()->new BossEggItem(BossKind.MANANG,true)));
     private static RegistryObject<SoundEvent> sound(String id){return ForgottenIsland.SOUNDS.register(id,()->SoundEvent.createVariableRangeEvent(ForgottenIsland.id(id)));}
     private static RegistryObject<EntityType<IslandBoss>> boss(BossKind kind) {
         return ForgottenIsland.ENTITIES.register(kind.id,()->EntityType.Builder.<IslandBoss>of((t,l)->new IslandBoss(t,l,kind),MobCategory.MONSTER)
@@ -37,10 +45,11 @@ public final class AdventureContent {
     public static final RegistryObject<Item> CRYSTAL_SWORD=ForgottenIsland.ITEMS.register("crystal_sword",CrystalSwordItem::new);
     public static final RegistryObject<Item> MANANG_WINGS=ForgottenIsland.ITEMS.register("manang_wings",ManangWingsItem::new);
     public static final RegistryObject<Item> BAKUNAWA_SKULL=ForgottenIsland.ITEMS.register("bakunawa_skull",()->new Item(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.EPIC)));
-    public static void register(IEventBus bus) { BLOCKS.register(bus); }
+    public static void register(IEventBus bus) { BLOCKS.register(bus); GENERATORS.register(bus); }
     public static void creative(net.minecraft.world.item.CreativeModeTab.Output out) {
         out.accept(STAR_NECKLACE.get());out.accept(PAROL_ITEM.get());out.accept(LANTERN_ITEM.get());
         out.accept(MANANG_WINGS.get());out.accept(CRYSTAL_SWORD.get());out.accept(BAKUNAWA_SKULL.get());
+        for(var egg:BOSS_EGGS)out.accept(egg.get());
         com.forgottenisland.arsenal.ArsenalContent.creative(out);
     }
     private AdventureContent() {}

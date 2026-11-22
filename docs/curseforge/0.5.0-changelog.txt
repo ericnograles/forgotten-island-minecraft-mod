@@ -1,0 +1,11 @@
+Forgotten Island 0.5.0 | Minecraft Java 1.20.1, Forge 47.4.10, Java 17
+
+The necklace now opens into a lantern market surrounded by mountain wilderness. Follow nearby routes to Batiba’s cave, Twilight Summit and Moonbreak Coast. Return to legacy builds with /island harbor. Use /island market to visit the new region.
+
+Bakunawa breaches open water and lowers its tired head for direct attacks. Its first defeat awakens a larger black winged form with its own health bar, Lightning Strike and Lightning Breath. A final split and explosion precede the island rewards. Breaking three internal Memory Crystals still frees swallowed players.
+
+Manang and her companion have a reworked humanoid face, upper and lower fangs, vertical pupils, layered hair and articulated wings. Manang keeps her joined and separated combat poses and her original reward.
+
+Both bosses appear in Creative. Switch to Survival within the arena to fight. Four Creative boss eggs allow independent encounters in the Overworld and island dimensions. Direct-form tests leave island progression intact.
+
+Back up a 0.4 world and replace its mod JAR on every client and the server. Existing companions, equipment, builds, portals and completed encounters carry forward.

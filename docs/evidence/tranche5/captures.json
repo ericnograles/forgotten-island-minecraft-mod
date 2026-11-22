@@ -1,0 +1,271 @@
+{
+  "highlands.jpg": [
+    {
+      "source": "ship-basin.png",
+      "client": "Dev",
+      "original_sha256": "0ace3d116d4458dbe244718bae55469fcac12d7f005d42f9592f1bbdbf8a26e8",
+      "normalized_crop": null,
+      "caption": "Festival basin and surrounding ridges"
+    },
+    {
+      "source": "ship-festival.png",
+      "client": "Dev",
+      "original_sha256": "88b81c191be4942f3cb2c29a1a1463bb40bafd4f8c680ceb9c259623cc61878d",
+      "normalized_crop": null,
+      "caption": "Market stage, stalls and lantern strings"
+    },
+    {
+      "source": "ship-waterfall.png",
+      "client": "Dev",
+      "original_sha256": "138f215c25c644bd5bc2345ebdd9379b52a3c23ae2b8f8e5dddd63fb94b3ef9b",
+      "normalized_crop": null,
+      "caption": "Water descending through a forested cliff"
+    },
+    {
+      "source": "ship-hollow.png",
+      "client": "Dev",
+      "original_sha256": "23e4ce68a0b266e499d69d4a50edbe7c137b770e0261f442309371bd6b6bfada",
+      "normalized_crop": null,
+      "caption": "Memory Hollow and its luminous cave roof"
+    },
+    {
+      "source": "bench5-ridge.png",
+      "client": "Dev",
+      "original_sha256": "7c83f086f06d73de26e22de29d5a3e72c6678201a21b2f0712553fd0a2a1b608",
+      "normalized_crop": null,
+      "caption": "Wilderness ridges near X −1337, Z 2400"
+    },
+    {
+      "source": "ship-coastline.png",
+      "client": "Dev",
+      "original_sha256": "81fb9e362ad81e5ea90be34aa0bacabf5718ff4f8bc1c8bebccd29fd040ceb8a",
+      "normalized_crop": null,
+      "caption": "Eastern coastal slope near the island boundary"
+    }
+  ],
+  "bakunawa.jpg": [
+    {
+      "source": "ship-breach.png",
+      "client": "Dev",
+      "original_sha256": "1bd48241644ddfeb8d55e586ada0d58be30ec335fdfa1908331ed5d2667f008c",
+      "normalized_crop": null,
+      "caption": "Breach from coastal water"
+    },
+    {
+      "source": "ship-roar.png",
+      "client": "Dev",
+      "original_sha256": "b1a662c46cd6a5c2923d38bb1d13020246fafa95115bcd735dca84b98f9bbab4",
+      "normalized_crop": null,
+      "caption": "Roar above the inlet"
+    },
+    {
+      "source": "ship-side-rest-1.png",
+      "client": "Observer",
+      "original_sha256": "ae24dbcb15b0dd9f3ac9e26ac92f82d76dcf2cb76110948cb5a07d414d56375f",
+      "normalized_crop": null,
+      "caption": "Exhausted jaw at beach level"
+    },
+    {
+      "source": "ship-memory-2.png",
+      "client": "Dev",
+      "original_sha256": "4391e4bdcd83a59af89d7fce007dba7b751e7fd10a408829d1c8f26882423ac1",
+      "normalized_crop": null,
+      "caption": "Third internal Memory Crystal"
+    },
+    {
+      "source": "ship-side-transform.png",
+      "client": "Observer",
+      "original_sha256": "0ea2ff286e6f44db71016a26f1579a802ccb4f95f6d65d7436d4f81171e06ab4",
+      "normalized_crop": null,
+      "caption": "Transformation and unfolding wings"
+    },
+    {
+      "source": "ship-duel-lightning-0.png",
+      "client": "Dev",
+      "original_sha256": "d46a831c76b2f5fa4dbe329d9da84170db7c4c34a0696794eb12a1088c36d3a7",
+      "normalized_crop": null,
+      "caption": "Lightning Strike"
+    },
+    {
+      "source": "ship-duel-lightning-1.png",
+      "client": "Dev",
+      "original_sha256": "d0c2bfd37401ff0be28ffc03d44feb8cbd5872d5a7a8cd5fc031280f70818dd9",
+      "normalized_crop": null,
+      "caption": "Lightning Breath"
+    },
+    {
+      "source": "ship-side-rest-2.png",
+      "client": "Observer",
+      "original_sha256": "c7660b4597598d0a8b5aa56f187f51f8478bf75e407f406f3bf3a0bfb7807214",
+      "normalized_crop": null,
+      "caption": "Storm form returns to the center"
+    },
+    {
+      "source": "ship-duel-split.png",
+      "client": "Dev",
+      "original_sha256": "3dac0323b979c473f9ce088b878d3d470174ca1b870a397cc0c8b926338ca914",
+      "normalized_crop": null,
+      "caption": "Split before the explosion"
+    },
+    {
+      "source": "ship-duel-explosion.png",
+      "client": "Dev",
+      "original_sha256": "48afb0fd18f42f793089377f7b7982ecf1f6d4b9b45e332bbfa5395e364e1b90",
+      "normalized_crop": null,
+      "caption": "Explosion at the break in the spine"
+    },
+    {
+      "source": "ship-side-dissolve.png",
+      "client": "Observer",
+      "original_sha256": "b12d72c09529f3560e1a0ff5a957a4175f36a7e1c60b0e8465e978e09e165ace",
+      "normalized_crop": null,
+      "caption": "Dissolving halves and expanding ring"
+    },
+    {
+      "source": "ship-reward.png",
+      "client": "Dev",
+      "original_sha256": "b4480fafcebc1acda58bff707bcdb32df5a5df76c3c42c3caa628626e64b245a",
+      "normalized_crop": null,
+      "caption": "Personal drops and the return star"
+    }
+  ],
+  "boss-eggs.jpg": [
+    {
+      "source": "ship-egg-roar-bakunawa_boss.png",
+      "client": "Observer",
+      "original_sha256": "f67a4df0eb548209f6a05d9c395e5f45362a181ddc777ca12dd20b732a8ba957",
+      "normalized_crop": null,
+      "caption": "Bakunawa Boss Spawn Egg"
+    },
+    {
+      "source": "ship-egg-roar-phase_two_bakunawa_boss.png",
+      "client": "Observer",
+      "original_sha256": "b7335c72e1a034a441db3720d8378fdd1e84caca268b66e21672d3b6dc97066e",
+      "normalized_crop": null,
+      "caption": "Phase Two Bakunawa Boss Spawn Egg"
+    },
+    {
+      "source": "ship-egg-manang_boss.png",
+      "client": "Observer",
+      "original_sha256": "4338c18f753382eb965f2882db611ce634a318eb1844d503300c7ef6da848d70",
+      "normalized_crop": null,
+      "caption": "Manang Boss Spawn Egg"
+    },
+    {
+      "source": "ship-egg-separated_manang_boss.png",
+      "client": "Observer",
+      "original_sha256": "c44ff1a27b0ed1ffc4510f179aa1b386880f08c182fd1e1dc7da42933592e151",
+      "normalized_crop": null,
+      "caption": "Separated Manang Boss Spawn Egg"
+    },
+    {
+      "source": "ship-manang-creative.png",
+      "client": "Dev",
+      "original_sha256": "4124aff3047687e475ba5e2cd3bf23cab71696accf1aef95ba2da7d656a45cec",
+      "normalized_crop": null,
+      "caption": "Creative entrance at Twilight Summit"
+    },
+    {
+      "source": "ship-manang-survival.png",
+      "client": "Dev",
+      "original_sha256": "208fd67cb372b72f8e093ec95b8e1ae27b8fd3bf355fa5f69a2490e7a438b037",
+      "normalized_crop": null,
+      "caption": "Same visitor after switching to Survival"
+    }
+  ],
+  "manang.jpg": [
+    {
+      "source": "daylight-joined-front.png",
+      "client": "Observer",
+      "original_sha256": "bb63a16f6c9cb5258c5ae87692f656a766b92564ec5257c96f75ea7a8799aec9",
+      "normalized_crop": null,
+      "caption": "Joined boss · front"
+    },
+    {
+      "source": "daylight-joined-quarter.png",
+      "client": "Observer",
+      "original_sha256": "ea8e344483e9428c3583bc78a7c6f11877f71717b3ef092a459c51101c885ae8",
+      "normalized_crop": [
+        0.3,
+        0.26,
+        0.7,
+        0.66
+      ],
+      "caption": "Joined boss · three-quarter"
+    },
+    {
+      "source": "daylight-joined-side.png",
+      "client": "Observer",
+      "original_sha256": "db4745e910fdb41a4bb9b7be105001016f56a9a1fbacec985169e387017f503d",
+      "normalized_crop": [
+        0.3,
+        0.26,
+        0.7,
+        0.66
+      ],
+      "caption": "Joined boss · profile"
+    },
+    {
+      "source": "daylight-separated-front.png",
+      "client": "Observer",
+      "original_sha256": "eead87ad5f2e0c1651e934cb5533849ed655b2adb51f8ef97ea7c0566efeb14b",
+      "normalized_crop": null,
+      "caption": "Separated boss · front"
+    },
+    {
+      "source": "daylight-separated-quarter.png",
+      "client": "Observer",
+      "original_sha256": "3c7911144945dafb2b29147f176f244a8669731a01873847f758f3fae5545a00",
+      "normalized_crop": [
+        0.29,
+        0.16,
+        0.71,
+        0.58
+      ],
+      "caption": "Separated boss · three-quarter"
+    },
+    {
+      "source": "daylight-separated-side.png",
+      "client": "Observer",
+      "original_sha256": "ef19062e1ac26a0f6f26e4ac85a570c906c5f44b2ba00428bdd02fa59318fbb5",
+      "normalized_crop": [
+        0.29,
+        0.16,
+        0.71,
+        0.58
+      ],
+      "caption": "Separated boss · profile"
+    },
+    {
+      "source": "ship-companion-front.png",
+      "client": "Observer",
+      "original_sha256": "3bcc448b033a905ecbeec76f271c2b78df077bbd5fc3d9595b688434b35cb6f6",
+      "normalized_crop": null,
+      "caption": "Friendly companion · front"
+    },
+    {
+      "source": "ship-companion-quarter.png",
+      "client": "Observer",
+      "original_sha256": "ef8fa6111657b9e56d85aababd9dbee793f1c1da3f2e604dac239725285cd0d9",
+      "normalized_crop": [
+        0.31,
+        0.12,
+        0.69,
+        0.5
+      ],
+      "caption": "Friendly companion · three-quarter"
+    },
+    {
+      "source": "ship-companion-side.png",
+      "client": "Observer",
+      "original_sha256": "8a6e02af526840a5fc10995bffae270b4b857b66c2ca838e0bf2b32aeac44f65",
+      "normalized_crop": [
+        0.31,
+        0.12,
+        0.69,
+        0.5
+      ],
+      "caption": "Friendly companion · profile"
+    }
+  ]
+}

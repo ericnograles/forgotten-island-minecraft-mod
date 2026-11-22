@@ -1,0 +1,30 @@
+Forgotten Island 0.5.0 — release checks
+OpenJDK 17.0.15 / Forge 47.4.10 / Minecraft Java 1.20.1
+
+./gradlew --offline build runGameTestServer
+[15:55:53] [Server thread/INFO] [minecraft/GameTestServer]: All 41 required tests passed :)
+BUILD SUCCESSFUL in 35s
+
+JUnit test suites
+com.forgottenisland.CompanionRulesTest: 3 tests, 0 failures, 0 errors
+com.forgottenisland.EncounterStateTest: 3 tests, 0 failures, 0 errors
+com.forgottenisland.IslandLayoutTest: 2 tests, 0 failures, 0 errors
+com.forgottenisland.MountainsAndFormsTest: 2 tests, 0 failures, 0 errors
+com.forgottenisland.StarPatternTest: 2 tests, 0 failures, 0 errors
+com.forgottenisland.StomachStateTest: 3 tests, 0 failures, 0 errors
+
+tools/validate_assets.py
+PASS: 13 species; 219 bones; 456 boxes; matching editable models, textures, eggs, labels and mono OGG calls.
+
+tools/validate_adventure_assets.py
+PASS: adventure recipes, dimension/biome, blocks, animated portal, reward icons, two themed meters, moon sprite, six original boss sounds, loot tables, JSON and festival ambience.
+PASS: inexpensive necklace recipe/art, interior dimension and blocks, Holy Beam mitigation tags, three regional soundscapes.
+PASS: 0.4 arsenal art and nine recipes, four horned egg stages, wearable armor, boss skeleton/UVs/emissive atlas and original roar.
+PASS: 0.5 highland generator data, facial rig, storm wings and emissive atlas, four independent boss egg assets.
+
+tools/publishing release verification fixtures
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.013s
+
+OK

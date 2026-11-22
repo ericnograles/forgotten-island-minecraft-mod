@@ -1,0 +1,157 @@
+{
+  "Departures": 0,
+  "Portals": 0,
+  "NecklacePortals": 0,
+  "Exits": 1,
+  "RewardDais": 1,
+  "ProtectedColumns": 0,
+  "schema_before": 2,
+  "schema_after": 3,
+  "completed": {
+    "bakunawa_boss": [
+      "COMPLETE",
+      4,
+      0
+    ]
+  },
+  "full_legacy_chunks": 962,
+  "identical_full_legacy_chunks": 961,
+  "remaining_block_changes": {
+    "('minecraft:water', 'minecraft:stone')": 1012,
+    "('minecraft:water', 'minecraft:sand')": 253,
+    "('minecraft:air', 'minecraft:sand')": 253,
+    "('minecraft:air', 'minecraft:smooth_sandstone')": 141,
+    "('minecraft:air', 'minecraft:cut_sandstone')": 61,
+    "('minecraft:air', 'minecraft:jungle_planks')": 28,
+    "('minecraft:air', 'minecraft:yellow_terracotta')": 23,
+    "('minecraft:air', 'minecraft:stripped_jungle_log')": 20,
+    "('minecraft:air', 'minecraft:water')": 15,
+    "('minecraft:air', 'minecraft:white_wool')": 12,
+    "('minecraft:air', 'minecraft:magenta_wool')": 12,
+    "('minecraft:air', 'minecraft:oak_fence')": 10,
+    "('minecraft:air', 'minecraft:prismarine_bricks')": 7,
+    "('minecraft:air', 'forgottenisland:parol_lantern')": 4,
+    "('minecraft:air', 'minecraft:orange_wool')": 4,
+    "('minecraft:air', 'minecraft:barrel')": 3,
+    "('minecraft:air', 'minecraft:melon')": 2,
+    "('minecraft:air', 'minecraft:red_wool')": 2
+  },
+  "retained_owned_companions": 1,
+  "unchanged_inventory_stacks": 3,
+  "old_rooms_released": true,
+  "native_0_4_placed_egg_and_portal": {
+    "before": {
+      "egg": {
+        "Owner": [
+          301266199,
+          -2059649805,
+          -1608804992,
+          -1648951199
+        ],
+        "keepPacked": 0,
+        "x": 16,
+        "y": 250,
+        "Incubated": 101,
+        "z": 18,
+        "id": "forgottenisland:bakunawa_egg"
+      },
+      "portal": "forgottenisland:star_portal",
+      "links": [
+        {
+          "Player": [
+            301266199,
+            -2059649805,
+            -1608804992,
+            -1648951199
+          ],
+          "Center": 2199023304954
+        }
+      ],
+      "portals": [
+        2199023304954
+      ],
+      "dimension": "forgottenisland:forgotten_island",
+      "position": [
+        0.5,
+        65.0,
+        40.5
+      ],
+      "platform": 480
+    },
+    "after": {
+      "egg": {
+        "Owner": [
+          301266199,
+          -2059649805,
+          -1608804992,
+          -1648951199
+        ],
+        "keepPacked": 0,
+        "x": 16,
+        "y": 250,
+        "Incubated": 581,
+        "z": 18,
+        "id": "forgottenisland:bakunawa_egg"
+      },
+      "portal": "forgottenisland:star_portal",
+      "links": [
+        {
+          "Player": [
+            301266199,
+            -2059649805,
+            -1608804992,
+            -1648951199
+          ],
+          "Center": 2199023304954
+        },
+        {
+          "Player": [
+            940439953,
+            -167562164,
+            -1601161573,
+            -1389718966
+          ],
+          "Center": 2199023304954
+        }
+      ],
+      "portals": [
+        2199023304954
+      ],
+      "dimension": "forgottenisland:highlands",
+      "position": [
+        310.5,
+        65.0,
+        85.5
+      ],
+      "platform": 480
+    }
+  },
+  "native_legacy_stomach_recovery": [
+    {
+      "fixture": "Swallowed04",
+      "registered_necklaces_retained": 0,
+      "individual_departures_retained": 0,
+      "prior_guest_count": 1,
+      "pending_offline_recoveries": 0,
+      "recovered_player_dimension": "forgottenisland:forgotten_island",
+      "recovered_player_position": [
+        820.5,
+        65.0,
+        -19.5
+      ]
+    },
+    {
+      "fixture": "LinkedGuests",
+      "registered_necklaces_retained": 1,
+      "individual_departures_retained": 2,
+      "prior_guest_count": 2,
+      "pending_offline_recoveries": 1,
+      "recovered_player_dimension": "forgottenisland:forgotten_island",
+      "recovered_player_position": [
+        820.5,
+        65.29161659442798,
+        -19.5
+      ]
+    }
+  ]
+}

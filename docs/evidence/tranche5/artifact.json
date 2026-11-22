@@ -1,0 +1,15 @@
+{
+  "filename": "forgotten-island-0.5.0.jar",
+  "bytes": 1803135,
+  "sha256": "d746f7719067c3c02925e3da549812bb877da4447f619b9f121967797b165cf0",
+  "minecraft": "1.20.1",
+  "forge": "47.4.10",
+  "java": "17.0.15",
+  "junit": 15,
+  "junit_failures": 0,
+  "forge_gametests": 41,
+  "publishing_fixture_tests": 6,
+  "companion_meshes": 13,
+  "companion_bones": 219,
+  "companion_boxes": 456
+}

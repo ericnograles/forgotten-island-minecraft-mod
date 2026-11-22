@@ -4,9 +4,9 @@
 
 The [CurseForge player guide](docs/curseforge/description.html) collects the installation, companions, controls, recipes, and boss instructions used by the listing. Maintainers can find release synchronization instructions in [CurseForge publishing](docs/curseforge/PUBLISHING.md).
 
-Version **0.4.0** adds the drawing-inspired black/red Bakunawa boss, eleven animated attacks, ocean-rise and split/explosion cinematics, three craftable swords with Sneak abilities, spiked Crystal Armor, and a horned egg that hatches a growing friendly Bakunawa. The necklace, expanded island, stomach adventure and all thirteen companions remain available.
+Version **0.5.0** brings the festival into a mountain basin on a 100,000 × 80,000-block island. Manang guards the summit. At Moonbreak Coast, Bakunawa breaches the inlet, brings its jaw within sword reach after attacks and transforms into a larger winged lightning serpent when its first health bar runs out.
 
-See the [0.4 design and verification ledger](docs/adventure-tranche4.md) for exact damage, recipes, armor behavior, growth, test results and playtest assistance. Previous [0.3 evidence](docs/adventure-tranche3.md) covers the island expansion and save upgrades. Full unassisted Survival progression and fresh solo/cooperative balance review remain assigned to human testers.
+See the [0.5 field notes and verification ledger](docs/adventure-tranche5.md) for terrain, balance, migration and playtest results.
 
 An unofficial Minecraft Java mod inspired by DreamWorks' *Forgotten Island* and Philippine folklore. **Thirteen playable creatures** with original models, companion abilities and three rideable creatures. See [the verification ledger](docs/verification.md) for automated tests, single-player and multiplayer evidence, and remaining limits.
 
@@ -17,7 +17,7 @@ The current build includes **thirteen creatures**: Bakunawa, Raww, Manang, Sarim
 Requires **Minecraft Java Edition 1.20.1**, **Java 17**, and **Forge 47.4.10** (the pinned test version). No animation or other mod dependencies are required. The declared Forge range is 47.4.10–47.x; other Forge releases have not been tested.
 
 1. Install the matching [official Forge client](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html).
-2. Copy `forgotten-island-0.4.0.jar` from the release archive (or `build/libs` after building the source) into that Minecraft profile's `mods` folder.
+2. Copy `forgotten-island-0.5.0.jar` from the release archive (or `build/libs` after building the source) into that Minecraft profile's `mods` folder.
 3. Launch the Forge profile. Put the same JAR on a Forge server and every connecting client for multiplayer.
 4. In Survival, craft the field guide and follow the portal plan below. For the original companion showcase, use the **Forgotten Island** tab on the second Creative-tab page.
 
@@ -35,28 +35,28 @@ Use it on the top of dry Overworld ground. Keep it in hand nearby for the two-se
 
 The normal entry path requires no amethyst or glow ink. Legacy Parol Stone portals still work, and their optional manual recipe/activation remain available. Craft the field guide with a **book and feather** for the new instructions.
 
-The old arrival harbor remains at `(0, 65, 40)`. Follow its eastern shore to the larger festival quarter at `(310, 65, 65)`: sixteen new stalls, a performance stage, parol strings and twenty-four more residents. The junction at `(400, 65, 35)` leads independently to:
+The necklace brings you to the festival at **(310, 65, 85)**. The market’s eastern junction at **(400, 65, 35)** branches to three destinations.
 
-- **Memory Hollow** `(475, 67, 190)`: Batiba's explorable cave, luminous chambers, a resting alcove and supplies.
-- **Twilight Summit** `(535, 105, -215)`: a lit ascent through the ridge to Manang's mountain encounter.
-- **Moonbreak Coast** `(820, 65, -65)`: a sea arch, jetty and a 168-block-wide Bakunawa arena.
+| Destination | Coordinates (X, Y, Z) | Route |
+| --- | --- | --- |
+| Memory Hollow | 475, 67, 190 | Take the southern trail under the mossy hillside to Batiba’s chamber. |
+| Twilight Summit | 535, 105, −215 | Climb the northern ridge to the purple lantern court. |
+| Moonbreak Coast | 820, 65, −65 | Follow the eastern trail past the sea arch. Approach from the south and face the open inlet. |
+| Homeward star | 310, 64, 99 | Jump into the market star to return to your personal Overworld portal. |
 
-The old island's ground envelope was **437 × 351 blocks**; the expanded envelope is **1,268 × 699 blocks**, with paths, terrain, vegetation, regional sounds and small caches. [Route distances, estimated walking times and interpretation notes](docs/adventure-tranche3.md) distinguish calculations from measured play.
-
-Each player's last departure portal is stored separately, with a five-second travel cooldown. Return stars search for safe, dry ground near that portal, then at Overworld spawn. `/island home` remains an unopped emergency recovery command, including inside Bakunawa. Death retains the normal Overworld bed/spawn. Island beds and anchors cannot change it.
-
-Existing saves upgrade automatically and additively. Previously built old-district chunks remain intact. In the expansion, any column containing non-baseline blocks is left untouched from bedrock to sky; untouched ocean columns can gain terrain even if explored before. Companions, residents, portal links, encounter completion and reward journals persist. Unfinished bosses use the new destinations; completed bosses stay completed, and existing rewards/exits remain where they were. The old arenas become historic courts. Extensive player construction can interrupt a new route or destination; the upgrade preserves that construction.
+Outside the festival basin, follow forested ridges, riverbeds and mossy lantern arches. The terrain generates on demand. Back up a 0.4 save before installing the same new JAR on all clients and the server. The original island has its own dimension and keeps its builds and residents. From either island, use `/island harbor` for the old district and `/island market` for the highlands. Existing completions and reward claims carry forward.
 
 ## Encounters and rewards
 
-Enter an arena in Survival to awaken its boss. Party health scales at awakening for up to four players; late arrivals join without healing the boss. Separate custom meters display shared server health and the current phase. Leave the arena to hide its meter. If everyone retreats or dies, an unfinished encounter resets after ten seconds. Completed bosses stay defeated in that world.
+Both bosses greet Creative, Survival and Adventure visitors. A Creative-only group can watch the entrance and stay in the arena. Switching to Survival starts the combat pattern. Spectators observe without triggering. At awakening, each additional visitor adds 50% health, up to double the solo value. In an occupied server an unfinished fight resets after ten seconds without visitors. Swallowed fighters count.
 
-Bring enchanted armor, a sword, food and healing supplies. The **previous 0.2** verified victories used Protection II diamond armor, a Sharpness III diamond sword, a shield and ordinary golden apples. These are obtainable before either boss; iron-only victory has not been established. Learn the warning patterns and move back into melee reach after knockback.
+**Manang** has 220 solo HP. Leave the Shadow Dive circle, jump the Shriek ring and move behind Wing Cut. Strike her lower body when she folds her wings. At half health the attacks quicken. Her blue-violet face, arched brows, fangs and swinging dark hair are shared with the friendly companion.
 
-- **Manang** stands about 4.7 blocks tall while joined. Her upper body separates for Shadow Dive, Shriek and Wing Cut. Leave the marked circle, jump over the expanding ring, or move out of her facing arc. Strike the lower body when her wings fold after an attack. The second half of the fight accelerates her pattern.
-- **Bakunawa** rises with an articulated black/red body, angular horns, visible fangs and luminous eyes. Chomp/swallowing, Moon Rocks and Fireballs deal **9 HP**; Tentacles **7**; Tail Whip and Horn Slash **5**; Atomic Breath **1 HP each second** during its three-second discharge. Golden Ward grants **five seconds of invincibility**. Holy Beam, Lunar Tide and Eclipse Breath remain. Ground warnings, visible projectiles and sweeping limbs share the server's hit timing. Strike the three gold moon anchors during recovery. Phase II accelerates the pattern.
+**Bakunawa** begins with 400 solo HP. After each attack, meet its exhausted jaw in the center and strike the visible body. A charged iron sword deals 9 damage in recovery. Stronger swords retain an advantage with diminishing returns against boss hide. Empty the first bar to trigger a three-second transformation and a fresh 500 HP bar. The larger storm form opens with Lightning Strike, followed by Lightning Breath. Leave the three yellow circles or sidestep the charged line. Its hide absorbs another 15%. Only the final defeat splits the serpent and opens the reward dais.
 
-Newly generated northern coast stays ocean for the rise. Previously expanded terrain and player construction are preserved. Use a client/server view distance of at least **10 chunks** (12 recommended) for the full coastal backdrop; the encounter remains playable at shorter distances.
+Chomp, Moon Rocks and Fireballs deal 9 HP before armor, Tentacles 7, Tail Whip and Horn Slash 5. Atomic Breath pulses for 1 HP per second. Golden Ward protects the serpent for five seconds. Lunar Tide and Eclipse Breath retain their ground warnings. Lightning Strike deals up to 9 HP per volley and Lightning Breath deals 8 HP per discharge.
+
+The Creative tab contains **Bakunawa Boss Spawn Egg**, **Phase Two Bakunawa Boss Spawn Egg**, **Manang Boss Spawn Egg** and **Separated Manang Boss Spawn Egg**. Use Bakunawa eggs on open water with an eight-block-deep breach lane to the north. Manang needs a clear, level 19 × 19 roost. Each test fight has its own origin, health and interior objective. Test victories award no island loot. The friendly incubating egg and Manang companion egg keep their familiar functions.
 
 Swallowed players explore a sealed ribbed interior with a rising passage and three luminous Memory Crystals. Breaking all three is the only normal escape and ejects all swallowed fighters together, safely back into the fight. No special pickaxe, wings or Crystal Sword is required. Everyone inside still counts toward the encounter and rewards. Death, reset, defeat, emergency recovery and stale reconnects are explicit escape safeguards. Offline guests keep durable recovery markers; restart does not erase crystal progress.
 
@@ -64,7 +64,7 @@ Holy Beam deals **10 HP per unblocked discharge**, bypassing ordinary armor and 
 
 **K** skips your current scene. **O** cycles Full, Reduced and Off; these keys can be rebound in Controls. Reduced keeps your own camera and movement. Off disables the camera/title spectacle and eclipse treatment. The world animation and encounter timing stay synchronized. Late arrivals see the remaining scene time. Everyone in the arena is protected during the shared entrance/defeat interval; your skip never skips another player's scene. Esc/menu, death, travel and disconnect restore local camera and controls.
 
-Rewards appear on the south dais only after the defeated scene finishes. Each Survival participant who joined before defeat receives a personal set. Uncollected drops are reserved for their recipient, do not expire and resist damage; they persist through chunk unload/restart. After pickup, normal inventory, chest, death-drop and sharing rules apply. Picked-up rewards are not replaced if subsequently lost.
+Rewards appear on the south dais only after the defeated scene finishes. Each participant who joined before defeat receives a personal set. Uncollected drops are reserved for their recipient, do not expire and resist damage; they persist through chunk unload/restart. After pickup, normal inventory, chest, death-drop and sharing rules apply. Picked-up rewards are not replaced if subsequently lost.
 
 | Victory reward | Behavior |
 | --- | --- |
@@ -150,6 +150,7 @@ python3 -m venv .tools-venv
 .tools-venv/bin/python tools/generate_adventure_assets.py
 .tools-venv/bin/python tools/generate_tranche_assets.py
 .tools-venv/bin/python tools/generate_tranche4_assets.py
+python tools/generate_tranche5_assets.py
 .tools-venv/bin/python tools/validate_assets.py
 .tools-venv/bin/python tools/validate_adventure_assets.py
 ```

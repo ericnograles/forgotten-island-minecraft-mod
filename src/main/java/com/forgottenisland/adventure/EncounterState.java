@@ -4,7 +4,7 @@ import java.util.*;
 
 /** Server-owned encounter journal. Views/skipping never advance this state machine. */
 public final class EncounterState {
-    public enum Stage { READY, ENTRANCE, COMBAT, DEFEAT, COMPLETE }
+    public enum Stage { READY, ENTRANCE, COMBAT, DEFEAT, COMPLETE, TRANSFORM }
     public record Snapshot(Stage stage,int ticks,int attempt,int phase,float health,float maxHealth,
                            UUID actor,Set<UUID> participants,Set<String> delivered,Set<String> collected) {}
     private Stage stage=Stage.READY;
@@ -21,30 +21,40 @@ public final class EncounterState {
     public float maxHealth(){return maxHealth;}
     public UUID actor(){return actor;}
     public Set<UUID> participants(){return Set.copyOf(participants);}
-    public boolean cinematic(){return stage==Stage.ENTRANCE||stage==Stage.DEFEAT;}
+    public boolean cinematic(){return stage==Stage.ENTRANCE||stage==Stage.TRANSFORM||stage==Stage.DEFEAT;}
     public boolean start(float baseHealth,Collection<UUID> players,UUID actor) {
         if(stage!=Stage.READY||players.isEmpty()||!Float.isFinite(baseHealth)||baseHealth<=0)return false;
         this.actor=Objects.requireNonNull(actor);participants.addAll(players);
-        maxHealth=baseHealth*(1+.5f*Math.min(3,players.size()-1));health=maxHealth;
+        maxHealth=baseHealth*(1+.5f*Math.min(2,players.size()-1));health=maxHealth;
         attempt++;phase=1;ticks=0;stage=Stage.ENTRANCE;return true;
     }
-    public void join(UUID player){if(stage==Stage.ENTRANCE||stage==Stage.COMBAT)participants.add(player);}
+    public void join(UUID player){if(stage==Stage.ENTRANCE||stage==Stage.COMBAT||stage==Stage.TRANSFORM)participants.add(player);}
     public boolean tick(int entranceLength,int defeatLength) {
         if(stage==Stage.READY||stage==Stage.COMPLETE)return false;
         ticks++;
+        if(stage==Stage.TRANSFORM&&ticks>=60){stage=Stage.COMBAT;ticks=0;return true;}
         if(stage==Stage.ENTRANCE&&ticks>=entranceLength){stage=Stage.COMBAT;ticks=0;return true;}
         if(stage==Stage.DEFEAT&&ticks>=defeatLength){stage=Stage.COMPLETE;ticks=0;return true;}
         return false;
     }
-    public boolean recordHealth(float current) {
+    public void directForm(boolean serpent){
+        if(stage!=Stage.ENTRANCE)return;
+        phase=2;
+        if(serpent){maxHealth*=1.25f;health=maxHealth;}
+    }
+    public boolean recordHealth(float current){return recordHealth(current,false);}
+    public boolean recordHealth(float current,boolean serpent) {
         if(stage!=Stage.COMBAT||!Float.isFinite(current))return false;
         health=Math.max(0,Math.min(maxHealth,current));
+        if(serpent&&phase==1&&health<=0){
+            phase=2;maxHealth*=1.25f;health=maxHealth;stage=Stage.TRANSFORM;ticks=0;return true;
+        }
         if(health<=0){stage=Stage.DEFEAT;ticks=0;return true;}
-        if(health<=maxHealth*.5f&&phase==1){phase=2;ticks=0;}
+        if(!serpent&&health<=maxHealth*.5f&&phase==1){phase=2;ticks=0;}
         return false;
     }
     public boolean retry() {
-        if(stage!=Stage.COMBAT&&stage!=Stage.ENTRANCE)return false;
+        if(stage!=Stage.COMBAT&&stage!=Stage.ENTRANCE&&stage!=Stage.TRANSFORM)return false;
         stage=Stage.READY;ticks=0;health=maxHealth=0;actor=null;participants.clear();phase=1;return true;
     }
     public String rewardToken(String boss,UUID player,String item) {return boss+":"+attempt+":"+player+":"+item;}

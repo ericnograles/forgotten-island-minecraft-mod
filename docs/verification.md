@@ -1,6 +1,8 @@
 # Verification ledger
 
-**Scope note:** the evidence below verifies the original 0.1.0 companion release. The 0.2 adventure is tracked in [adventure-development.md](adventure-development.md). The current **0.3 necklace, expanded island and Bakunawa attacks** have their own [evidence ledger](adventure-tranche3.md) and `evidence/tranche3/`. Older screenshots and performance measurements must not be counted as verification of new features.
+For the 0.5.0 build, playthroughs, measured performance and upgrade results, see [the highlands release ledger](adventure-tranche5.md).
+
+**Scope note:** the evidence below verifies the original 0.1.0 companion release. The 0.2 adventure is tracked in [adventure-development.md](adventure-development.md). The **0.3 necklace, expanded island and Bakunawa attacks** have their own [evidence ledger](adventure-tranche3.md) and `evidence/tranche3/`. Older screenshots and performance measurements must not be counted as verification of new features.
 
 Status: **full identified roster implemented and tested: thirteen creatures, including mandatory Bakunawa**. Verification date: 2026-11-21. The Flaming Aswang Chef uses the original gameplay design explicitly authorized by the user; its film likeness is not claimed. Sarangay follows primary production concept art. See [the research inventory](creature-roster.md) for sources, confidence and interpretation choices.
 

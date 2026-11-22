@@ -18,16 +18,18 @@ public final class IslandWorld {
     public static final BlockPos MANANG=new BlockPos(-112,65,-72), BAKUNAWA=new BlockPos(112,65,-72);
     private static final Species[] RESIDENTS={Species.RAWW,Species.DUWENDE,Species.BUNGI,Species.BATIBA,Species.ZIPPY,Species.TIKBALANG,Species.SARANGAY,Species.CHEF,Species.DATU,Species.SARIMANOK};
     private static final Block[] COLORS={Blocks.RED_WOOL,Blocks.YELLOW_WOOL,Blocks.CYAN_WOOL,Blocks.MAGENTA_WOOL,Blocks.LIME_WOOL,Blocks.ORANGE_WOOL};
+    static boolean legacyChunk(ChunkPos pos){return pos.x>=-14&&pos.x<=66&&pos.z>=-24&&pos.z<=22;}
     public static void prepareArrival(ServerLevel level) {
         // Arrival, retreat portal and the first market sightline must be ready before the player enters.
         for(int x=-2;x<=1;x++)for(int z=-2;z<=3;z++) initialize(level,level.getChunk(x,z));
     }
     public static void initialize(ServerLevel level,LevelChunk chunk) {
-        if(level.dimension()!=AdventureContent.ISLAND)return;
+        if(level.dimension()==AdventureContent.HIGHLANDS){IslandExpansion.highlands(level,chunk);return;}
+        if(level.dimension()!=AdventureContent.ISLAND||!legacyChunk(chunk.getPos()))return;
         var data=IslandSavedData.get(level.getServer());
+        var w=data.chunkBuilt(chunk.getPos().toLong())?null:new Writer(level,chunk);
         if(!data.expanded(chunk.getPos().toLong()))IslandExpansion.initialize(level,chunk);
-        if(data.chunkBuilt(chunk.getPos().toLong()))return;
-        var w=new Writer(level,chunk.getPos());
+        if(w==null)return;
         int minX=chunk.getPos().getMinBlockX(),minZ=chunk.getPos().getMinBlockZ();
         for(int x=minX;x<minX+16;x++)for(int z=minZ;z<minZ+16;z++) {
             double edge=x*x/(218.0*218)+z*z/(175.0*175);
@@ -142,13 +144,31 @@ public final class IslandWorld {
         creature.setPersistenceRequired();creature.setInvulnerable(true);
         level.addFreshEntity(creature);
     }
-    private record Writer(ServerLevel level,ChunkPos chunk) {
+    static boolean pristineColumn(LevelChunk chunk,int x,int z){
+        var at=new BlockPos.MutableBlockPos();
+        for(int y=0;y<chunk.getMaxBuildHeight();y++){
+            var block=chunk.getBlockState(at.set(x,y,z));
+            if(!(y==0?block.is(Blocks.BEDROCK):y<56?block.is(Blocks.STONE):y<63?block.is(Blocks.WATER)&&block.getFluidState().isSource():block.isAir()))return false;
+        }
+        return true;
+    }
+    private static final class Writer {
+        final ServerLevel level;
+        final ChunkPos chunk;
+        final boolean[] clear=new boolean[256];
+        Writer(ServerLevel level,LevelChunk source){
+            this.level=level;chunk=source.getPos();
+            if(chunk.getMinBlockX()>218||chunk.getMaxBlockX()< -218||chunk.getMinBlockZ()>175||chunk.getMaxBlockZ()< -175)return;
+            for(int x=chunk.getMinBlockX();x<=chunk.getMaxBlockX();x++)for(int z=chunk.getMinBlockZ();z<=chunk.getMaxBlockZ();z++)
+                clear[(x&15)*16+(z&15)]=pristineColumn(source,x,z);
+        }
+        boolean writable(int x,int z){return x>>4==chunk.x&&z>>4==chunk.z&&clear[(x&15)*16+(z&15)];}
         void set(int x,int y,int z,Block block) {state(x,y,z,block.defaultBlockState());}
         void state(int x,int y,int z,BlockState state) {
-            if(x>>4==chunk.x&&z>>4==chunk.z)level.setBlock(new BlockPos(x,y,z),state,2|16);
+            if(writable(x,z))level.setBlock(new BlockPos(x,y,z),state,2|16);
         }
         void sign(int x,int y,int z,String a,String b,String c,String d) {
-            if(x>>4!=chunk.x||z>>4!=chunk.z)return;
+            if(!writable(x,z))return;
             set(x,y,z,Blocks.OAK_SIGN);
             if(level.getBlockEntity(new BlockPos(x,y,z)) instanceof SignBlockEntity sign) {
                 SignText text=new SignText();String[] lines={a,b,c,d};
