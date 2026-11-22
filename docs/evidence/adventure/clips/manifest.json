@@ -1,0 +1,110 @@
+{
+  "captured_on": "2026-11-21",
+  "method": "Approved ffmpeg AVFoundation display capture of full-screen Minecraft; scaled from 1920x1200 to 1280x800. Continuous original captures, no edits or synthesized frames.",
+  "clips": [
+    {
+      "file": "m8-bakunawa-eclipse-defeat.mp4",
+      "duration_seconds": 37.966667,
+      "decoded_frames": 1139,
+      "width": 1280,
+      "height": 800,
+      "fps": "30/1",
+      "codec": "h264",
+      "audio_streams": 0,
+      "bytes": 4806299,
+      "sha256": "57454fcc634948f8850ed778062770c08400c97a56f65d454a561159b9d6048d",
+      "full_decode": "pass"
+    },
+    {
+      "file": "m8-bakunawa-entrance.mp4",
+      "duration_seconds": 24.966667,
+      "decoded_frames": 749,
+      "width": 1280,
+      "height": 800,
+      "fps": "30/1",
+      "codec": "h264",
+      "audio_streams": 0,
+      "bytes": 4083438,
+      "sha256": "b956017a0fad47fd48b426979334437965c3734ef70a2a734414a4eb8555f1d9",
+      "full_decode": "pass"
+    },
+    {
+      "file": "m8-bakunawa-rewards-return.mp4",
+      "duration_seconds": 24.0,
+      "decoded_frames": 720,
+      "width": 1280,
+      "height": 800,
+      "fps": "30/1",
+      "codec": "h264",
+      "audio_streams": 0,
+      "bytes": 2764397,
+      "sha256": "af52082a405d4c70151b35f680f4a43ab252383d7370c9ca5d4677559bc3f1dd",
+      "full_decode": "pass"
+    },
+    {
+      "file": "m8-festival-market.mp4",
+      "duration_seconds": 20.0,
+      "decoded_frames": 600,
+      "width": 1280,
+      "height": 800,
+      "fps": "30/1",
+      "codec": "h264",
+      "audio_streams": 0,
+      "bytes": 3083487,
+      "sha256": "9a45b5a812e8850649f61fb7800c5c334596a69054aac14a42b631d1c37abb47",
+      "full_decode": "pass"
+    },
+    {
+      "file": "m8-manang-defeat.mp4",
+      "duration_seconds": 30.0,
+      "decoded_frames": 900,
+      "width": 1280,
+      "height": 800,
+      "fps": "30/1",
+      "codec": "h264",
+      "audio_streams": 0,
+      "bytes": 3241831,
+      "sha256": "46cf198cd982be8fea5dbe238a65f6a43d21992b981ac9531e053bd8fb352874",
+      "full_decode": "pass"
+    },
+    {
+      "file": "m8-manang-entrance.mp4",
+      "duration_seconds": 24.966667,
+      "decoded_frames": 749,
+      "width": 1280,
+      "height": 800,
+      "fps": "30/1",
+      "codec": "h264",
+      "audio_streams": 0,
+      "bytes": 3710764,
+      "sha256": "7659f72de9217c3177a4eebc1f42db0ef762a4ea41e746474d3a1298f8958e9b",
+      "full_decode": "pass"
+    },
+    {
+      "file": "m8-portal-entry.mp4",
+      "duration_seconds": 24.966667,
+      "decoded_frames": 749,
+      "width": 1280,
+      "height": 800,
+      "fps": "30/1",
+      "codec": "h264",
+      "audio_streams": 0,
+      "bytes": 4018556,
+      "sha256": "ca87b96ddc0c6fcb6af21cd8856d5572c048b47fa9469f77a1f4f625cefc3bc4",
+      "full_decode": "pass"
+    },
+    {
+      "file": "m8-wings-gliding.mp4",
+      "duration_seconds": 24.966667,
+      "decoded_frames": 749,
+      "width": 1280,
+      "height": 800,
+      "fps": "30/1",
+      "codec": "h264",
+      "audio_streams": 0,
+      "bytes": 4401414,
+      "sha256": "ca993a45925d630dd3b80332b16e536b24b5ee74b19a626408f6a6d4522cea89",
+      "full_decode": "pass"
+    }
+  ]
+}

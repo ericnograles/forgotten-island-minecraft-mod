@@ -115,5 +115,51 @@
         "attenuation_distance": 16
       }
     ]
+  },
+  "festival_ambience": {
+    "subtitle": "subtitles.forgottenisland.festival",
+    "sounds": [
+      {
+        "name": "forgottenisland:festival_ambience",
+        "stream": false,
+        "volume": 0.45
+      }
+    ]
+  },
+  "boss_warning": {
+    "subtitle": "subtitles.forgottenisland.boss_warning",
+    "sounds": [
+      "forgottenisland:boss_warning"
+    ]
+  },
+  "manang_shriek": {
+    "subtitle": "subtitles.forgottenisland.manang_shriek",
+    "sounds": [
+      "forgottenisland:manang_shriek"
+    ]
+  },
+  "boss_impact": {
+    "subtitle": "subtitles.forgottenisland.boss_impact",
+    "sounds": [
+      "forgottenisland:boss_impact"
+    ]
+  },
+  "moon_devour": {
+    "subtitle": "subtitles.forgottenisland.moon_devour",
+    "sounds": [
+      "forgottenisland:moon_devour"
+    ]
+  },
+  "boss_release": {
+    "subtitle": "subtitles.forgottenisland.boss_release",
+    "sounds": [
+      "forgottenisland:boss_release"
+    ]
+  },
+  "weakpoint": {
+    "subtitle": "subtitles.forgottenisland.weakpoint",
+    "sounds": [
+      "forgottenisland:weakpoint"
+    ]
   }
 }

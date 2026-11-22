@@ -1,0 +1,15 @@
+{
+  "combat_verified_jar_sha256": "6dd342e38a5057010616b353748f3770cdb81c8f4e293423d9c4590c461c6447",
+  "audit_jar_sha256": "2b838117ae6ae7923ee20fdd1da184adcc677c5e3c9bcce7b9cadd2dee54942b",
+  "changed_jar_entries": [
+    "com/forgottenisland/adventure/AdventureEvents.class"
+  ],
+  "change": "Raww market greeting now recommends enchanted armor, matching field guide and verified equipment.",
+  "final_jar_sha256": "525d245a8f868929cdef04d8a5016aeb0bdeb40baa374e476d75fd31ad621b98",
+  "final_changed_jar_entries": [
+    "com/forgottenisland/adventure/AdventureEvents$1.class",
+    "com/forgottenisland/adventure/AdventureEvents.class",
+    "com/forgottenisland/adventure/AdventureGameTests.class"
+  ],
+  "final_change": "Retain unavailable chunks in the bounded END-tick construction queue; skip already-built work. Add a real Forge regression for deferred FULL availability, in addition to the Raww greeting correction."
+}

@@ -22,9 +22,22 @@ public final class ClientHooks {
     public static final KeyMapping ROAR=new KeyMapping("key.forgottenisland.roar",InputConstants.Type.KEYSYM,GLFW.GLFW_KEY_G,"key.categories.forgottenisland");
     public static final KeyMapping DESCEND=new KeyMapping("key.forgottenisland.descend",InputConstants.Type.KEYSYM,GLFW.GLFW_KEY_C,"key.categories.forgottenisland");
     public static void openGuide() {Minecraft.getInstance().setScreen(new CreatureGuideScreen());}
-    @SubscribeEvent public static void keys(RegisterKeyMappingsEvent e){e.register(ABILITY);e.register(ROAR);e.register(DESCEND);}
-    @SubscribeEvent public static void layers(EntityRenderersEvent.RegisterLayerDefinitions e){for(Species s:Species.values())e.registerLayerDefinition(CreatureModel.layer(s),()->CreatureModel.bake(s));}
-    @SubscribeEvent public static void renderers(EntityRenderersEvent.RegisterRenderers e){ForgottenIsland.TYPES.forEach((s,t)->e.registerEntityRenderer(t.get(),c->new CreatureRenderer(c,s)));}
+    @SubscribeEvent public static void keys(RegisterKeyMappingsEvent e){e.register(ABILITY);e.register(ROAR);e.register(DESCEND);e.register(BossPresentation.SKIP);e.register(BossPresentation.MODE);}
+    @SubscribeEvent public static void layers(EntityRenderersEvent.RegisterLayerDefinitions e){
+        for(Species s:Species.values())e.registerLayerDefinition(CreatureModel.layer(s),()->CreatureModel.bake(s));
+        for(var kind:com.forgottenisland.adventure.BossKind.values())e.registerLayerDefinition(BossModel.layer(kind),()->CreatureModel.bake(kind.species,true));
+    }
+    @SubscribeEvent public static void renderers(EntityRenderersEvent.RegisterRenderers e){
+        ForgottenIsland.TYPES.forEach((s,t)->e.registerEntityRenderer(t.get(),c->new CreatureRenderer(c,s)));
+        e.registerEntityRenderer(com.forgottenisland.adventure.AdventureContent.MANANG_BOSS.get(),c->new BossRenderer(c,com.forgottenisland.adventure.BossKind.MANANG));
+        e.registerEntityRenderer(com.forgottenisland.adventure.AdventureContent.BAKUNAWA_BOSS.get(),c->new BossRenderer(c,com.forgottenisland.adventure.BossKind.BAKUNAWA));
+    }
+    @SubscribeEvent public static void wearableLayers(EntityRenderersEvent.AddLayers e) {
+        for(String skin:e.getSkins()) {
+            net.minecraft.client.renderer.entity.player.PlayerRenderer renderer=e.getSkin(skin);
+            if(renderer!=null)renderer.addLayer(new ManangWingsLayer(renderer));
+        }
+    }
     @SubscribeEvent public static void particles(RegisterParticleProvidersEvent e){e.registerSpriteSet(ForgottenIsland.MEMORY_MOTE.get(),MemoryMoteParticle.Provider::new);}
     @SubscribeEvent public static void overlays(RegisterGuiOverlaysEvent e){e.registerAboveAll("companion",(gui,g,partial,w,h)->Events.overlay(g,w,h,partial));}
 
@@ -71,6 +84,11 @@ public final class ClientHooks {
             }
             IslandCreature c=mc.player.getVehicle() instanceof IslandCreature ride?ride:mc.hitResult instanceof EntityHitResult hit&&hit.getEntity() instanceof IslandCreature look?look:null;
             if(c==null)return;
+            if(c.isMarketResident()) {
+                g.drawCenteredString(mc.font,c.species.displayName+" • Festival host",w/2,h-110,0xffffdf9a);
+                g.drawCenteredString(mc.font,"Empty-hand use • Greet",w/2,h-96,0xff9be2d0);
+                return;
+            }
             String text=c.getName().getString()+"  •  "+(c.isTame()?(c.isOrderedToSit()?"Stay":"Follow")+" / "+(c.defending()?"Defend":"Passive"):"Gift: "+c.species.gift.getDescription().getString()+" "+c.friendship()+"/3");
             int width=mc.font.width(text)+24;
             String hint=c.cooldown()>0?"Ability ready in "+((c.cooldown()+19)/20)+"s":"R • "+c.species.ability+(c.species==Species.BAKUNAWA?"   G • Roar":"");

@@ -1,0 +1,270 @@
+{
+  "arrival_portal": "forgottenisland:star_portal",
+  "bosses": {},
+  "counts": {
+    "forgottenisland:batiba": 2,
+    "forgottenisland:bungi": 2,
+    "forgottenisland:datu": 2,
+    "forgottenisland:duwende": 2,
+    "forgottenisland:flamingchef": 2,
+    "forgottenisland:mermahn": 1,
+    "forgottenisland:raww": 2,
+    "forgottenisland:sarangay": 2,
+    "forgottenisland:sarimanok": 2,
+    "forgottenisland:tikbalang": 2,
+    "forgottenisland:zippy": 2
+  },
+  "departures": [
+    {
+      "Center": -1099511627706,
+      "Player": [
+        940439953,
+        -167562164,
+        -1601161573,
+        -1389718966
+      ]
+    }
+  ],
+  "encounters": {
+    "bakunawa_boss": {
+      "Actor": [
+        403080806,
+        1942700778,
+        -1961450780,
+        -1548199865
+      ],
+      "Attempt": 2,
+      "Collected": [
+        "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:bakunawa_skull",
+        "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:crystal_sword",
+        "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:bakunawa_skull",
+        "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:crystal_sword"
+      ],
+      "Delivered": [
+        "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:bakunawa_skull",
+        "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:crystal_sword",
+        "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:bakunawa_skull",
+        "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:crystal_sword"
+      ],
+      "Health": 0.0,
+      "MaxHealth": 600.0,
+      "Participants": [
+        {
+          "Id": [
+            301266199,
+            -2059649805,
+            -1608804992,
+            -1648951199
+          ]
+        },
+        {
+          "Id": [
+            940439953,
+            -167562164,
+            -1601161573,
+            -1389718966
+          ]
+        }
+      ],
+      "Phase": 2,
+      "Stage": "COMPLETE",
+      "Ticks": 0
+    },
+    "manang_boss": {
+      "Actor": [
+        -893887737,
+        547767339,
+        -2034423209,
+        349156749
+      ],
+      "Attempt": 2,
+      "Collected": [
+        "manang_boss:2:380df991-f603-344c-a090-369bad2a924a:manang_wings"
+      ],
+      "Delivered": [
+        "manang_boss:2:380df991-f603-344c-a090-369bad2a924a:manang_wings"
+      ],
+      "Health": 0.0,
+      "MaxHealth": 220.0,
+      "Participants": [
+        {
+          "Id": [
+            940439953,
+            -167562164,
+            -1601161573,
+            -1389718966
+          ]
+        }
+      ],
+      "Phase": 2,
+      "Stage": "COMPLETE",
+      "Ticks": 0
+    }
+  },
+  "exits": {
+    "bakunawa": "forgottenisland:star_portal"
+  },
+  "portals": [
+    -1099511627706
+  ],
+  "residents": {
+    "-1258141616,28194695,-2086428560,1884351368": {
+      "home": -2473901117375,
+      "id": "forgottenisland:sarangay",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-1586835507,1730229925,-1076414066,1022595515": {
+      "home": 7421703487553,
+      "id": "forgottenisland:tikbalang",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-1598489666,-1203620191,-1250492548,964029658": {
+      "home": 7696581500992,
+      "id": "forgottenisland:mermahn",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-1879658477,2074752651,-1648694111,1458607914": {
+      "home": -2199023345599,
+      "id": "forgottenisland:raww",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-2078339482,-2118698006,-1095038739,2102992384": {
+      "home": -2199023300543,
+      "id": "forgottenisland:bungi",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-240804877,1162492154,-1155176361,19286791": {
+      "home": -7421703397311,
+      "id": "forgottenisland:datu",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-474888644,-1975898012,-1288149688,1617267635": {
+      "home": 7696581349441,
+      "id": "forgottenisland:batiba",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-595034683,1750282384,-1489290368,411452977": {
+      "home": 2473901207617,
+      "id": "forgottenisland:flamingchef",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-659452519,220740123,-1740916758,-1788980009": {
+      "home": 7696581304385,
+      "id": "forgottenisland:duwende",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-77991198,-129026320,-1328120299,2107087456": {
+      "home": 2473901252673,
+      "id": "forgottenisland:sarimanok",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1518945493,-1059245513,-1404958199,1533370824": {
+      "home": -7146825670591,
+      "id": "forgottenisland:raww",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1530180500,-554617698,-1642974207,-1616864740": {
+      "home": -7421703442367,
+      "id": "forgottenisland:sarangay",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1633271762,323761403,-1776930049,-1035768520": {
+      "home": 7421703532609,
+      "id": "forgottenisland:flamingchef",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1688707027,-444187801,-1912076293,818809916": {
+      "home": -7146825625535,
+      "id": "forgottenisland:bungi",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1971962987,764424887,-1106433308,1336114249": {
+      "home": 2473901162561,
+      "id": "forgottenisland:tikbalang",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1982589447,-1587398481,-1378477721,-1813135265": {
+      "home": 2748778979393,
+      "id": "forgottenisland:duwende",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "236308622,891498505,-1151257324,1732763332": {
+      "home": -7421703487423,
+      "id": "forgottenisland:zippy",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "334652628,487667361,-1492659639,-664638402": {
+      "home": -2473901072319,
+      "id": "forgottenisland:datu",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "435169356,1455044644,-1145981346,-459617287": {
+      "home": -2473901162431,
+      "id": "forgottenisland:zippy",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "566079089,1960261409,-1310212897,1492712628": {
+      "home": 7421703577665,
+      "id": "forgottenisland:sarimanok",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "809347595,-253019801,-1716368797,-1216710262": {
+      "home": 2748779024449,
+      "id": "forgottenisland:batiba",
+      "invulnerable": 1,
+      "persistent": 1
+    }
+  },
+  "rewards": {
+    "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:bakunawa_skull": {
+      "count": 1,
+      "id": "forgottenisland:bakunawa_skull",
+      "location": "inventory",
+      "owner": "11f4f517-853c-3cf3-a01b-95809db70061"
+    },
+    "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:crystal_sword": {
+      "count": 1,
+      "id": "forgottenisland:crystal_sword",
+      "location": "inventory",
+      "owner": "11f4f517-853c-3cf3-a01b-95809db70061"
+    },
+    "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:bakunawa_skull": {
+      "count": 1,
+      "id": "forgottenisland:bakunawa_skull",
+      "location": "inventory",
+      "owner": "380df991-f603-344c-a090-369bad2a924a"
+    },
+    "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:crystal_sword": {
+      "count": 1,
+      "id": "forgottenisland:crystal_sword",
+      "location": "inventory",
+      "owner": "380df991-f603-344c-a090-369bad2a924a"
+    },
+    "manang_boss:2:380df991-f603-344c-a090-369bad2a924a:manang_wings": {
+      "count": 1,
+      "id": "forgottenisland:manang_wings",
+      "location": "inventory",
+      "owner": "380df991-f603-344c-a090-369bad2a924a"
+    }
+  }
+}

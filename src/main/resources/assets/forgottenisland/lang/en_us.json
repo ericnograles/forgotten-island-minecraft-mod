@@ -45,5 +45,22 @@
   "subtitles.forgottenisland.sarangay": "Sarangay calls",
   "entity.forgottenisland.flamingchef": "Flaming Aswang Chef",
   "item.forgottenisland.flamingchef_spawn_egg": "Flaming Aswang Chef Spawn Egg",
-  "subtitles.forgottenisland.flamingchef": "Flaming Aswang Chef calls"
+  "subtitles.forgottenisland.flamingchef": "Flaming Aswang Chef calls",
+  "block.forgottenisland.parol_stone": "Parol Stone",
+  "block.forgottenisland.star_portal": "Homeward Star",
+  "block.forgottenisland.parol_lantern": "Parol Lantern",
+  "subtitles.forgottenisland.festival": "Festival chimes and sea breeze",
+  "item.forgottenisland.crystal_sword": "Crystal Sword",
+  "item.forgottenisland.manang_wings": "Manang Wings",
+  "item.forgottenisland.bakunawa_skull": "Bakunawa Skull",
+  "entity.forgottenisland.manang_boss": "Manang, The Severed Twilight",
+  "entity.forgottenisland.bakunawa_boss": "Bakunawa, Devourer of Moons",
+  "key.forgottenisland.skip_scene": "Skip my boss cinematic",
+  "key.forgottenisland.scene_mode": "Cycle boss cinematic mode",
+  "subtitles.forgottenisland.boss_warning": "Danger gathers",
+  "subtitles.forgottenisland.manang_shriek": "Manang shrieks",
+  "subtitles.forgottenisland.boss_impact": "Island magic strikes",
+  "subtitles.forgottenisland.moon_devour": "The moon is swallowed",
+  "subtitles.forgottenisland.boss_release": "The island releases a spirit",
+  "subtitles.forgottenisland.weakpoint": "A weak point opens"
 }

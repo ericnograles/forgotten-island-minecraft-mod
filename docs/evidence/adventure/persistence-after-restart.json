@@ -1,0 +1,158 @@
+{
+  "arrival_portal": "forgottenisland:star_portal",
+  "counts": {
+    "forgottenisland:batiba": 2,
+    "forgottenisland:bungi": 2,
+    "forgottenisland:datu": 2,
+    "forgottenisland:duwende": 2,
+    "forgottenisland:flamingchef": 2,
+    "forgottenisland:mermahn": 1,
+    "forgottenisland:raww": 2,
+    "forgottenisland:sarangay": 2,
+    "forgottenisland:sarimanok": 2,
+    "forgottenisland:tikbalang": 2,
+    "forgottenisland:zippy": 2
+  },
+  "departures": [
+    {
+      "Center": 70,
+      "Player": [
+        940439953,
+        -167562164,
+        -1601161573,
+        -1389718966
+      ]
+    }
+  ],
+  "portals": [
+    70
+  ],
+  "residents": {
+    "-1040739707,-62571734,-1522407591,-351796601": {
+      "home": -7421703442367,
+      "id": "forgottenisland:sarangay",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-1201765175,-1006027157,-1751616147,-478796627": {
+      "home": 7421703487553,
+      "id": "forgottenisland:tikbalang",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-1392499451,-99532892,-1413549793,-1032685717": {
+      "home": 2473901252673,
+      "id": "forgottenisland:sarimanok",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-1533065513,1039808618,-1404147840,-570705591": {
+      "home": -7146825625535,
+      "id": "forgottenisland:bungi",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-1538205155,1715813490,-1691201844,-987293801": {
+      "home": 2473901162561,
+      "id": "forgottenisland:tikbalang",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-156610932,-170511853,-1176405204,77434323": {
+      "home": -2473901162431,
+      "id": "forgottenisland:zippy",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-182125833,-638963661,-1597699594,-1907044614": {
+      "home": 7696581349441,
+      "id": "forgottenisland:batiba",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-252393622,-589286999,-1794054789,-1977086244": {
+      "home": 2748778979393,
+      "id": "forgottenisland:duwende",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "-691120234,-1442433765,-1569139294,-1069559669": {
+      "home": 7696581304385,
+      "id": "forgottenisland:duwende",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1031507861,-529320757,-1254710327,714941749": {
+      "home": 7421703577665,
+      "id": "forgottenisland:sarimanok",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1151775945,-1261290725,-1617793252,154508012": {
+      "home": -7421703487423,
+      "id": "forgottenisland:zippy",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1278020549,1845049372,-1595229943,1379943516": {
+      "home": 7696581500992,
+      "id": "forgottenisland:mermahn",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1582021673,1598306046,-1549375156,1219573453": {
+      "home": 2473901207617,
+      "id": "forgottenisland:flamingchef",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1798679951,-1316077905,-1580967813,-1137236597": {
+      "home": 7421703532609,
+      "id": "forgottenisland:flamingchef",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "1979295623,-433900000,-1375212362,-651022345": {
+      "home": -2473901117375,
+      "id": "forgottenisland:sarangay",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "219950332,-1230882430,-1581445114,-1082158822": {
+      "home": -7421703397311,
+      "id": "forgottenisland:datu",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "308242548,-54644604,-1904991916,-591549497": {
+      "home": -2199023300543,
+      "id": "forgottenisland:bungi",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "665166625,1283603891,-2147286821,1318769523": {
+      "home": -2199023345599,
+      "id": "forgottenisland:raww",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "686995523,975780646,-1515088993,-1994568758": {
+      "home": 2748779024449,
+      "id": "forgottenisland:batiba",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "68786440,2017933573,-1171348808,-1396576251": {
+      "home": -2473901072319,
+      "id": "forgottenisland:datu",
+      "invulnerable": 1,
+      "persistent": 1
+    },
+    "848864184,-251445262,-1733867317,-1518753529": {
+      "home": -7146825670591,
+      "id": "forgottenisland:raww",
+      "invulnerable": 1,
+      "persistent": 1
+    }
+  }
+}

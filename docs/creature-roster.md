@@ -61,7 +61,7 @@ Aswang is an umbrella term in filmmaker reporting, not a reason to add a generic
 
 ## Implementation decisions
 
-Native Forge entity models and original procedural animation avoid an extra runtime dependency. Minecraft 1.20.1, Java 17, Forge 47.4.10, ForgeGradle 6.0.54 and Gradle 8.8 are pinned. Natural spawning, story progression and dimensions are deliberately outside this release.
+Native Forge entity models and original procedural animation avoid an extra runtime dependency. Minecraft 1.20.1, Java 17, Forge 47.4.10, ForgeGradle 6.0.54 and Gradle 8.8 are pinned. The original 0.1.0 companion release excluded natural spawning, story progression and dimensions. The 0.2.0 adventure explicitly adds the persistent island, its market residents and separate hostile boss variants; the companion roster and controls remain unchanged.
 
 ## Original Flaming Aswang Chef design
 

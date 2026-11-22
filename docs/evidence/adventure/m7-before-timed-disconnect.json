@@ -1,0 +1,39 @@
+{
+  "bakunawa_boss": {
+    "Phase": 1,
+    "Attempt": 4,
+    "Delivered": [],
+    "Health": 400.0,
+    "Ticks": 79,
+    "Actor": [
+      1643463005,
+      -1597616749,
+      -1478679125,
+      -657450781
+    ],
+    "Stage": "ENTRANCE",
+    "Participants": [
+      {
+        "Id": [
+          301266199,
+          -2059649805,
+          -1608804992,
+          -1648951199
+        ]
+      }
+    ],
+    "Collected": [],
+    "MaxHealth": 400.0
+  },
+  "manang_boss": {
+    "Phase": 1,
+    "Attempt": 1,
+    "Delivered": [],
+    "Health": 0.0,
+    "Ticks": 0,
+    "Stage": "READY",
+    "Participants": [],
+    "Collected": [],
+    "MaxHealth": 0.0
+  }
+}

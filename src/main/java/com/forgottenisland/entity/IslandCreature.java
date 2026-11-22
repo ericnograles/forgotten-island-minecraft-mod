@@ -32,6 +32,7 @@ public class IslandCreature extends TamableAnimal {
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(IslandCreature.class,EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(IslandCreature.class,EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> STAY = SynchedEntityData.defineId(IslandCreature.class,EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> MARKET = SynchedEntityData.defineId(IslandCreature.class,EntityDataSerializers.BOOLEAN);
     public final Species species;
     private UUID giftGiver;
     private int verticalInput, inputAge;
@@ -53,6 +54,7 @@ public class IslandCreature extends TamableAnimal {
         entityData.define(FRIENDSHIP,0); entityData.define(DEFEND,true); entityData.define(ACTIVE,0);
         entityData.define(ABILITY,0); entityData.define(COOLDOWN,0); entityData.define(VARIANT,0); entityData.define(FLYING,false);
         entityData.define(STAY,false);
+        entityData.define(MARKET,false);
     }
     @Override protected void registerGoals() {
         goalSelector.addGoal(1,new SitWhenOrderedToGoal(this));
@@ -68,6 +70,8 @@ public class IslandCreature extends TamableAnimal {
         targetSelector.addGoal(2,new OwnerHurtTargetGoal(this));
     }
     public int friendship() {return entityData.get(FRIENDSHIP);}
+    public boolean isMarketResident() {return entityData.get(MARKET);}
+    public void setMarketResident() {entityData.set(MARKET,true);getPersistentData().putBoolean("IslandMarketResident",true);}
     @Override public boolean isOwnedBy(LivingEntity player) {return isTame() && getOwnerUUID()!=null && getOwnerUUID().equals(player.getUUID());}
     @Override public boolean isOrderedToSit() {return entityData.get(STAY);}
     @Override public void setOrderedToSit(boolean stay) {super.setOrderedToSit(stay);entityData.set(STAY,stay);}
@@ -297,9 +301,11 @@ public class IslandCreature extends TamableAnimal {
         tag.putInt("Friendship",friendship()); if(giftGiver!=null)tag.putUUID("GiftGiver",giftGiver);
         tag.putBoolean("Defend",defending());tag.putInt("AbilityTicks",activeTicks());tag.putInt("Ability",abilityKind());
         tag.putInt("Cooldown",cooldown());tag.putInt("Variant",variant());tag.putBoolean("Flying",flying());
+        if(isMarketResident())tag.putBoolean("MarketResident",true);
     }
     @Override public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+        entityData.set(MARKET,tag.getBoolean("MarketResident")||tag.getCompound("ForgeData").getBoolean("IslandMarketResident"));
         // Vanilla restores its private orderedToSit field directly, bypassing the setter.
         entityData.set(STAY,tag.getBoolean("Sitting"));
         entityData.set(FRIENDSHIP,Mth.clamp(tag.getInt("Friendship"),0,3));

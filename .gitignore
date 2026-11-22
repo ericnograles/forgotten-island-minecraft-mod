@@ -11,4 +11,5 @@ out/
 .DS_Store
 __pycache__/
 *.log
+!docs/evidence/adventure/*.log
 .tools-venv/

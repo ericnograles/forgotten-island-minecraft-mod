@@ -9,3 +9,12 @@ Build-time dependencies: Forge/ForgeGradle (their upstream licenses), Gradle wra
 The sounds are short additive/noise synthesis, rendered to spatial mono Vorbis. No voice impersonation or third-party music is used.
 
 The Flaming Aswang Chef's model, flame crown, checked apron, cooking implements, animations and synthesized sizzle/chime are an original gameplay interpretation requested by the user. No chef film image or audio was used as an asset source; film-design accuracy is not claimed.
+
+## Adventure expansion references and original adaptations
+
+On 2026-11-21 the official [Universal Pictures Philippines new trailer](https://www.youtube.com/watch?v=n2zWJxmwHNU) was inspected in browser playback at approximately 0:45, 0:47 and 0:50. The inspected sequence shows blue-white light, a luminous radial opening on the ground, and the characters above it beginning to fall downward. The Minecraft entrance preserves that ground-plane/downward direction. Its buildable five-point parol silhouette, copper-inlaid stone frame, glow-ink activation, materials, cooldown and personal return linking are original gameplay adaptations, not claims that those construction details appear in the movie. A complete film review is not claimed.
+
+`tools/generate_adventure_assets.py` authors the new star stone, parol lantern, animated floor-light texture and quiet festival sound loop. The sound uses original additive chimes, synthesized drum pulses and a generated sea-noise bed; it samples no music, voices or film audio. The market layout, lantern strings, food displays and branching arena routes are original block architecture. Existing companion textures and meshes are unchanged.
+
+
+The adventure generator also authors two themed life-meter frames, the Crystal Sword, Manang Wings and Bakunawa Skull item art, a world-space moon sprite, and six original encounter sounds. The sounds use additive oscillators and shaped noise, without recorded voices or samples. Boss animation/camera choreography, lunar anchors, the eclipse effect and attack warnings are original gameplay adaptations. Manang's larger separated form reuses the project's original film-reference-informed skeleton and atlas; Bakunawa's approximately 92-block articulated boss uses the existing original folklore adaptation. Neither size is asserted as a movie measurement. A boss-only mesh adjustment separates overlapping belly faces; the thirteen companion mesh definitions and palettes remain unchanged. The wearable bat-wing geometry is authored in `ManangWingsLayer.java`.

@@ -24,6 +24,9 @@ public class CreatureModel extends EntityModel<IslandCreature> {
     }
     public static ModelLayerLocation layer(Species s) {return new ModelLayerLocation(ForgottenIsland.id(s.id),"main");}
     public static LayerDefinition bake(Species s) {
+        return bake(s,false);
+    }
+    public static LayerDefinition bake(Species s,boolean boss) {
         MeshDefinition mesh=new MeshDefinition();
         Map<String,PartDefinition> bones=new HashMap<>();
         bones.put("root",mesh.getRoot().addOrReplaceChild("body_root",CubeListBuilder.create(),PartPose.offset(0,24,0)));
@@ -36,7 +39,8 @@ public class CreatureModel extends EntityModel<IslandCreature> {
                 CubeListBuilder cubes=CubeListBuilder.create();
                 for(JsonElement boxElement:bone.getAsJsonArray("boxes")) {
                     JsonArray b=boxElement.getAsJsonArray();
-                    cubes.texOffs(b.get(6).getAsInt()*128,0).addBox(f(b,0),f(b,1),f(b,2),f(b,3),f(b,4),f(b,5));
+                    boolean belly=boss&&s==Species.BAKUNAWA&&name.startsWith("segment")&&b.get(6).getAsInt()==7;
+                    cubes.texOffs(b.get(6).getAsInt()*128,0).addBox(f(b,0),f(b,1),f(b,2)-(belly?.03f:0),f(b,3),f(b,4),f(b,5)+(belly?.06f:0));
                 }
                 PartPose pose=PartPose.offsetAndRotation(f(pivot,0),f(pivot,1),f(pivot,2),f(rotation,0),f(rotation,1),f(rotation,2));
                 bones.put(name,bones.get(parent).addOrReplaceChild(name,cubes,pose));

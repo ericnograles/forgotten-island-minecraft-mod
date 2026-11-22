@@ -1,0 +1,135 @@
+[21Nov2026 15:31:01.722] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[21Nov2026 15:31:01.725] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.15 by Homebrew; OS Mac OS X arch aarch64 version 26.5.2
+[21Nov2026 15:31:01.792] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[21Nov2026 15:31:01.820] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/adventure-server/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[21Nov2026 15:31:01.939] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/adventure-server/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.10/fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[21Nov2026 15:31:01.940] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/adventure-server/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.10/javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[21Nov2026 15:31:01.940] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/adventure-server/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.10/lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[21Nov2026 15:31:01.941] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/adventure-server/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.10/mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[21Nov2026 15:31:02.001] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[21Nov2026 15:31:02.567] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[21Nov2026 15:31:05.764] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[21Nov2026 15:31:05.777] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[21Nov2026 15:31:06.018] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[21Nov2026 15:31:06.262] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.10 Target: 47.4.28
+[21Nov2026 15:31:06.518] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[21Nov2026 15:31:06.863] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/adventure-server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23103!/assets/.mcassetsroot' uses unexpected schema
+[21Nov2026 15:31:06.863] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/adventure-server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23103!/data/.mcassetsroot' uses unexpected schema
+[21Nov2026 15:31:07.933] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 7 recipes
+[21Nov2026 15:31:07.934] [main/ERROR] [net.minecraft.server.ServerFunctionLibrary/]: Failed to load function fiqa:setup
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 13: Unknown item 'forgottenisland:field_guide' at position 9: give Dev <--[HERE]
+	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1760) ~[?:?]
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?]
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 13: Unknown item 'forgottenisland:field_guide' at position 9: give Dev <--[HERE]
+	at net.minecraft.commands.CommandFunction.m_77984_(CommandFunction.java:63) ~[server-1.20.1-20230612.114412-srg.jar%23103!/:?]
+	at net.minecraft.server.ServerFunctionLibrary.m_214320_(ServerFunctionLibrary.java:83) ~[server-1.20.1-20230612.114412-srg.jar%23103!/:?]
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 6 more
+[21Nov2026 15:31:08.053] [main/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1271 advancements
+[21Nov2026 15:31:08.330] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 1.20.1
+[21Nov2026 15:31:08.330] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[21Nov2026 15:31:08.330] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: SURVIVAL
+[21Nov2026 15:31:08.330] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[21Nov2026 15:31:08.390] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on 127.0.0.1:25585
+[21Nov2026 15:31:08.419] [Server thread/INFO] [net.minecraft.server.network.ServerConnectionListener/]: Using default channel type
+[21Nov2026 15:31:08.482] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[21Nov2026 15:31:08.483] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: The server will make no attempt to authenticate usernames. Beware.
+[21Nov2026 15:31:08.483] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[21Nov2026 15:31:08.483] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: To change this, set "online-mode" to "true" in the server.properties file.
+[21Nov2026 15:31:08.513] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "adventure-survival-qa"
+[21Nov2026 15:31:08.640] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[21Nov2026 15:31:10.115] [Worker-Main-7/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[21Nov2026 15:31:10.118] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[21Nov2026 15:31:10.122] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[21Nov2026 15:31:10.143] [Worker-Main-5/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[21Nov2026 15:31:10.641] [Worker-Main-6/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 22%
+[21Nov2026 15:31:10.974] [Server thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 2334 ms
+[21Nov2026 15:31:10.976] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (2.483s)! For help, type "help"
+[21Nov2026 15:31:10.987] [LanServerPinger #1/WARN] [net.minecraft.client.server.LanServerPinger/]: LanServerPinger: No route to host
+[21Nov2026 15:31:10.989] [Server thread/INFO] [net.minecraftforge.server.permission.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[21Nov2026 15:31:39.804] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[/127.0.0.1:59573] logged in with entity id 1 at (-7.5, -60.0, 4.5)
+[21Nov2026 15:31:39.920] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev joined the game
+[21Nov2026 15:31:44.146] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Unknown function fiqa:setup
+[21Nov2026 15:31:53.198] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: There are 4 data pack(s) enabled: [vanilla (built-in)], [mod:forge], [mod:forgottenisland], [file/survival-fixture (world)]
+[21Nov2026 15:31:53.204] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: There are no more data packs available
+[21Nov2026 15:32:05.452] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Reloading!
+[21Nov2026 15:32:05.612] [Server thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 7 recipes
+[21Nov2026 15:32:05.645] [Server thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1271 advancements
+[21Nov2026 15:32:08.929] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev has made the advancement [Stone Age]
+[21Nov2026 15:32:08.940] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev has made the advancement [Suit Up]
+[21Nov2026 15:32:08.953] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Not Secure] [Server] QA fixture supplies ordinary ingredients and iron equipment only. All crafting, portal placement, combat and rewards follow Survival rules.
+[21Nov2026 15:32:08.956] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Executed 25 command(s) from function 'fiqa:setup'
+[21Nov2026 15:35:28.248] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Teleported Dev to -3.817181, 70.000000, 4.538997
+[21Nov2026 15:35:52.492] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Teleported Dev to -3.817181, 71.000000, 2.799260
+[21Nov2026 15:36:11.463] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev has the following entity data: "forgottenisland:forgotten_island"
+[21Nov2026 15:36:22.191] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Teleported Dev to 0.500000, 65.000000, 40.500000
+[21Nov2026 15:37:50.897] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Observer[/127.0.0.1:60152] logged in with entity id 144 at (-8.5, 70.0, 5.5)
+[21Nov2026 15:37:50.939] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Observer joined the game
+[21Nov2026 15:37:57.053] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Observer has made the advancement [Suit Up]
+[21Nov2026 15:37:57.065] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Executed 10 command(s) from function 'fiqa:observer_kit'
+[21Nov2026 15:37:57.173] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Teleported Observer to 65.500000, 65.000000, -29.500000
+[21Nov2026 15:38:04.443] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev has the following entity data: [44.69999998807907d, 65.0d, -35.04316314545712d]
+[21Nov2026 15:39:07.542] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev has the following entity data: [108.9282797842088d, 65.0d, -26.351783821605782d]
+[21Nov2026 15:39:07.642] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Observer has the following entity data: 20.0f
+[21Nov2026 15:39:38.953] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev was slain by Bakunawa, Devourer of Moons
+[21Nov2026 15:40:41.092] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Teleported Observer to 112.500000, 65.000000, -7.500000
+[21Nov2026 15:40:41.192] [Server thread/WARN] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Observer moved too quickly! 48.61095070278561,0.0,25.164693560024162
+[21Nov2026 15:40:41.300] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Reloading!
+[21Nov2026 15:40:41.998] [Server thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 7 recipes
+[21Nov2026 15:40:42.023] [Server thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1271 advancements
+[21Nov2026 15:41:11.046] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev has made the advancement [Cover Me with Diamonds]
+[21Nov2026 15:41:11.054] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Executed 9 command(s) from function 'fiqa:prepare_dev'
+[21Nov2026 15:41:11.141] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Observer has made the advancement [Cover Me with Diamonds]
+[21Nov2026 15:41:11.144] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Executed 9 command(s) from function 'fiqa:prepare_observer'
+[21Nov2026 15:41:11.237] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Teleported Dev to 112.500000, 65.000000, -8.500000
+[21Nov2026 15:41:11.377] [Server thread/WARN] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev moved too quickly! 112.0,-5.0,-18.0
+[21Nov2026 15:42:43.147] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Observer has the following entity data: [112.5d, 65.0d, -22.5434031208716d]
+[21Nov2026 15:42:43.243] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev has the following entity data: 20.0f
+[21Nov2026 15:43:53.654] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dim minecraft:overworld (minecraft:overworld): Mean tick time: 0.612 ms. Mean TPS: 20.000
+[21Nov2026 15:43:53.691] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dim minecraft:the_end (minecraft:the_end): Mean tick time: 0.055 ms. Mean TPS: 20.000
+[21Nov2026 15:43:53.691] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dim minecraft:the_nether (minecraft:the_nether): Mean tick time: 0.003 ms. Mean TPS: 20.000
+[21Nov2026 15:43:53.691] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dim forgottenisland:forgotten_island (forgottenisland:forgotten_island): Mean tick time: 1.484 ms. Mean TPS: 20.000
+[21Nov2026 15:43:53.694] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Overall: Mean tick time: 2.459 ms. Mean TPS: 20.000
+[21Nov2026 15:44:37.122] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dim minecraft:overworld (minecraft:overworld): Mean tick time: 0.676 ms. Mean TPS: 20.000
+[21Nov2026 15:44:37.290] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dim minecraft:the_end (minecraft:the_end): Mean tick time: 0.013 ms. Mean TPS: 20.000
+[21Nov2026 15:44:37.290] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dim minecraft:the_nether (minecraft:the_nether): Mean tick time: 0.004 ms. Mean TPS: 20.000
+[21Nov2026 15:44:37.290] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dim forgottenisland:forgotten_island (forgottenisland:forgotten_island): Mean tick time: 1.567 ms. Mean TPS: 20.000
+[21Nov2026 15:44:37.291] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Overall: Mean tick time: 2.435 ms. Mean TPS: 20.000
+[21Nov2026 15:46:09.064] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving the game (this may take a moment!)
+[21Nov2026 15:46:09.265] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (adventure-survival-qa): All chunks are saved
+[21Nov2026 15:46:09.265] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[21Nov2026 15:46:09.265] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[21Nov2026 15:46:09.265] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (forgotten_island): All chunks are saved
+[21Nov2026 15:46:09.265] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[21Nov2026 15:46:09.266] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saved the game
+[21Nov2026 15:47:32.864] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev has the following entity data: [113.57929397255174d, 65.0d, -17.681918588870094d]
+[21Nov2026 15:47:32.960] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Observer has the following entity data: [106.02798334640484d, 65.0d, -15.256683849325176d]
+[21Nov2026 15:50:09.615] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving the game (this may take a moment!)
+[21Nov2026 15:50:09.740] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (adventure-survival-qa): All chunks are saved
+[21Nov2026 15:50:09.740] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[21Nov2026 15:50:09.740] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[21Nov2026 15:50:09.740] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (forgotten_island): All chunks are saved
+[21Nov2026 15:50:09.740] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[21Nov2026 15:50:09.740] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saved the game
+[21Nov2026 15:50:13.365] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping the server
+[21Nov2026 15:50:13.413] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[21Nov2026 15:50:13.415] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[21Nov2026 15:50:13.421] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Observer lost connection: Server closed
+[21Nov2026 15:50:13.422] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Observer left the game
+[21Nov2026 15:50:13.427] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[21Nov2026 15:50:14.379] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[adventure-survival-qa]'/minecraft:overworld
+[21Nov2026 15:50:14.598] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[adventure-survival-qa]'/minecraft:the_end
+[21Nov2026 15:50:14.599] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[adventure-survival-qa]'/minecraft:the_nether
+[21Nov2026 15:50:14.599] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[adventure-survival-qa]'/forgottenisland:forgotten_island
+[21Nov2026 15:50:14.718] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (adventure-survival-qa): All chunks are saved
+[21Nov2026 15:50:14.719] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[21Nov2026 15:50:14.719] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[21Nov2026 15:50:14.719] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (forgotten_island): All chunks are saved
+[21Nov2026 15:50:14.719] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
