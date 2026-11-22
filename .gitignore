@@ -12,4 +12,5 @@ out/
 __pycache__/
 *.log
 !docs/evidence/adventure/*.log
+!docs/evidence/tranche3/*.log
 .tools-venv/

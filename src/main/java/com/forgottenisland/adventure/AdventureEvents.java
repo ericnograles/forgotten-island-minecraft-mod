@@ -39,11 +39,15 @@ public final class AdventureEvents {
     @SubscribeEvent public static void buildChunks(TickEvent.ServerTickEvent e) {
         if(e.phase!=TickEvent.Phase.END)return;
         IslandTravel.finishTick(e.getServer());
+        StarNecklaceItem.tick(e.getServer());
         PENDING.forEach((level,queue)->{
             if(level.getServer()!=e.getServer())return;
+            long deadline=System.nanoTime()+6_000_000;
             for(int n=0;n<4;n++) {
+                if(n>0&&System.nanoTime()>deadline)break;
                 var pos=queue.poll();if(pos==null)break;
-                if(IslandSavedData.get(e.getServer()).chunkBuilt(pos.toLong()))continue;
+                var data=IslandSavedData.get(e.getServer());
+                if(data.chunkBuilt(pos.toLong())&&data.expanded(pos.toLong()))continue;
                 var chunk=level.getChunkSource().getChunkNow(pos.x,pos.z);
                 if(chunk!=null)IslandWorld.initialize(level,chunk);
                 // Load fires before FULL promotion; retain work without forcing or blocking chunk loads.
@@ -54,6 +58,7 @@ public final class AdventureEvents {
     @SubscribeEvent public static void stopped(ServerStoppedEvent e) {
         PENDING.keySet().removeIf(level->level.getServer()==e.getServer());
         IslandTravel.clear(e.getServer());
+        StarNecklaceItem.clear(e.getServer());
     }
     @SubscribeEvent public static void commands(RegisterCommandsEvent e) {
         e.getDispatcher().register(Commands.literal("island").then(Commands.literal("home").executes(c->{
@@ -67,12 +72,12 @@ public final class AdventureEvents {
         e.setCanceled(true);e.setCancellationResult(InteractionResult.SUCCESS);
         if(e.getLevel().isClientSide)return;
         String line=switch(c.species) {
-            case RAWW->"Both trails are open! West: Manang. East: Bakunawa. Bring food and enchanted armor.";
+            case RAWW->"Follow the eastern shore to the larger festival quarter! Its junction leads to the mountain, cave and coast. Both bosses are independent.";
             case CHEF->"Kain tayo! Enjoy the merienda stalls. Full bellies make brave adventurers.";
             case ZIPPY->"Watch the glowing ground. A warning gives you time to move!";
             case TIKBALANG->"Follow the parol lanterns. The fork leads to two separate challenges.";
             case SARANGAY->"Our market is a sanctuary. The bosses cannot hurt us here.";
-            case BATIBA->"The star remembers YOUR home. Jump into the arrival star to return.";
+            case BATIBA->"Visit my Memory Hollow beyond the eastern festival. There are glowing berries in a hidden alcove. Your star still remembers home.";
             case MERMAHN->"Welcome to my lagoon! Beyond the eastern shore the moon meets the sea.";
             case BUNGI->"Big wings! Bigger dragon! You can choose either adventure first.";
             case DATU->"Even if your portal is lost, the star finds safe ground near home.";
@@ -96,5 +101,9 @@ public final class AdventureEvents {
     }
     @SubscribeEvent public static void playerTick(TickEvent.PlayerTickEvent e) {
         if(e.phase==TickEvent.Phase.END&&e.player instanceof ServerPlayer p&&p.level().dimension()==AdventureContent.ISLAND&&p.getY()<0)IslandTravel.home(p);
+        if(e.phase!=TickEvent.Phase.END||!(e.player instanceof ServerPlayer p)||p.level().dimension()!=AdventureContent.ISLAND||p.tickCount%320!=0)return;
+        int x=p.getBlockX(),z=p.getBlockZ();
+        var sound=IslandLayout.cavern(x,z)?AdventureContent.CAVE_AMBIENCE.get():IslandLayout.mountain(x,z)<160?AdventureContent.MOUNTAIN_AMBIENCE.get():x>600?AdventureContent.COAST_AMBIENCE.get():IslandLayout.market(x,z)||Math.abs(x)<38&&Math.abs(z)<60?AdventureContent.FESTIVAL.get():net.minecraft.sounds.SoundEvents.AMBIENT_CAVE.value();
+        p.playNotifySound(sound,net.minecraft.sounds.SoundSource.AMBIENT,.45f,1);
     }
 }

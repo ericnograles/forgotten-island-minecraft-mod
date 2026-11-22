@@ -1,0 +1,278 @@
+[
+  {
+    "capture": "batiba-cave-singleplayer.png",
+    "sha256": "fa27d7a53673e63875e189033ab6242680f83008185ab2d02ef428f197750ee3",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.37.12.png"
+  },
+  {
+    "capture": "bite-lunge.png",
+    "sha256": "7183914cffbf748abecfae3d0aead5dbf7225e8c0b5b48180abf9d431228af03",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.31.56.png"
+  },
+  {
+    "capture": "bite-recovery.png",
+    "sha256": "afa066a7c3543cd7991f33d1393e1b9b35da1ee132f84a1faad6e7c28777feea",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.31.58.png"
+  },
+  {
+    "capture": "bite-windup.png",
+    "sha256": "8a67b159c426fde61939a1942fcaddb5cb930cd7b6e2aeb3f7cdefb55b93cb89",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.31.55.png"
+  },
+  {
+    "capture": "coastal-arch.png",
+    "sha256": "42557a6c4e30cda28a0bd00368e932cdb0babea3bc4db3a20eb4feed1cba19f1",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.35.29.png"
+  },
+  {
+    "capture": "crystal-escape-coast.png",
+    "sha256": "b5fb2b6fc6a56f2f6e8ff5bf858f33276cf15172a36afb20f6c73aaf7bd1ec7e",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.27.39.png"
+  },
+  {
+    "capture": "crystal-escape-ejection.png",
+    "sha256": "56557841ab60fa66db7bcffdbe5b5fc02e18a8c086eaaaaa8377b436f8b3b2c2",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.27.30.png"
+  },
+  {
+    "capture": "crystal-one-broken.png",
+    "sha256": "fa02bc6bdc76c5abab4b88e7881194fd9a6b18356bc5d9df33aa94b8f578ebe5",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.26.37.png"
+  },
+  {
+    "capture": "crystal-one-intact.png",
+    "sha256": "30551401e52b96d7251acff1e36471418c81e7e615ce23ca71188b8d49040cde",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.26.20.png"
+  },
+  {
+    "capture": "crystal-three-intact.png",
+    "sha256": "8a6a79e95af329175545fc7184083171299b54d7d1a7151b827a60f07d64fbcb",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.27.25.png"
+  },
+  {
+    "capture": "crystal-two-broken-coop.png",
+    "sha256": "905d0964f4336ccafb269cda05d5d07cceba9cea3b3187ec6b9a6c284556b2b9",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.27.19.png"
+  },
+  {
+    "capture": "eclipse-performance.png",
+    "sha256": "45a5ffdc7e26c640931582791e4fe26987e4d4e8ec91a4dd75b68d519ec2aa91",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.31.23.png"
+  },
+  {
+    "capture": "festival-overview.png",
+    "sha256": "8db983b0714db2b5a768991235e1a3149aa3e1b0658591e8c4bfc0c398038feb",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.33.50.png"
+  },
+  {
+    "capture": "festival-performance.png",
+    "sha256": "cbc5141ba429b651e6e3a3fc28cddbe4d9dc71dfabf81bd90c85adf02a4f5b06",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.33.51.png"
+  },
+  {
+    "capture": "first-pass-2026-11-22_06.12.39.png",
+    "sha256": "109bf48adc1bca6a6128ea6c64e7ba26bcd14e9092dfa16bc3a03828864361d6",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.12.39.png"
+  },
+  {
+    "capture": "first-pass-2026-11-22_06.12.43.png",
+    "sha256": "68c591b9b308b56c46094451fba545047789a1686e5bc436c4e1dbaf30e28f97",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.12.43.png"
+  },
+  {
+    "capture": "first-pass-2026-11-22_06.13.49.png",
+    "sha256": "3e5a07216fcd2f54dbf211b1e63ea0618a83d18e1ee12f0bc55daa2cfbc9e23f",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.13.49.png"
+  },
+  {
+    "capture": "first-pass-2026-11-22_06.14.13.png",
+    "sha256": "891bb88673dd19313a2f9293364df5e8ba347b45e3f38c6be07789d9efbe9ef4",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.14.13.png"
+  },
+  {
+    "capture": "first-pass-2026-11-22_06.14.13_2.png",
+    "sha256": "0a20679fac8ad8ccbfbaeca2ae03f8d804332c29df2e7ca8fc6e8687403194bf",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.14.13_2.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.18.37.png",
+    "sha256": "9f72a2dd5b1051b5477943057049fefe3183d472298704a53064b53fb22c2576",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.18.37.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.18.43.png",
+    "sha256": "a43abe86669c9fe785d5b8cddc0e722406d64b978553e446841a6b975257bb69",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.18.43.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.19.12.png",
+    "sha256": "c523aa73fc68b4b476905984d7ae9e99c8999eb0ba574f0be9f699d92e4bdd28",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.19.12.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.19.35.png",
+    "sha256": "d6a453306e3beadad67ab15c8b7125bf62f91c50c38fdd8482634a5151350865",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.19.35.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.19.41.png",
+    "sha256": "33a47c059d058a3f8b3fc5e74b01b6cbe991c549bb359fa6a960e9fee468cced",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.19.41.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.19.56.png",
+    "sha256": "a8aef8aef63a245e02bdbabea289d7d0b2dff344d917d77eb0329f36d557d2ea",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.19.56.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.20.18.png",
+    "sha256": "823b3dad3bed0ebe34763d52e8313c3ddbdb931593e5341d443d70d667ee3a55",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.20.18.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.20.58.png",
+    "sha256": "1443f1cef87366ba6fc83637df4e3d7c90ca7d83459540d8f0260d73040371cb",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.20.58.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.21.15.png",
+    "sha256": "83642ba75b1cfb4d16a8239a2200b19f7a3a861e480b6a078c7ae3ffd4518447",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.21.15.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.21.37.png",
+    "sha256": "976b5215a37ac030ce6ae579b01130007db65af999a6da2e3f6fbf24e993b908",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.21.37.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.21.37_2.png",
+    "sha256": "dfcb9d0d5fd5ba5cdd98839efd1960b69150dcc27646bfabab7673c271608740",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.21.37_2.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.21.42.png",
+    "sha256": "78cd4f3b72324a6f455e769c7d6c2c15ce0c9bba9da01ee41105e86f31bf165d",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.21.42.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.21.49.png",
+    "sha256": "6f5154dac9c1fbf62d8f23a76d16171991e10e3cfc1e971d153ee27c9dcd5940",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.21.49.png"
+  },
+  {
+    "capture": "game-2026-11-22_06.22.07.png",
+    "sha256": "360b440616bd6a42a43e1ad5225e039a14f4f178d37546f1b45c9aacd2dd89db",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.22.07.png"
+  },
+  {
+    "capture": "holy-beam-charge.png",
+    "sha256": "47a34b73a7133047f57e4799ca5870018b6a67fd872d5d74c672f2360a0da418",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.33.10.png"
+  },
+  {
+    "capture": "holy-beam-discharge.png",
+    "sha256": "43e43d429e448c1778714b3fb748bfa106a27092f452c2a9068ef6856aecc09b",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.33.11.png"
+  },
+  {
+    "capture": "holy-beam-recovery.png",
+    "sha256": "777b8140e34eaa90858c2a0a35353e91fb0d7070e55dd68a0120ccf3e6784212",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.33.12.png"
+  },
+  {
+    "capture": "legacy-portal-arrival-singleplayer.png",
+    "sha256": "5bbd23d2bdc5d07ee85b83097e0e874b14b3d9532a9419aab3c7652164e04591",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.36.41.png"
+  },
+  {
+    "capture": "mountain-overview.png",
+    "sha256": "3110e54647219f5d8bb0f13205023c120681cb18377c66316e89daa3b7076c22",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.34.28.png"
+  },
+  {
+    "capture": "observer-ejected.png",
+    "sha256": "99ebcff8e4cc6c6cb3b90bcd9ea218cb4bbcdac977f1245a3343b114a2d557b4",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.27.31.png"
+  },
+  {
+    "capture": "stomach-rejoined.png",
+    "sha256": "8e05cc4ebf9afded0b1278de3e13fe64c0e78cb79d1e94f5206d112c165a34fe",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.24.59.png"
+  },
+  {
+    "capture": "summit-entry-singleplayer.png",
+    "sha256": "4e2feb99ce1f00496da0bcaa5b9bce3306220b4f7010a9a4318af213d251a2bd",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.41.06.png"
+  },
+  {
+    "capture": "tentacles-impact.png",
+    "sha256": "90b776d9e8235c100d7f478ca93fb1876fb1e902a12f7c3ecb9edd893bdc26f5",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.33.01_2.png"
+  },
+  {
+    "capture": "tentacles-rise.png",
+    "sha256": "f616f189821807f53c7afed35a6595af4cdba48ee8c3d7dc0d262624dc96ad9f",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.33.01.png"
+  },
+  {
+    "capture": "tentacles-withdraw.png",
+    "sha256": "603484f531a8cac64e01772099836229962f24e70661c9d7fb4c0739f9f0b44f",
+    "profile": "observer-game",
+    "native_filename": "2026-11-22_06.33.02.png"
+  },
+  {
+    "capture": "walk-end.png",
+    "sha256": "113531df62639a3ef56aa2dc4a98431e1806e3c431c2e158af53a8f8de25c26c",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.34.26.png"
+  },
+  {
+    "capture": "walk-start.png",
+    "sha256": "a551d611fd98ac5ae0f24c62be085a182a7e4bcafe0229de8744d082057f615d",
+    "profile": "game",
+    "native_filename": "2026-11-22_06.34.05.png"
+  }
+]

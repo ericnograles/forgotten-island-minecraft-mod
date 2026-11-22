@@ -1,0 +1,219 @@
+[22Nov2026 06:17:20.099] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--username, Observer, --version, 1.20.1-forge-47.4.10, --gameDir, /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/production-client/observer-game, --assetsDir, /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/.gradle-home/caches/forge_gradle/assets, --assetIndex, 5, --uuid, 11f4f517-853c-3cf3-a01b-95809db70061, --accessToken, ❄❄❄❄❄❄❄❄, --clientId, , --xuid, , --userType, legacy, --versionType, release, --launchTarget, forgeclient, --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412]
+[22Nov2026 06:17:20.104] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.15 by Homebrew; OS Mac OS X arch aarch64 version 26.5.2
+[22Nov2026 06:17:20.170] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[22Nov2026 06:17:20.347] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[22Nov2026 06:17:20.440] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.5
+[22Nov2026 06:17:20.475] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.4
+[22Nov2026 06:17:20.497] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.3
+[22Nov2026 06:17:20.517] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.2
+[22Nov2026 06:17:20.533] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.1
+[22Nov2026 06:17:20.551] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.1 got version 4.1
+[22Nov2026 06:17:20.618] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/production-client/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2394!/ Service=ModLauncher Env=CLIENT
+[22Nov2026 06:17:20.628] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: Apple M1 Pro GL version 4.1 Metal - 90.5, Apple
+[22Nov2026 06:17:20.792] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/production-client/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.10/fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[22Nov2026 06:17:20.793] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/production-client/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.10/javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[22Nov2026 06:17:20.794] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/production-client/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.10/lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[22Nov2026 06:17:20.794] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/production-client/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.10/mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[22Nov2026 06:17:20.846] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[22Nov2026 06:17:21.472] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclient' with arguments [--version, 1.20.1-forge-47.4.10, --gameDir, /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/production-client/observer-game, --assetsDir, /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/.gradle-home/caches/forge_gradle/assets, --uuid, 11f4f517-853c-3cf3-a01b-95809db70061, --username, Observer, --assetIndex, 5, --accessToken, ❄❄❄❄❄❄❄❄, --clientId, , --xuid, , --userType, legacy, --versionType, release]
+[22Nov2026 06:17:24.913] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 188 Datafixer optimizations took 94 milliseconds
+[22Nov2026 06:17:25.976] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/production-client/libraries/net/minecraft/client/1.20.1-20230612.114412/client-1.20.1-20230612.114412-srg.jar%23153!/assets/.mcassetsroot' uses unexpected schema
+[22Nov2026 06:17:25.977] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/build/production-client/libraries/net/minecraft/client/1.20.1-20230612.114412/client-1.20.1-20230612.114412-srg.jar%23153!/data/.mcassetsroot' uses unexpected schema
+[22Nov2026 06:17:25.984] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[22Nov2026 06:17:25.987] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Observer
+[22Nov2026 06:17:26.038] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.1 build 7
+[22Nov2026 06:17:26.484] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[22Nov2026 06:17:26.491] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[22Nov2026 06:17:28.235] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources
+[22Nov2026 06:17:28.293] [Worker-Main-4/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.0.06.hex, loading
+[22Nov2026 06:17:28.461] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[22Nov2026 06:17:28.680] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.10 Target: 47.4.28
+[22Nov2026 06:17:30.213] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[22Nov2026 06:17:30.214] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[22Nov2026 06:17:30.248] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device CoreAudio Default
+[22Nov2026 06:17:30.251] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[22Nov2026 06:17:30.354] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[22Nov2026 06:17:30.366] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[22Nov2026 06:17:30.367] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[22Nov2026 06:17:30.368] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[22Nov2026 06:17:30.369] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[22Nov2026 06:17:30.375] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[22Nov2026 06:17:30.376] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[22Nov2026 06:17:30.376] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[22Nov2026 06:17:30.377] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[22Nov2026 06:17:30.498] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[22Nov2026 06:17:30.583] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[22Nov2026 06:17:30.584] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[22Nov2026 06:17:30.585] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[22Nov2026 06:17:30.701] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient/]: Could not authorize you against Realms server: java.lang.RuntimeException: Failed to parse into SignedJWT: 0
+[22Nov2026 06:18:06.826] [Render thread/INFO] [net.minecraft.client.gui.screens.ConnectScreen/]: Connecting to 127.0.0.1, 25586
+[22Nov2026 06:19:03.188] [Render thread/INFO] [net.minecraft.client.gui.screens.ConnectScreen/]: Connecting to 127.0.0.1, 25586
+[22Nov2026 06:19:04.618] [Netty Client IO #1/INFO] [net.minecraftforge.network.NetworkHooks/]: Connected to a modded server.
+[22Nov2026 06:19:05.335] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 2 advancements
+[22Nov2026 06:19:16.853] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Observer was slain by Slime
+[22Nov2026 06:19:16.878] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 30 advancements
+[22Nov2026 06:20:46.092] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Explore east along the shore to the expanded festival (310, 65). Its lantern junction leads to Batiba's cave, Manang's mountain and Bakunawa's coast. The old district and your builds remain.
+[22Nov2026 06:21:26.210] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Dev has made the advancement [Cover Me with Diamonds]
+[22Nov2026 06:21:26.682] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Observer has made the advancement [Cover Me with Diamonds]
+[22Nov2026 06:21:26.692] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 37 advancements
+[22Nov2026 06:21:39.896] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] SWALLOWED · Explore the ribs and break all three luminous crystals to escape together. /island home is emergency recovery only.
+[22Nov2026 06:22:39.199] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Dev left the game
+[22Nov2026 06:24:38.113] [Render thread/INFO] [net.minecraft.client.gui.screens.ConnectScreen/]: Connecting to 127.0.0.1, 25586
+[22Nov2026 06:25:31.072] [Render thread/INFO] [net.minecraft.client.gui.screens.ConnectScreen/]: Connecting to 127.0.0.1, 25586
+[22Nov2026 06:25:32.681] [Netty Client IO #3/INFO] [net.minecraftforge.network.NetworkHooks/]: Connected to a modded server.
+[22Nov2026 06:25:33.105] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 37 advancements
+[22Nov2026 06:26:36.390] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 2 crystals remain. Follow the rising floor through the ribs.
+[22Nov2026 06:26:58.894] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.26.58.png
+[22Nov2026 06:27:08.169] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Made Observer a server operator]
+[22Nov2026 06:27:08.259] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Observer to 15.500000, 69.000000, 3.500000]
+[22Nov2026 06:27:18.173] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 1 crystals remain. Follow the rising floor through the ribs.
+[22Nov2026 06:27:19.504] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.27.19.png
+[22Nov2026 06:27:30.327] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] The last crystal shatters. Bakunawa ejects you!
+[22Nov2026 06:27:31.844] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.27.31.png
+[22Nov2026 06:28:01.327] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] SWALLOWED · Explore the ribs and break all three luminous crystals to escape together. /island home is emergency recovery only.
+[22Nov2026 06:30:47.936] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Applied effect Resistance to Dev]
+[22Nov2026 06:30:48.045] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Applied effect Saturation to Dev]
+[22Nov2026 06:30:48.204] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Dev to 820.500000, 65.000000, -4.500000]
+[22Nov2026 06:30:48.343] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Your game mode has been updated to Spectator Mode
+[22Nov2026 06:30:48.426] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Set Observer's game mode to Spectator Mode]
+[22Nov2026 06:30:48.545] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Observer to 844.500000, 80.000000, -11.500000]
+[22Nov2026 06:30:58.219] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Applied 510.0 damage to Bakunawa, Devourer of Moons]
+[22Nov2026 06:30:58.296] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Observer to 844.500000, 80.000000, -11.500000]
+[22Nov2026 06:31:02.243] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.01.png
+[22Nov2026 06:31:18.213] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Observer to 860.500000, 84.000000, 8.500000]
+[22Nov2026 06:31:18.683] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Saved the game]
+[22Nov2026 06:31:23.701] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.23.png
+[22Nov2026 06:31:23.744] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.23_2.png
+[22Nov2026 06:31:24.390] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.24.png
+[22Nov2026 06:31:25.091] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.24_2.png
+[22Nov2026 06:31:25.859] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.25.png
+[22Nov2026 06:31:26.438] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.26.png
+[22Nov2026 06:31:27.074] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.26_2.png
+[22Nov2026 06:31:27.759] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.27.png
+[22Nov2026 06:31:28.414] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.28.png
+[22Nov2026 06:31:29.039] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.28_2.png
+[22Nov2026 06:31:29.675] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.29.png
+[22Nov2026 06:31:30.297] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.30.png
+[22Nov2026 06:31:30.904] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.30_2.png
+[22Nov2026 06:31:31.571] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.31.png
+[22Nov2026 06:31:32.286] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.32.png
+[22Nov2026 06:31:49.864] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Dev to 820.500000, 65.000000, 0.500000]
+[22Nov2026 06:31:56.246] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.55.png
+[22Nov2026 06:31:56.834] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.56.png
+[22Nov2026 06:31:57.467] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.57.png
+[22Nov2026 06:31:58.093] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.57_2.png
+[22Nov2026 06:31:58.739] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.58.png
+[22Nov2026 06:31:59.462] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.59.png
+[22Nov2026 06:32:00.050] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.31.59_2.png
+[22Nov2026 06:32:00.681] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.00.png
+[22Nov2026 06:32:01.318] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.01.png
+[22Nov2026 06:32:01.906] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.01_2.png
+[22Nov2026 06:32:02.491] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.02.png
+[22Nov2026 06:32:03.137] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.02_2.png
+[22Nov2026 06:32:03.781] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.03.png
+[22Nov2026 06:32:04.418] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.04.png
+[22Nov2026 06:32:05.170] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.04_2.png
+[22Nov2026 06:32:05.762] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.05.png
+[22Nov2026 06:32:06.407] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.06.png
+[22Nov2026 06:32:07.055] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.06_2.png
+[22Nov2026 06:32:15.117] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Dev to 820.500000, 65.000000, 0.500000]
+[22Nov2026 06:32:25.163] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.24.png
+[22Nov2026 06:32:25.818] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.25.png
+[22Nov2026 06:32:26.394] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.26.png
+[22Nov2026 06:32:27.038] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.26_2.png
+[22Nov2026 06:32:27.638] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.27.png
+[22Nov2026 06:32:28.190] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.28.png
+[22Nov2026 06:32:28.757] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.28_2.png
+[22Nov2026 06:32:29.458] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.29.png
+[22Nov2026 06:32:30.202] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.30.png
+[22Nov2026 06:32:30.826] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.30_2.png
+[22Nov2026 06:32:31.417] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.31.png
+[22Nov2026 06:32:31.998] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.31_2.png
+[22Nov2026 06:32:32.530] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.32.png
+[22Nov2026 06:32:33.129] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.32_2.png
+[22Nov2026 06:32:33.782] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.33.png
+[22Nov2026 06:32:34.414] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.34.png
+[22Nov2026 06:32:35.055] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.34_2.png
+[22Nov2026 06:32:35.796] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.35.png
+[22Nov2026 06:32:36.499] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.36.png
+[22Nov2026 06:32:37.151] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.36_2.png
+[22Nov2026 06:32:37.851] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.37.png
+[22Nov2026 06:32:38.549] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.38.png
+[22Nov2026 06:32:39.155] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.38_2.png
+[22Nov2026 06:32:39.794] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.39.png
+[22Nov2026 06:32:40.694] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.40.png
+[22Nov2026 06:32:41.436] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.41.png
+[22Nov2026 06:32:42.112] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.41_2.png
+[22Nov2026 06:32:42.694] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.42.png
+[22Nov2026 06:32:43.296] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.43.png
+[22Nov2026 06:32:43.930] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.43_2.png
+[22Nov2026 06:32:44.535] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.44.png
+[22Nov2026 06:32:45.301] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.45.png
+[22Nov2026 06:32:46.045] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.45_2.png
+[22Nov2026 06:32:46.631] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.46.png
+[22Nov2026 06:32:47.240] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.47.png
+[22Nov2026 06:32:47.840] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.47_2.png
+[22Nov2026 06:32:48.556] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.48.png
+[22Nov2026 06:32:49.518] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.49.png
+[22Nov2026 06:32:50.389] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.50.png
+[22Nov2026 06:32:51.071] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.50_2.png
+[22Nov2026 06:32:51.659] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.51.png
+[22Nov2026 06:32:52.456] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.52.png
+[22Nov2026 06:32:53.126] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.52_2.png
+[22Nov2026 06:32:53.935] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.53.png
+[22Nov2026 06:32:54.526] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.54.png
+[22Nov2026 06:32:55.126] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.54_2.png
+[22Nov2026 06:32:56.025] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.55.png
+[22Nov2026 06:32:56.524] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.56.png
+[22Nov2026 06:32:57.362] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.57.png
+[22Nov2026 06:32:57.978] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.57_2.png
+[22Nov2026 06:32:58.806] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.58.png
+[22Nov2026 06:32:59.419] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.59.png
+[22Nov2026 06:33:00.011] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.32.59_2.png
+[22Nov2026 06:33:00.681] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.00.png
+[22Nov2026 06:33:01.306] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.01.png
+[22Nov2026 06:33:01.883] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.01_2.png
+[22Nov2026 06:33:02.561] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.02.png
+[22Nov2026 06:33:03.236] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.03.png
+[22Nov2026 06:33:03.802] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.03_2.png
+[22Nov2026 06:33:04.356] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.04.png
+[22Nov2026 06:33:04.928] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.04_2.png
+[22Nov2026 06:33:05.573] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.05.png
+[22Nov2026 06:33:06.148] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.05_2.png
+[22Nov2026 06:33:06.705] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.06.png
+[22Nov2026 06:33:07.429] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.07.png
+[22Nov2026 06:33:08.009] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.07_2.png
+[22Nov2026 06:33:08.635] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.08.png
+[22Nov2026 06:33:09.347] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.09.png
+[22Nov2026 06:33:09.954] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.09_2.png
+[22Nov2026 06:33:10.555] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.10.png
+[22Nov2026 06:33:11.211] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.11.png
+[22Nov2026 06:33:11.827] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.11_2.png
+[22Nov2026 06:33:12.463] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.12.png
+[22Nov2026 06:33:13.060] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.12_2.png
+[22Nov2026 06:33:13.642] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.13.png
+[22Nov2026 06:33:14.333] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.14.png
+[22Nov2026 06:33:14.945] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.14_2.png
+[22Nov2026 06:33:15.551] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.15.png
+[22Nov2026 06:33:16.170] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.16.png
+[22Nov2026 06:33:16.820] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.16_2.png
+[22Nov2026 06:33:17.448] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.17.png
+[22Nov2026 06:33:18.093] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.17_2.png
+[22Nov2026 06:33:18.655] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.18.png
+[22Nov2026 06:33:19.285] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.19.png
+[22Nov2026 06:33:19.879] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.19_2.png
+[22Nov2026 06:33:34.738] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Dev to 310.500000, 65.000000, 65.500000]
+[22Nov2026 06:33:34.963] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Observer to 350.500000, 89.000000, 105.500000]
+[22Nov2026 06:33:36.340] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Saved the game]
+[22Nov2026 06:33:50.523] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.50.png
+[22Nov2026 06:33:51.409] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.33.51.png
+[22Nov2026 06:34:00.917] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Dev to 270.500000, 65.000000, 65.500000]
+[22Nov2026 06:34:01.562] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Observer to 590.500000, 127.000000, -134.500000]
+[22Nov2026 06:34:29.025] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.34.28.png
+[22Nov2026 06:34:39.718] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Observer to 910.500000, 95.000000, -49.500000]
+[22Nov2026 06:34:39.856] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Saved the game]
+[22Nov2026 06:34:46.444] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.34.46.png
+[22Nov2026 06:35:08.768] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Teleported Observer to 685.500000, 84.000000, 25.500000]
+[22Nov2026 06:35:30.113] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Dev left the game
+[22Nov2026 06:35:30.212] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-22_06.35.29.png
+[22Nov2026 06:36:11.296] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] [Server: Stopping the server]

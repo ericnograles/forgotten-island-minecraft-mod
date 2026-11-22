@@ -5,8 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
 public enum BossKind {
-    MANANG("manang_boss","Manang · The Severed Twilight",Species.MANANG,IslandWorld.MANANG,29,220,120,110),
-    BAKUNAWA("bakunawa_boss","Bakunawa · Devourer of Moons",Species.BAKUNAWA,IslandWorld.BAKUNAWA,62,400,160,140);
+    MANANG("manang_boss","Manang · The Severed Twilight",Species.MANANG,new BlockPos(IslandLayout.MOUNTAIN_X,105,IslandLayout.MOUNTAIN_Z),29,220,120,110),
+    BAKUNAWA("bakunawa_boss","Bakunawa · Devourer of Moons",Species.BAKUNAWA,new BlockPos(IslandLayout.COAST_X,65,IslandLayout.COAST_Z),84,400,160,140);
     public final String id,title;
     public final Species species;
     public final BlockPos center;

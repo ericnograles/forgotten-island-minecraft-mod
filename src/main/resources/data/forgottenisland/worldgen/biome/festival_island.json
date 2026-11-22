@@ -8,8 +8,7 @@
     "water_color": 4258435,
     "water_fog_color": 2700408,
     "grass_color": 7259734,
-    "foliage_color": 5885526,
-    "ambient_loop_sound": "forgottenisland:festival_ambience"
+    "foliage_color": 5885526
   },
   "spawners": {},
   "spawn_costs": {},

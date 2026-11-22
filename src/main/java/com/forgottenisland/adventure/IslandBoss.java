@@ -32,7 +32,7 @@ public final class IslandBoss extends Monster {
         if(kind==BossKind.MANANG)parts=new BossPart[]{new BossPart(this,1.7f,2.1f,true),new BossPart(this,2.8f,2.6f,false)};
         else {
             parts=new BossPart[13];
-            for(int i=0;i<10;i++)parts[i]=new BossPart(this,i==0?11:8,7,false);
+            for(int i=0;i<10;i++)parts[i]=new BossPart(this,i==0?22:8,i==0?11:7,false);
             for(int i=10;i<13;i++)parts[i]=new BossPart(this,3,3,true);
         }
         setId(ENTITY_COUNTER.getAndAdd(parts.length+1)+1);
@@ -57,9 +57,20 @@ public final class IslandBoss extends Monster {
     public int phase(){return entityData.get(PHASE);}
     public int attempt(){return entityData.get(ATTEMPT);}
     public int localClock(){return clock()%kind.cycle(phase());}
-    public int attack(){return clock()/kind.cycle(phase())%3;}
+    public int attack(){return clock()/kind.cycle(phase())%(kind==BossKind.BAKUNAWA?6:3);}
     public boolean exposed(){return stage()==EncounterState.Stage.COMBAT&&localClock()>=80;}
-    public Vec3 aim(){return new Vec3(entityData.get(AIM_X),65,entityData.get(AIM_Z));}
+    public Vec3 aim(){return new Vec3(entityData.get(AIM_X),kind.center.getY(),entityData.get(AIM_Z));}
+    public Vec3 headOffset(){
+        if(kind!=BossKind.BAKUNAWA||stage()!=EncounterState.Stage.COMBAT)return Vec3.ZERO;
+        if(attack()==0)return aim().add(0,4,-12).subtract(kind.origin().add(0,12.375,10.6875)).scale(BakunawaMoves.lunge(localClock()));
+        if(attack()==2)return new Vec3(0,-7*BakunawaMoves.smooth(localClock()/35.0)*(1-BakunawaMoves.smooth((localClock()-72)/28.0)),0);
+        return Vec3.ZERO;
+    }
+    public Vec3 mouth(){return kind.origin().add(0,10,21).add(headOffset());}
+    public Vec3 tentaclePoint(int i){
+        double a=(i-1)*Math.PI/2;Vec3 p=i==0?aim():aim().add(Math.cos(a)*8,0,Math.sin(a)*8);
+        var c=Vec3.atBottomCenterOf(kind.center);var d=p.subtract(c);return d.horizontalDistance()>kind.radius-4?c.add(d.normalize().scale(kind.radius-4)):p;
+    }
     public Vec3 upperOffset() {
         if(kind!=BossKind.MANANG||stage()!=EncounterState.Stage.COMBAT||attack()!=0)return Vec3.ZERO;
         float t=localClock();if(t<40||t>=80)return Vec3.ZERO;
@@ -106,7 +117,7 @@ public final class IslandBoss extends Monster {
         if(kind==BossKind.MANANG) {
             parts[0].setPos(kind.origin());parts[1].setPos(kind.origin().add(0,2.1+separation(),0).add(upperOffset()));
         } else {
-            parts[0].setPos(kind.origin().add(0,8,13));
+            parts[0].setPos(kind.origin().add(0,8,13).add(headOffset()));
             for(int i=1;i<10;i++)parts[i].setPos(bodyPoint(i-1));
             for(int i=0;i<3;i++)parts[10+i].setPos(weakPoint(i));
         }
@@ -136,7 +147,7 @@ public final class IslandBoss extends Monster {
         int t=localClock(),attack=attack();
         var players=players();
         int warning=phase()*1000000+clock()/kind.cycle(phase());
-        if(t<=1&&warning!=lastWarning) {
+        if(warning!=lastWarning) {
             lastWarning=warning;
             struck.clear();
             if(!players.isEmpty()) {
@@ -149,6 +160,8 @@ public final class IslandBoss extends Monster {
             warn(players,attack);sound(AdventureContent.BOSS_WARNING.get(),.85f,kind==BossKind.MANANG?1.2f:.65f);
         }
         if(t==80){sound(AdventureContent.WEAKPOINT.get(),1,1);for(var p:players)p.displayClientMessage(Component.literal(kind==BossKind.MANANG?"Wings folded — strike her lower body!":"Moon anchors exposed — strike the gold crystals!"),true);}
+        if(kind==BossKind.BAKUNAWA&&attack<3){bakunawaCombat(level,players,t,attack);exposedEffects(level,t);return;}
+        if(kind==BossKind.BAKUNAWA)attack-=3;
         if(t<60&&t%4==0) {
             if(attack==0)ring(level,aim(),kind==BossKind.MANANG?4:6,ParticleTypes.FLAME,28);
             else if(attack==1)ring(level,Vec3.atBottomCenterOf(kind.center),kind==BossKind.MANANG?7:12,ParticleTypes.SOUL_FIRE_FLAME,36);
@@ -158,25 +171,81 @@ public final class IslandBoss extends Monster {
         if(t>=60&&t<80) {
             double r=(t-60)*(kind==BossKind.MANANG?1.5:3.1);
             if(attack==1&&t%2==0)ring(level,Vec3.atBottomCenterOf(kind.center),r,ParticleTypes.SOUL_FIRE_FLAME,64);
-            if(t==60&&attack==0)level.sendParticles(ParticleTypes.EXPLOSION,aim().x,65.4,aim().z,7,2,.2,2,0);
+            if(t==60&&attack==0)level.sendParticles(ParticleTypes.EXPLOSION,aim().x,kind.center.getY()+.4,aim().z,7,2,.2,2,0);
             if(t%3==0&&attack==2)line(level,Vec3.atBottomCenterOf(kind.center),aim(),ParticleTypes.DRAGON_BREATH);
             for(var p:players) {
                 if(struck.contains(p.getUUID()))continue;
                 Vec3 c=Vec3.atBottomCenterOf(kind.center),v=p.position().subtract(c),direction=aim().subtract(c).normalize();
                 boolean hit=attack==0?t==60&&p.position().subtract(aim()).horizontalDistanceSqr()<Math.pow(kind==BossKind.MANANG?4:6,2):
-                    attack==1?Math.abs(v.horizontalDistance()-r)<1.6&&p.getY()<66.1:
-                    v.horizontalDistance()<kind.radius&&v.normalize().dot(direction)>(kind==BossKind.MANANG?.77:.985)&&p.getY()<69;
+                    attack==1?Math.abs(v.horizontalDistance()-r)<1.6&&p.getY()<kind.center.getY()+1.1:
+                    v.horizontalDistance()<kind.radius&&v.normalize().dot(direction)>(kind==BossKind.MANANG?.77:.985)&&p.getY()<kind.center.getY()+4;
                 if(hit){p.hurt(damageSources().mobAttack(this),(phase()==1?6:8)+(kind==BossKind.BAKUNAWA?2:0));p.knockback(.55,-v.x,-v.z);struck.add(p.getUUID());}
             }
         }
+        exposedEffects(level,t);
+    }
+    private void exposedEffects(ServerLevel level,int t){
         if(exposed()&&t%6==0)for(int i=0;i<(kind==BossKind.MANANG?1:3);i++) {
             Vec3 v=weakPoint(i);level.sendParticles(ParticleTypes.WAX_ON,v.x,v.y+1.5,v.z,4,.8,1,.8,0);
         }
         if(kind==BossKind.BAKUNAWA&&phase()==2&&t==0)sound(AdventureContent.MOON_DEVOUR.get(),1,.8f);
     }
+    void bakunawaCombat(ServerLevel level,List<ServerPlayer> players,int t,int attack){
+        if(attack==0){
+            if(t<60&&t%4==0)ring(level,aim(),4,ParticleTypes.FLAME,32);
+            if(t==35)sound(SoundEvents.ENDER_DRAGON_FLAP,1,.65f);
+            if(t==60){
+                sound(SoundEvents.ENDER_DRAGON_GROWL,1,.7f);
+                level.sendParticles(ParticleTypes.CLOUD,aim().x,aim().y+2,aim().z,50,3,1,3,.12);
+                for(var p:players)if(p.position().subtract(aim()).horizontalDistanceSqr()<16&&Math.abs(p.getY()-aim().y)<4&&struck.add(p.getUUID())){
+                    p.hurt(damageSources().mobAttack(this),4);
+                    if(p.isAlive())BakunawaStomach.swallow(this,p);
+                }
+            }
+        }else if(attack==1){
+            for(int i=0;i<5;i++){
+                var point=tentaclePoint(i);
+                if(t<60&&t%5==0)ring(level,point,2.7,ParticleTypes.SOUL_FIRE_FLAME,18);
+                if(t==40)level.sendParticles(ParticleTypes.POOF,point.x,point.y,point.z,12,1,.2,1,.03);
+                if(t==60){
+                    level.sendParticles(ParticleTypes.EXPLOSION,point.x,point.y+.3,point.z,1,0,0,0,0);
+                    for(var p:players)if(p.position().subtract(point).horizontalDistanceSqr()<2.7*2.7&&p.getY()<point.y+3&&struck.add(p.getUUID())){
+                        p.hurt(damageSources().mobAttack(this),BakunawaMoves.TENTACLE_DAMAGE);p.knockback(.4,point.x-p.getX(),point.z-p.getZ());
+                    }
+                }
+            }
+            if(t==40||t==60)sound(AdventureContent.BOSS_IMPACT.get(),1,t==40?.5f:.9f);
+        }else{
+            Vec3 from=mouth(),end=beamEnd();
+            if(t<60&&t%3==0){
+                beamParticles(level,from,end,ParticleTypes.ELECTRIC_SPARK,3);
+                level.sendParticles(ParticleTypes.ENCHANT,from.x,from.y,from.z,8,.8,.8,.8,.1);
+            }
+            if(t==45)sound(SoundEvents.BEACON_ACTIVATE,1.2f,1.4f);
+            if(t>=60&&t<72){
+                if(t%2==0)beamParticles(level,from,end,ParticleTypes.END_ROD,1);
+                if(t==60){
+                    sound(SoundEvents.GUARDIAN_ATTACK,1.2f,.75f);
+                    var holder=level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.DAMAGE_TYPE)
+                        .getHolderOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DAMAGE_TYPE,com.forgottenisland.ForgottenIsland.id("holy_beam")));
+                    var source=new DamageSource(holder,this,this,from);
+                    // One discharge has one impact tick, regardless of its twelve visual frames.
+                    for(var p:players)if(p.getBoundingBox().inflate(.8).clip(from,end).isPresent()&&struck.add(p.getUUID()))p.hurt(source,BakunawaMoves.BEAM_DAMAGE);
+                    level.sendParticles(ParticleTypes.FLASH,end.x,end.y,end.z,1,0,0,0,0);
+                }
+            }
+        }
+    }
+    public Vec3 beamEnd(){
+        Vec3 from=mouth(),end=from.add(aim().add(0,1,0).subtract(from).normalize().scale(kind.radius*2));
+        return level().clip(new net.minecraft.world.level.ClipContext(from,end,net.minecraft.world.level.ClipContext.Block.COLLIDER,net.minecraft.world.level.ClipContext.Fluid.NONE,this)).getLocation();
+    }
+    private static void beamParticles(ServerLevel level,Vec3 from,Vec3 to,net.minecraft.core.particles.SimpleParticleType type,int step){
+        var d=to.subtract(from);for(int n=0;n<d.length();n+=step){var p=from.add(d.normalize().scale(n));level.sendParticles(type,p.x,p.y,p.z,1,.08,.08,.08,0);}
+    }
     private void warn(List<ServerPlayer> players,int attack) {
         String[] m={"SHADOW DIVE · leave the marked circle","SHRIEK · jump over the expanding ring","WING CUT · move out of her facing arc"};
-        String[] b={"MOONFALL · leave the burning circle","LUNAR TIDE · jump over the blue ring","ECLIPSE BREATH · move sideways out of the beam"};
+        String[] b={"BITE AND EAT · leave the amber circle! Crystals free swallowed players","TENTACLES · leave the five blue circles","HOLY BEAM · sidestep the white aim line! Two unblocked hits are lethal","MOONFALL · leave the burning circle","LUNAR TIDE · jump over the blue ring","ECLIPSE BREATH · move sideways out of the beam"};
         for(var p:players)p.displayClientMessage(Component.literal((kind==BossKind.MANANG?m:b)[attack]),true);
     }
     private void cinematicEffects(ServerLevel level) {
@@ -195,8 +264,14 @@ public final class IslandBoss extends Monster {
         for(int i=0;i<count;i++){double a=i*Math.PI*2/count;l.sendParticles(type,c.x+Math.cos(a)*radius,c.y+.15,c.z+Math.sin(a)*radius,1,0,0,0,0);}
     }
     private void line(ServerLevel l,Vec3 a,Vec3 b,net.minecraft.core.particles.SimpleParticleType type) {
-        Vec3 d=b.subtract(a).normalize();for(int i=0;i<kind.radius;i+=2){Vec3 p=a.add(d.scale(i));if(!l.isLoaded(net.minecraft.core.BlockPos.containing(p)))break;l.sendParticles(type,p.x,65.7,p.z,1,.2,.2,.2,0);}
+        Vec3 d=b.subtract(a).normalize();for(int i=0;i<kind.radius;i+=2){Vec3 p=a.add(d.scale(i));if(!l.isLoaded(net.minecraft.core.BlockPos.containing(p)))break;l.sendParticles(type,p.x,kind.center.getY()+.7,p.z,1,.2,.2,.2,0);}
     }
-    @Override public void addAdditionalSaveData(CompoundTag tag){super.addAdditionalSaveData(tag);tag.putFloat("AimX",entityData.get(AIM_X));tag.putFloat("AimZ",entityData.get(AIM_Z));}
-    @Override public void readAdditionalSaveData(CompoundTag tag){super.readAdditionalSaveData(tag);entityData.set(AIM_X,tag.getFloat("AimX"));entityData.set(AIM_Z,tag.getFloat("AimZ"));}
+    @Override public void addAdditionalSaveData(CompoundTag tag){
+        super.addAdditionalSaveData(tag);tag.putFloat("AimX",entityData.get(AIM_X));tag.putFloat("AimZ",entityData.get(AIM_Z));tag.putInt("Warning",lastWarning);
+        var hits=new net.minecraft.nbt.ListTag();for(UUID id:struck){var entry=new CompoundTag();entry.putUUID("Player",id);hits.add(entry);}tag.put("Struck",hits);
+    }
+    @Override public void readAdditionalSaveData(CompoundTag tag){
+        super.readAdditionalSaveData(tag);entityData.set(AIM_X,tag.getFloat("AimX"));entityData.set(AIM_Z,tag.getFloat("AimZ"));lastWarning=tag.contains("Warning")?tag.getInt("Warning"):-1;
+        struck.clear();for(var entry:tag.getList("Struck",net.minecraft.nbt.Tag.TAG_COMPOUND))if(((CompoundTag)entry).hasUUID("Player"))struck.add(((CompoundTag)entry).getUUID("Player"));
+    }
 }

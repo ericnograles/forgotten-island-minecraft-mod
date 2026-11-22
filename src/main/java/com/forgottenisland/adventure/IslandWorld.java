@@ -25,6 +25,7 @@ public final class IslandWorld {
     public static void initialize(ServerLevel level,LevelChunk chunk) {
         if(level.dimension()!=AdventureContent.ISLAND)return;
         var data=IslandSavedData.get(level.getServer());
+        if(!data.expanded(chunk.getPos().toLong()))IslandExpansion.initialize(level,chunk);
         if(data.chunkBuilt(chunk.getPos().toLong()))return;
         var w=new Writer(level,chunk.getPos());
         int minX=chunk.getPos().getMinBlockX(),minZ=chunk.getPos().getMinBlockZ();
@@ -63,8 +64,8 @@ public final class IslandWorld {
         }
         for(int y=65;y<69;y++)w.set(0,y,0,Blocks.CHISELED_QUARTZ_BLOCK);
         w.set(0,69,0,AdventureContent.PAROL.get());
-        w.sign(-5,65,-34,"← MANANG","Twilight roost","Separate challenge","Armor + food");
-        w.sign(5,65,-34,"BAKUNAWA →","Moonbreak coast","Separate challenge","Armor + food");
+        w.sign(-5,65,-34,"OLD TWILIGHT ROOST","New mountain: east","Past festival quarter","Bring armor + food");
+        w.sign(5,65,-34,"FESTIVAL QUARTER →","Follow eastern shore","Cave / summit / coast","All trails are open");
         // Sheltered waystations and foliage lead to two independent arenas.
         for(int side:new int[]{-1,1})for(int i=0;i<4;i++) {
             int x=side*(35+i*20),z=-42-i*5;
@@ -83,8 +84,8 @@ public final class IslandWorld {
             for(int y=65;y<=69;y++)w.set(x,y,z,Blocks.POLISHED_BLACKSTONE_BRICKS);
             w.set(x,70,z,AdventureContent.PAROL.get());
         }
-        w.sign(-112,65,-39,"TWILIGHT ROOST","Manang awaits","Watch wings / shriek","Retreat: south path");
-        w.sign(112,65,-5,"MOONBREAK COAST","Bakunawa awaits","Moon marks danger","Retreat: south path");
+        w.sign(-112,65,-39,"OLD TWILIGHT ROOST","Manang: new summit","East of the festival","Your history remains");
+        w.sign(112,65,-5,"OLD MOON COURT","New coast: far east","Via festival quarter","Your history remains");
         // A shallow lagoon gives Mermahn an appropriate home, away from combat.
         for(int x=25;x<=32;x++)for(int z=22;z<=30;z++) {
             w.set(x,63,z,Blocks.PRISMARINE_BRICKS);w.set(x,64,z,Blocks.WATER);
@@ -129,7 +130,7 @@ public final class IslandWorld {
         for(int dx=-4;dx<=4;dx++)for(int dz=-4;dz<=4;dz++)if(Math.abs(dx)<=1||Math.abs(dz)<=1)
             w.state(x+dx,72+(Math.abs(dx)+Math.abs(dz)<3?1:0),z+dz,Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT,true));
     }
-    private static void resident(ServerLevel level,LevelChunk chunk,int slot,Species species,BlockPos pos) {
+    static void resident(ServerLevel level,LevelChunk chunk,int slot,Species species,BlockPos pos) {
         if(!chunk.getPos().equals(new ChunkPos(pos)))return;
         UUID id=UUID.nameUUIDFromBytes(("forgottenisland:market:"+level.getSeed()+":"+slot).getBytes(StandardCharsets.UTF_8));
         if(level.getEntity(id)!=null)return;

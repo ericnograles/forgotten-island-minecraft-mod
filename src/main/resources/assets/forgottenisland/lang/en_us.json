@@ -62,5 +62,13 @@
   "subtitles.forgottenisland.boss_impact": "Island magic strikes",
   "subtitles.forgottenisland.moon_devour": "The moon is swallowed",
   "subtitles.forgottenisland.boss_release": "The island releases a spirit",
-  "subtitles.forgottenisland.weakpoint": "A weak point opens"
+  "subtitles.forgottenisland.weakpoint": "A weak point opens",
+  "item.forgottenisland.star_necklace": "Homeward Star Necklace",
+  "block.forgottenisland.stomach_tissue": "Bakunawa Tissue",
+  "block.forgottenisland.stomach_crystal": "Memory Crystal",
+  "death.attack.holy_beam": "%1$s was unmade by Bakunawa\u2019s Holy Beam",
+  "death.attack.holy_beam.player": "%1$s was unmade by Bakunawa\u2019s Holy Beam while fighting %2$s",
+  "subtitles.forgottenisland.cave_ambience": "Memory cave echoes",
+  "subtitles.forgottenisland.mountain_ambience": "Wind across the twilight ridge",
+  "subtitles.forgottenisland.coast_ambience": "Waves roll under the sea arch"
 }
