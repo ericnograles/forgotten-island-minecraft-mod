@@ -29,4 +29,8 @@ If another workflow creates a release with `GITHUB_TOKEN`, GitHub normally suppr
 
 Run `python3 -m unittest discover -s tools/publishing -p 'test_*.py' -v` for the checksum, version, compatibility, and publication-receipt safeguards. `workflow_dispatch` with dry_run verifies the real GitHub release and makes no CurseForge upload. Publishing actions are pinned to immutable commits; update those pins deliberately.
 
-Initial status: icon and guide prepared; project creation, token configuration, live API verification and moderation are pending dashboard sign-in. Update `project.json` and this status after submission.
+## First submission
+
+On November 22, 2026, GitHub Actions uploaded `forgotten-island-0.5.0.jar` as a Beta for Minecraft 1.20.1 on Forge. The receipt identifies project `1825044`, file `9763079`, and the SHA-256 of the GitHub release JAR. [Publishing run](https://github.com/ericnograles/forgotten-island-minecraft-mod/actions/runs/45083293596) · [Publication receipt](https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.5.0/curseforge-publication.json)
+
+At submission, the author dashboard showed the file undergoing its malware scan and the new project awaiting moderator approval. The project uses CurseForge-only distribution. [Author file status](https://authors.curseforge.com/#/projects/1825044/files/9763079) · [Public listing after approval](https://www.curseforge.com/minecraft/mc-mods/forgotten-island-wild-companions)
