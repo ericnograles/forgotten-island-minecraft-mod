@@ -4,6 +4,7 @@ import com.forgottenisland.entity.IslandCreature;
 import com.forgottenisland.entity.Species;
 import com.forgottenisland.item.GuideItem;
 import com.forgottenisland.network.IslandNetwork;
+import com.forgottenisland.adventure.AdventureContent;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -53,19 +54,24 @@ public final class ForgottenIsland {
         TABS.register("wild_companions", () -> CreativeModeTab.builder().title(Component.translatable("tab.forgottenisland"))
             .icon(() -> EGGS.get(Species.BAKUNAWA).get().getDefaultInstance()).displayItems((p,o) -> {
                 o.accept(GUIDE.get()); o.accept(WHISTLE.get()); o.accept(SHOWCASE.get());
+                AdventureContent.creative(o);
                 for (Species s: Species.values()) o.accept(EGGS.get(s).get());
             }).build());
     }
     public ForgottenIsland() {
         var bus=FMLJavaModLoadingContext.get().getModEventBus();
+        AdventureContent.register(bus);
         ENTITIES.register(bus); ITEMS.register(bus); SOUNDS.register(bus); TABS.register(bus); PARTICLES.register(bus);
         bus.addListener(this::attributes);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, IslandConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT,com.forgottenisland.adventure.AdventureClientConfig.SPEC);
         IslandNetwork.register();
         MinecraftForge.EVENT_BUS.addListener(ShowcaseCommands::register);
     }
     private void attributes(EntityAttributeCreationEvent event) {
         TYPES.forEach((s,t) -> event.put(t.get(), IslandCreature.attributes(s).build()));
+        event.put(AdventureContent.MANANG_BOSS.get(),com.forgottenisland.adventure.IslandBoss.attributes().build());
+        event.put(AdventureContent.BAKUNAWA_BOSS.get(),com.forgottenisland.adventure.IslandBoss.attributes().build());
     }
     public static ResourceLocation id(String path) { return new ResourceLocation(ID,path); }
 }

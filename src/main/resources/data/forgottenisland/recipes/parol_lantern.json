@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forgottenisland:parol_stone"
+    },
+    {
+      "item": "minecraft:torch"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "forgottenisland:parol_lantern",
+    "count": 2
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "forgottenisland:forgotten_island",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "forgottenisland:festival_island",
+      "lakes": false,
+      "features": false,
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        },
+        {
+          "block": "minecraft:stone",
+          "height": 55
+        },
+        {
+          "block": "minecraft:water",
+          "height": 7
+        }
+      ],
+      "structure_overrides": []
+    }
+  }
+}

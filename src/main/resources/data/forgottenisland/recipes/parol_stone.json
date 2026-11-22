@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "CAC",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:cobblestone"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "result": {
+    "item": "forgottenisland:parol_stone",
+    "count": 32
+  }
+}

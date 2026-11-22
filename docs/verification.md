@@ -1,5 +1,7 @@
 # Verification ledger
 
+**Scope note for the adventure expansion:** the evidence below verifies the original 0.1.0 companion release. New dimension, portal, market and boss requirements are tracked in [adventure-development.md](adventure-development.md) and `evidence/adventure/`. Existing screenshots and old performance measurements must not be counted as adventure verification.
+
 Status: **full identified roster implemented and tested: thirteen creatures, including mandatory Bakunawa**. Verification date: 2026-11-21. The Flaming Aswang Chef uses the original gameplay design explicitly authorized by the user; its film likeness is not claimed. Sarangay follows primary production concept art. See [the research inventory](creature-roster.md) for sources, confidence and interpretation choices.
 
 ## Build and automated evidence

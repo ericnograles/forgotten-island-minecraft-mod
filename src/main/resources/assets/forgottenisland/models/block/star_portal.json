@@ -1,0 +1,47 @@
+{
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "portal": "forgottenisland:block/star_portal",
+    "particle": "forgottenisland:block/star_portal"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        1,
+        0
+      ],
+      "to": [
+        16,
+        3,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#portal",
+          "tintindex": -1
+        },
+        "down": {
+          "texture": "#portal",
+          "tintindex": -1
+        },
+        "north": {
+          "texture": "#portal",
+          "tintindex": -1
+        },
+        "south": {
+          "texture": "#portal",
+          "tintindex": -1
+        },
+        "east": {
+          "texture": "#portal",
+          "tintindex": -1
+        },
+        "west": {
+          "texture": "#portal",
+          "tintindex": -1
+        }
+      }
+    }
+  ]
+}
