@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "original_residents_retained": 21,
+  "total_saved_residents": 46,
+  "original_district_chunks_unchanged": 458,
+  "legacy_built_markers_retained": 1124,
+  "expanded_chunks": 1877,
+  "preserved": [
+    "individual return links",
+    "manual portal registration and blocks",
+    "completed encounters",
+    "unique collected reward inventory/tokens",
+    "original resident identities"
+  ]
+}

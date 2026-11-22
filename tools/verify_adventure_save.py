@@ -52,7 +52,7 @@ def block_at(directory,x,y,z):
     value=(states['data'][index//per_long] >> ((index%per_long)*bits)) & ((1<<bits)-1)
     return palette[value]['Name']
 
-def snapshot(world):
+def snapshot(world, expected_residents=21):
     world=Path(world);island=world/'dimensions/forgottenisland/forgotten_island'
     data=NBT(gzip.decompress((world/'data/forgottenisland_adventure.dat').read_bytes())).root()['data']
     residents={};bosses={};rewards={}
@@ -68,7 +68,8 @@ def snapshot(world):
                 if not extra.get('IslandMarketResident'):continue
                 assert key not in residents, f'Duplicate resident UUID: {key}'
                 residents[key]={'id':entity['id'],'home':extra['IslandMarketHome'],'persistent':entity.get('PersistenceRequired'),'invulnerable':entity.get('Invulnerable')}
-    assert len(residents)==21,f'Expected 21 saved residents, got {len(residents)}'
+    if expected_residents is not None:
+        assert len(residents)==expected_residents,f'Expected {expected_residents} saved residents, got {len(residents)}'
     counts=dict(sorted(Counter(e['id'] for e in residents.values()).items()))
     assert len(counts)==11,f'Expected eleven non-boss creature types: {counts}'
     portal=block_at(island/'region',0,64,50)

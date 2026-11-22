@@ -161,5 +161,23 @@
     "sounds": [
       "forgottenisland:weakpoint"
     ]
+  },
+  "cave_ambience": {
+    "subtitle": "subtitles.forgottenisland.cave_ambience",
+    "sounds": [
+      "forgottenisland:cave_ambience"
+    ]
+  },
+  "mountain_ambience": {
+    "subtitle": "subtitles.forgottenisland.mountain_ambience",
+    "sounds": [
+      "forgottenisland:mountain_ambience"
+    ]
+  },
+  "coast_ambience": {
+    "subtitle": "subtitles.forgottenisland.coast_ambience",
+    "sounds": [
+      "forgottenisland:coast_ambience"
+    ]
   }
 }

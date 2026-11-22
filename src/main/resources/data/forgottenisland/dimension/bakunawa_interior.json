@@ -1,0 +1,18 @@
+{
+  "type": "forgottenisland:bakunawa_interior",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "forgottenisland:bakunawa_interior",
+      "lakes": false,
+      "features": false,
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        }
+      ],
+      "structure_overrides": []
+    }
+  }
+}

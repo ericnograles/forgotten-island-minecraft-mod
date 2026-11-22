@@ -37,3 +37,17 @@ for name in ('boss_warning','manang_shriek','boss_impact','moon_devour','boss_re
 for file in root.rglob('*.json'):
     json.loads(file.read_text())
 print('PASS: adventure recipes, dimension/biome, blocks, animated portal, reward icons, two themed meters, moon sprite, six original boss sounds, loot tables, JSON and festival ambience.')
+necklace=json.loads((root/'data/forgottenisland/recipes/star_necklace.json').read_text())
+assert {v['item'] for v in necklace['key'].values()}=={'minecraft:string','minecraft:copper_ingot','minecraft:torch'}
+with Image.open(assets/'textures/item/star_necklace.png') as image:assert image.size==(32,32) and image.mode=='RGBA'
+for name in ('stomach_tissue','stomach_crystal'):
+    assert (assets/f'blockstates/{name}.json').is_file() and (assets/f'models/block/{name}.json').is_file()
+    with Image.open(assets/f'textures/block/{name}.png') as image:assert image.size==(32,32)
+for tag in ('bypasses_armor','bypasses_enchantments'):
+    assert 'forgottenisland:holy_beam' in json.loads((root/f'data/minecraft/tags/damage_type/{tag}.json').read_text())['values']
+assert json.loads((root/'data/forgottenisland/damage_type/holy_beam.json').read_text())['scaling']=='never'
+assert (root/'data/forgottenisland/dimension/bakunawa_interior.json').is_file()
+assert 'ambient_loop_sound' not in biome['effects']
+for name in ('cave_ambience','mountain_ambience','coast_ambience'):
+    info=sf.info(assets/f'sounds/{name}.ogg');assert info.channels==1 and info.samplerate==22050 and info.duration==12
+print('PASS: inexpensive necklace recipe/art, interior dimension and blocks, Holy Beam mitigation tags, three regional soundscapes.')

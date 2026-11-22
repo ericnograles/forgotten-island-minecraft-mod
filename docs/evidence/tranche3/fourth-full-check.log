@@ -1,0 +1,127 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.8/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+
+> Configure project :
+Neither the 'eclipse' nor the 'idea' plugins were found, but IDE resource copy has been enabled.
+
+> Task :compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :processResources UP-TO-DATE
+> Task :classes
+> Task :jar
+> Task :downloadMcpConfig
+> Task :extractSrg UP-TO-DATE
+> Task :createMcpToSrg UP-TO-DATE
+> Task :reobfJar
+> Task :jarJar SKIPPED
+> Task :reobfJarJar SKIPPED
+> Task :assemble
+> Task :compileTestJava UP-TO-DATE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test
+> Task :check
+> Task :build
+> Task :createSrgToMcp UP-TO-DATE
+> Task :downloadMCMeta UP-TO-DATE
+> Task :downloadAssets UP-TO-DATE
+> Task :extractNatives UP-TO-DATE
+> Task :makeSrcDirs
+> Task :prepareRuns
+> Task :prepareRunGameTestServer
+> Task :prepareRunGameTestServerCompile
+
+> Task :runGameTestServer
+2026-11-22 05:58:05,767 main WARN Advanced terminal features are not available in this environment
+[05:58:05] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgegametestserveruserdev, --gameDir, ., --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412]
+[05:58:05] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.15 by Homebrew; OS Mac OS X arch aarch64 version 26.5.2
+[05:58:05] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgegametestserveruserdev
+[05:58:05] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/.gradle-home/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23121!/ Service=ModLauncher Env=SERVER
+[05:58:06] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/.gradle-home/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.20.1-47.4.10/ccc533c7dd67e0983217197d7549c8b49e7ab453/javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[05:58:06] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/.gradle-home/caches/modules-2/files-2.1/net.minecraftforge/lowcodelanguage/1.20.1-47.4.10/e9a2879fe3612ea34b9728ec2633304a1e67d480/lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[05:58:06] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/.gradle-home/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.20.1-47.4.10/ec5cefbbc65c67302b8fac317010faab85fa14b9/mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[05:58:06] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /Users/ericnograles/GitHub/forgotten-island-minecraft-mod/.gradle-home/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.20.1-47.4.10/94dae566be650566ea9115a1414ab76bfcf5a804/fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[05:58:06] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[05:58:06] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgegametestserveruserdev' with arguments [--gameDir, .]
+[05:58:10] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[05:58:10] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[05:58:10] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[05:58:11] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.10 Target: 47.4.28
+[05:58:11] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[05:58:11] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/.gradle-home/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_official_1.20.1/forge-1.20.1-47.4.10_mapped_official_1.20.1.jar%23184!/assets/.mcassetsroot' uses unexpected schema
+[05:58:11] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/.gradle-home/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_official_1.20.1/forge-1.20.1-47.4.10_mapped_official_1.20.1.jar%23184!/data/.mcassetsroot' uses unexpected schema
+[05:58:12] [main/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[05:58:12] [main/INFO] [minecraft/AdvancementList]: Loaded 1271 advancements
+[05:58:13] [main/INFO] [ne.mi.ga.ForgeGameTestHooks/]: Enabled Gametest Namespaces: [forgottenisland]
+[05:58:14] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[05:58:16] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[05:58:16] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[05:58:16] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[05:58:16] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[05:58:16] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[05:58:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 42%
+[05:58:17] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 2781 ms
+[05:58:17] [Server thread/INFO] [minecraft/GameTestServer]: Started game test server
+[05:58:17] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[05:58:17] [Server thread/INFO] [minecraft/GameTestBatchRunner]: Running test batch 'defaultBatch:1' (24 tests)...
+[05:58:17] [Server thread/INFO] [minecraft/GameTestServer]: 24 tests are now running!
+[05:58:18] [Server thread/ERROR] [minecraft/LogTestReporter]: tentaclesdealsevenonceperwave failed! Tentacle did not deal seven damage: 15.5
+[05:58:18] [Server thread/ERROR] [minecraft/LogTestReporter]: holybeamkillsarmorednormalplayerintwoseparatehits failed! First beam was mitigated by ordinary armor/enchantments: 11.0
+[05:58:19] [Server thread/INFO] [minecraft/GameTestServer]: [+_++_++_X_X++++++__+_+++]
+[05:58:19] [Server thread/INFO] [minecraft/GameTestServer]: [+_++_++_X+X++++++__+_+++]
+[05:58:20] [Server thread/INFO] [minecraft/GameTestServer]: [++++_+++X+X++++++_++++++]
+[05:58:20] [Server thread/INFO] [minecraft/GameTestServer]: [++++_+++X+X++++++_++++++]
+[05:58:21] [Server thread/INFO] [minecraft/GameTestServer]: [++++_+++X+X++++++_++++++]
+[05:58:21] [Server thread/INFO] [minecraft/GameTestServer]: [++++_+++X+X++++++_++++++]
+[05:58:21] [Server thread/INFO] [minecraft/GameTestServer]: [++++_+++X+X++++++_++++++]
+[05:58:21] [Server thread/INFO] [minecraft/GameTestServer]: [++++_+++X+X++++++_++++++]
+[05:58:21] [Server thread/INFO] [minecraft/GameTestServer]: [++++_+++X+X++++++_++++++]
+[05:58:22] [Server thread/INFO] [minecraft/GameTestServer]: [++++_+++X+X++++++_++++++]
+[05:58:22] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++X+X++++++_++++++]
+[05:58:22] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++X+X++++++_++++++]
+[05:58:22] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++X+X+++++++++++++]
+[05:58:22] [Server thread/INFO] [minecraft/GameTestServer]: ========= 24 GAME TESTS COMPLETE ======================
+[05:58:22] [Server thread/INFO] [minecraft/GameTestServer]: 2 required tests failed :(
+[05:58:22] [Server thread/INFO] [minecraft/GameTestServer]:    - tentaclesdealsevenonceperwave
+[05:58:22] [Server thread/INFO] [minecraft/GameTestServer]:    - holybeamkillsarmorednormalplayerintwoseparatehits
+[05:58:22] [Server thread/INFO] [minecraft/GameTestServer]: ====================================================
+[05:58:22] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[05:58:22] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[05:58:22] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[05:58:22] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/forgottenisland:forgotten_island
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/forgottenisland:bakunawa_interior
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (forgotten_island): All chunks are saved
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (bakunawa_interior): All chunks are saved
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[05:58:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[05:58:23] [Server thread/INFO] [minecraft/GameTestServer]: Game test server shutting down
+
+> Task :runGameTestServer FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':runGameTestServer'.
+> Process 'command '/opt/homebrew/Cellar/openjdk@17/17.0.15/libexec/openjdk.jdk/Contents/Home/bin/java'' finished with non-zero exit value 2
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.8/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 30s
+15 actionable tasks: 7 executed, 8 up-to-date

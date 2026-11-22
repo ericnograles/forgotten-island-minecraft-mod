@@ -1,0 +1,48 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.8/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+
+> Configure project :
+Neither the 'eclipse' nor the 'idea' plugins were found, but IDE resource copy has been enabled.
+
+> Task :compileJava
+/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/src/main/java/com/forgottenisland/adventure/AdventureEvents.java:105: error: incompatible types: Object cannot be converted to SoundEvent
+        p.playNotifySound(sound,net.minecraft.sounds.SoundSource.AMBIENT,.45f,1);
+                          ^
+/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/src/main/java/com/forgottenisland/ForgottenIsland.java:62: warning: [removal] get() in FMLJavaModLoadingContext has been deprecated and marked for removal
+        var bus=FMLJavaModLoadingContext.get().getModEventBus();
+                                        ^
+/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/src/main/java/com/forgottenisland/ForgottenIsland.java:66: warning: [removal] get() in ModLoadingContext has been deprecated and marked for removal
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, IslandConfig.SPEC);
+                         ^
+/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/src/main/java/com/forgottenisland/ForgottenIsland.java:67: warning: [removal] get() in ModLoadingContext has been deprecated and marked for removal
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT,com.forgottenisland.adventure.AdventureClientConfig.SPEC);
+                         ^
+/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/src/main/java/com/forgottenisland/ForgottenIsland.java:76: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static ResourceLocation id(String path) { return new ResourceLocation(ID,path); }
+                                                            ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+1 error
+4 warnings
+
+> Task :compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.8/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 7s
+1 actionable task: 1 executed

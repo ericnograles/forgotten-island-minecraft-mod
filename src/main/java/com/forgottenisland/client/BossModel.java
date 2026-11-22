@@ -14,7 +14,7 @@ public final class BossModel extends EntityModel<IslandBoss> {
     public BossModel(ModelPart root){this.root=root;}
     private ModelPart p(String path){ModelPart part=root.getChild("body_root");for(String s:path.split("/"))part=part.getChild(s);return part;}
     @Override public void setupAnim(IslandBoss boss,float swing,float amount,float age,float yaw,float pitch) {
-        root.getAllParts().forEach(ModelPart::resetPose);
+        root.getAllParts().forEach(part->{part.resetPose();part.xScale=part.yScale=part.zScale=1;});
         var base=root.getChild("body_root");float t=boss.clock();
         if(boss.kind==BossKind.MANANG) {
             float wing=Mth.sin(age*.22f)*.30f+(boss.exposed()?-.65f:.35f);
@@ -29,6 +29,8 @@ public final class BossModel extends EntityModel<IslandBoss> {
             p("upper/arm_left").xRot-=boss.exposed()?.2f:1.1f;p("upper/arm_right").xRot-=boss.exposed()?.2f:1.1f;
             base.y+=Mth.sin(age*.07f)*.2f;
         } else {
+            var head=p("head");head.xScale=head.yScale=head.zScale=1.25f;
+            var offset=boss.headOffset();head.x+=offset.x*16/9;head.y-=offset.y*16/9;head.z-=offset.z*16/9;
             String key="segment0";
             for(int i=0;i<9;i++) {
                 p(key).yRot+=Mth.sin(boss.clock()*.025f-i*.45f)*.12f;
@@ -36,6 +38,20 @@ public final class BossModel extends EntityModel<IslandBoss> {
                 if(i<8)key+="/segment"+(i+1);
             }
             p("head/jaw").xRot+=boss.phase()==2?.35f:.12f+Mth.sin(age*.06f)*.07f;
+            if(boss.stage()==EncounterState.Stage.COMBAT){
+                int attack=boss.attack(),tick=boss.localClock();
+                if(attack==0){
+                    p("head/jaw").xRot=(float)(tick<60?.15+BakunawaMoves.smooth(tick/40.0)*1.05:tick<67?.04:.12);
+                    p("head").xRot+=(float)(tick>=67&&tick<95?Math.sin((tick-67)/28.0*Math.PI)*.35:0);
+                    p("segment0").xScale=p("segment0").yScale=1+(tick>=67&&tick<95?.25f*Mth.sin((tick-67)/28f*Mth.PI):0);
+                }else if(attack==1){
+                    p("fin_left").zRot+=tick<60?tick*.008f:.48f*(1-(float)BakunawaMoves.smooth((tick-60)/32.0));
+                    p("fin_right").zRot-=tick<60?tick*.008f:.48f*(1-(float)BakunawaMoves.smooth((tick-60)/32.0));
+                }else if(attack==2){
+                    p("head/jaw").xRot=tick<60?.2f+tick*.01f:tick<72?.85f:.2f;
+                    p("head").xRot+=tick>=60&&tick<72?-.12f:0;
+                }
+            }
             p("fin_left").zRot+=Mth.sin(age*.05f)*.14f;p("fin_right").zRot-=Mth.sin(age*.05f)*.14f;
             if(boss.stage()==EncounterState.Stage.ENTRANCE) {
                 float rise=1-Mth.clamp(t/90,0,1);base.y+=rise*42;p("head").xRot-=Mth.sin(t/160*Mth.PI)*.45f;p("head/jaw").xRot+=Mth.sin(t/160*Mth.PI)*.65f;

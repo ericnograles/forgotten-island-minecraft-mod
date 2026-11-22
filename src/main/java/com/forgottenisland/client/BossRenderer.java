@@ -24,6 +24,7 @@ public final class BossRenderer extends MobRenderer<IslandBoss,BossModel> {
         super.render(boss,yaw,partial,pose,buffers,light);
         if(boss.kind!=BossKind.BAKUNAWA||boss.stage()==EncounterState.Stage.COMPLETE)return;
         moon(boss,partial,pose,buffers);
+        attacks(boss,partial,pose,buffers,light);
         for(int i=0;i<3;i++) {
             var p=boss.weakPoint(i).subtract(boss.position());pose.pushPose();pose.translate(p.x-1,p.y,p.z-1);pose.scale(2,1,2);
             Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.CHISELED_QUARTZ_BLOCK.defaultBlockState(),pose,buffers,light,OverlayTexture.NO_OVERLAY);
@@ -31,6 +32,48 @@ public final class BossRenderer extends MobRenderer<IslandBoss,BossModel> {
             pose.mulPose(Axis.YP.rotationDegrees((boss.tickCount+partial)*1.5f));pose.mulPose(Axis.ZP.rotationDegrees(45));pose.scale(1.2f,1.2f,1.2f);pose.translate(-.5,-.5,-.5);
             var block=boss.exposed()?AdventureContent.PAROL.get():Blocks.AMETHYST_BLOCK;
             Minecraft.getInstance().getBlockRenderer().renderSingleBlock(block.defaultBlockState(),pose,buffers,15728880,OverlayTexture.NO_OVERLAY);pose.popPose();
+        }
+    }
+    private void attacks(IslandBoss boss,float partial,PoseStack pose,MultiBufferSource buffers,int light){
+        if(boss.stage()!=EncounterState.Stage.COMBAT)return;
+        int t=boss.localClock();
+        if(boss.attack()==1){
+            double height=BakunawaMoves.tentacleHeight(t);
+            if(height<=0)return;
+            for(int i=0;i<5;i++){
+                var base=boss.tentaclePoint(i).subtract(boss.position());
+                for(int n=0;n<7;n++){
+                    double bend=Math.sin((t-40)*.045+n*.26+i)*.45*n;
+                    double slam=t<52?0:t<=60?BakunawaMoves.smooth((t-52)/8.0):1-BakunawaMoves.smooth((t-60)/12.0);
+                    float size=1.9f-n*.19f;
+                    pose.pushPose();pose.translate(base.x+bend*height,base.y-1+n*1.15*height*(1-slam*.98),base.z+slam*n*.28);
+                    pose.mulPose(Axis.ZP.rotationDegrees((float)(-bend*8*height)));pose.scale(size,(float)(1.8*height),size);pose.translate(-.5,0,-.5);
+                    Minecraft.getInstance().getBlockRenderer().renderSingleBlock((n==6?Blocks.SEA_LANTERN:Blocks.DARK_PRISMARINE).defaultBlockState(),pose,buffers,light,OverlayTexture.NO_OVERLAY);pose.popPose();
+                }
+            }
+        }else if(boss.attack()==2&&t<80){
+            var from=boss.mouth().subtract(boss.position());
+            if(t<60){
+                float size=.2f+t*.018f;pose.pushPose();pose.translate(from.x,from.y,from.z);pose.mulPose(Axis.YP.rotationDegrees((t+partial)*8));pose.mulPose(Axis.ZP.rotationDegrees(45));pose.scale(size,size,size);pose.translate(-.5,-.5,-.5);
+                Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.SEA_LANTERN.defaultBlockState(),pose,buffers,15728880,OverlayTexture.NO_OVERLAY);pose.popPose();
+            }else if(t<72){
+                var to=boss.beamEnd().subtract(boss.position());var direction=to.subtract(from).normalize();
+                var side=direction.cross(new net.minecraft.world.phys.Vec3(0,1,0)).normalize().scale(.55);
+                var other=direction.cross(side).normalize().scale(.55);var v=buffers.getBuffer(RenderType.lightning());
+                for(var normal:java.util.List.of(side,other)){
+                    for(var p:java.util.List.of(from.add(normal),to.add(normal),to.subtract(normal),from.subtract(normal)))v.vertex(pose.last().pose(),(float)p.x,(float)p.y,(float)p.z).color(1f,.95f,.65f,.88f).endVertex();
+                    for(var p:java.util.List.of(from.subtract(normal),to.subtract(normal),to.add(normal),from.add(normal)))v.vertex(pose.last().pose(),(float)p.x,(float)p.y,(float)p.z).color(1f,.95f,.65f,.88f).endVertex();
+                }
+            }
+        }else if(boss.attack()==0&&boss.headOffset().lengthSqr()>1){
+            // A continuous flexible throat follows the enlarged head during the lunge and gulp.
+            var offset=boss.headOffset();
+            int segments=Math.max(4,(int)(offset.length()/2));
+            for(int i=0;i<segments;i++){
+                double f=(i+.5)/segments;var p=new net.minecraft.world.phys.Vec3(0,10,7).add(offset.scale(f));
+                pose.pushPose();pose.translate(p.x,p.y,p.z);pose.scale(4.5f,4.5f,4.5f);pose.translate(-.5,-.5,-.5);
+                Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.DARK_PRISMARINE.defaultBlockState(),pose,buffers,light,OverlayTexture.NO_OVERLAY);pose.popPose();
+            }
         }
     }
     private void moon(IslandBoss boss,float partial,PoseStack pose,MultiBufferSource buffers) {

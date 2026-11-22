@@ -1,0 +1,25 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.8/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+
+> Configure project :
+Neither the 'eclipse' nor the 'idea' plugins were found, but IDE resource copy has been enabled.
+
+> Task :compileJava
+/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/src/main/java/com/forgottenisland/ForgottenIsland.java:62: warning: [removal] get() in FMLJavaModLoadingContext has been deprecated and marked for removal
+        var bus=FMLJavaModLoadingContext.get().getModEventBus();
+                                        ^
+/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/src/main/java/com/forgottenisland/ForgottenIsland.java:66: warning: [removal] get() in ModLoadingContext has been deprecated and marked for removal
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, IslandConfig.SPEC);
+                         ^
+/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/src/main/java/com/forgottenisland/ForgottenIsland.java:67: warning: [removal] get() in ModLoadingContext has been deprecated and marked for removal
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT,com.forgottenisland.adventure.AdventureClientConfig.SPEC);
+                         ^
+/Users/ericnograles/GitHub/forgotten-island-minecraft-mod/src/main/java/com/forgottenisland/ForgottenIsland.java:76: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static ResourceLocation id(String path) { return new ResourceLocation(ID,path); }
+                                                            ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+4 warnings
+
+BUILD SUCCESSFUL in 7s
+1 actionable task: 1 executed

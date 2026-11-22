@@ -1,10 +1,8 @@
 # Forgotten Island: Wild Companions
 
-The adventure expansion adds a persistent festival island, a buildable floor-star portal, separate Manang and Bakunawa bosses, four skippable scenes, custom life meters and unique rewards. All thirteen original companions remain available.
+Version **0.3.0** adds a craftable Homeward Star Necklace, an eastern island expansion with a festival quarter, Batiba's cave, Manang's mountain and a wider Bakunawa coast, plus Bite and Eat, Tentacles and Holy Beam. All thirteen original companions remain available.
 
-**Version 0.2.0 is ready for human playtesting.** The build, eight JUnit tests, eighteen Forge GameTests and both asset validators pass. Packaged clients achieved a cooperative Bakunawa victory without wings and a solo Manang victory with supplied, obtainable pre-boss equipment. Crafting, travel, all four scenes, shared and simultaneous meters, individual skipping, interrupted-scene recovery, rewards, gliding, unload/restart persistence and market/eclipse performance have evidence. [Eight continuous recordings](docs/evidence/adventure/clips/README.md) demonstrate the market, portal travel, both meters, all four cinematics and wing gliding; these silent presentation clips use documented setup and console damage.
-
-A complete unassisted Survival acquisition/progression run remains **unverified and deferred to human playtesting**. The fresh-world automated attempt stopped during ordinary Overworld gathering and recovery, before island entry. On 2026-11-21 the project owner closed this implementation phase and assigned the remaining progression check to human testers. See the [human playtest checklist](docs/adventure-acceptance.md#human-playtest-handoff), [requirement audit](docs/adventure-acceptance.md) and [evidence ledger](docs/adventure-development.md). Phase closure does not claim full gameplay acceptance.
+The release passes the build, 13 unit tests, 26 Forge GameTests and asset validation, with packaged single-player and two-client demonstrations. See the [0.3 evidence ledger](docs/adventure-tranche3.md) for captures, save-upgrade checks, performance snapshots and assistance used. Earlier [0.2 evidence](docs/adventure-development.md) describes the previous release. Full unassisted Survival acquisition/progression and a fresh 0.3 solo/cooperative victory balance review remain assigned to human testers.
 
 An unofficial Minecraft Java mod inspired by DreamWorks' *Forgotten Island* and Philippine folklore. **Thirteen playable creatures** with original models, companion abilities and three rideable creatures. See [the verification ledger](docs/verification.md) for automated tests, single-player and multiplayer evidence, and remaining limits.
 
@@ -15,51 +13,48 @@ The current build includes **thirteen creatures**: Bakunawa, Raww, Manang, Sarim
 Requires **Minecraft Java Edition 1.20.1**, **Java 17**, and **Forge 47.4.10** (the pinned test version). No animation or other mod dependencies are required. The declared Forge range is 47.4.10–47.x; other Forge releases have not been tested.
 
 1. Install the matching [official Forge client](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html).
-2. Copy `forgotten-island-0.2.0.jar` from the release archive (or `build/libs` after building the source) into that Minecraft profile's `mods` folder.
+2. Copy `forgotten-island-0.3.0.jar` from the release archive (or `build/libs` after building the source) into that Minecraft profile's `mods` folder.
 3. Launch the Forge profile. Put the same JAR on a Forge server and every connecting client for multiplayer.
 4. In Survival, craft the field guide and follow the portal plan below. For the original companion showcase, use the **Forgotten Island** tab on the second Creative-tab page.
 
 ## Travel to Forgotten Island
 
-Craft 32 **Parol Stone** in a crafting table:
+Craft a **Homeward Star Necklace** in a crafting table:
 
 ```text
-S C S    S = cobblestone (4)
-C A C    C = copper ingot (4)
-S C S    A = amethyst shard (1)
+S . S    S = string (2)
+. C .    C = copper ingot (1)
+. T .    T = torch (1)
 ```
 
-Lay the following 9 × 10 pattern flat in the Overworld, with its single point facing north (negative Z). `#` is Parol Stone; `C` is one more Parol Stone at the activation center; dots are empty openings. You need 28 stones, so one recipe is enough. Clear two blocks of headroom. The top row is north.
+Use it on the top of dry Overworld ground. Keep it in hand nearby for the two-second formation, then jump down into the luminous horizontal star. Each necklace creates 64 portals. The compact seven-block-wide star fits above small slopes; it needs open air but no frame, orientation or large flat platform. Obstructions, water and protected land produce feedback. Placement is checked again after the animation; an interrupted or obstructed formation changes no blocks and spends no charge.
 
-For assisted construction, hold at least 28 Parol Stone in one stack and **crouch-use the top of the ground beneath the intended center**. This places the same north-facing pattern and consumes 28 stones. It requires flat solid ground, a clear footprint and two blocks of headroom; an invalid site consumes nothing. Ordinary use still places individual blocks.
+The normal entry path requires no amethyst or glow ink. Legacy Parol Stone portals still work, and their optional manual recipe/activation remain available. Craft the field guide with a **book and feather** for the new instructions.
 
-```text
-    #
-    #
-   #.#
-###...###
-#.......#
- #..C..#
-  #...#
-  #.#.#
- ### ###
- #     #
-```
+The old arrival harbor remains at `(0, 65, 40)`. Follow its eastern shore to the larger festival quarter at `(310, 65, 65)`: sixteen new stalls, a performance stage, parol strings and twenty-four more residents. The junction at `(400, 65, 35)` leads independently to:
 
-Use one **glow ink sac** on C. The opening becomes luminous; step onto the frame and jump down through it. Cobblestone, copper, amethyst and glow ink are all obtainable before island travel. The field guide includes this plan, activation troubleshooting and travel instructions. Its existing recipe is a book plus prismarine crystals.
+- **Memory Hollow** `(475, 67, 190)`: Batiba's explorable cave, luminous chambers, a resting alcove and supplies.
+- **Twilight Summit** `(535, 105, -215)`: a lit ascent through the ridge to Manang's mountain encounter.
+- **Moonbreak Coast** `(820, 65, -65)`: a sea arch, jetty and a 168-block-wide Bakunawa arena.
 
-The arrival plaza opens directly into six colorful stalls, parol lanterns and 21 peaceful residents representing eleven companion types. Interact with residents for greetings. The two marked routes lead independently to the northwest twilight arena and northeast lunar arena; either boss can be attempted first with ordinary pre-boss equipment.
+The old island's ground envelope was **437 × 351 blocks**; the expanded envelope is **1,268 × 699 blocks**, with paths, terrain, vegetation, regional sounds and small caches. [Route distances, estimated walking times and interpretation notes](docs/adventure-tranche3.md) distinguish calculations from measured play.
 
-The permanent arrival star is always a retreat route. Each player's last departure portal is stored separately, with a five-second travel cooldown. Returns search for solid, dry space near that portal, then near the Overworld world spawn if necessary. Death retains normal Overworld bed/spawn behavior. Island beds and respawn anchors cannot change it. `/island home` is available without operator permission as emergency recovery, including after reconnecting. The new dimension is added to existing worlds; initialized island chunks and player edits are retained.
+Each player's last departure portal is stored separately, with a five-second travel cooldown. Return stars search for safe, dry ground near that portal, then at Overworld spawn. `/island home` remains an unopped emergency recovery command, including inside Bakunawa. Death retains the normal Overworld bed/spawn. Island beds and anchors cannot change it.
+
+Existing saves upgrade automatically and additively. Previously built old-district chunks remain intact. In the expansion, any column containing non-baseline blocks is left untouched from bedrock to sky; untouched ocean columns can gain terrain even if explored before. Companions, residents, portal links, encounter completion and reward journals persist. Unfinished bosses use the new destinations; completed bosses stay completed, and existing rewards/exits remain where they were. The old arenas become historic courts. Extensive player construction can interrupt a new route or destination; the upgrade preserves that construction.
 
 ## Encounters and rewards
 
 Enter an arena in Survival to awaken its boss. Party health scales at awakening for up to four players; late arrivals join without healing the boss. Separate custom meters display shared server health and the current phase. Leave the arena to hide its meter. If everyone retreats or dies, an unfinished encounter resets after ten seconds. Completed bosses stay defeated in that world.
 
-Bring enchanted armor, a sword, food and healing supplies. The verified victories used Protection II diamond armor, a Sharpness III diamond sword, a shield and ordinary golden apples. These are obtainable before either boss; iron-only victory has not been established. Learn the warning patterns and move back into melee reach after knockback.
+Bring enchanted armor, a sword, food and healing supplies. The **previous 0.2** verified victories used Protection II diamond armor, a Sharpness III diamond sword, a shield and ordinary golden apples. These are obtainable before either boss; iron-only victory has not been established. Learn the warning patterns and move back into melee reach after knockback.
 
 - **Manang** stands about 4.7 blocks tall while joined. Her upper body separates for Shadow Dive, Shriek and Wing Cut. Leave the marked circle, jump over the expanding ring, or move out of her facing arc. Strike the lower body when her wings fold after an attack. The second half of the fight accelerates her pattern.
-- **Bakunawa** has an approximately 92-block articulated body. Three ground-level moon anchors provide melee access; other body regions can also take damage. Avoid Moonfall circles, jump the Lunar Tide and sidestep Eclipse Breath. Anchors turn gold during recovery. At half health the eclipse begins and attacks accelerate. Neither wings nor the Crystal Sword is required to enter or damage it.
+- **Bakunawa** retains the articulated sea-serpent body, three accessible moon anchors, Moonfall, Lunar Tide and Eclipse Breath. New attacks alternate into the encounter: **Bite and Eat** visibly lunges into an amber warning circle and swallows connected targets; **Tentacles** rise from five blue circles, strike for 7 damage before normal mitigation and withdraw; **Holy Beam** charges a white/gold line, discharges once, and recovers. Anchors turn gold during recovery. At half health, attacks accelerate.
+
+Swallowed players explore a sealed ribbed interior with a rising passage and three luminous Memory Crystals. Breaking all three is the only normal escape and ejects all swallowed fighters together, safely back into the fight. No special pickaxe, wings or Crystal Sword is required. Everyone inside still counts toward the encounter and rewards. Death, reset, defeat, emergency recovery and stale reconnects are explicit escape safeguards. Offline guests keep durable recovery markers; restart does not erase crystal progress.
+
+Holy Beam deals **10 HP per unblocked discharge**, bypassing ordinary armor and protection enchantments. On Normal, two separate hits kill an otherwise unmodified full-health 20-HP player. A discharge has only one damage tick. **Exceptions:** a correctly facing shield, Resistance (including companion/arrival/ejection protection), absorption, extra maximum health, intervening healing, Totem of Undying, Creative/spectator immunity, scene immunity and other mods/datapacks that change damage. Vanilla damage immunity can reject a hit; no single discharge retries to force damage through. Move sideways out of the aim line or take cover behind solid terrain.
 
 **K** skips your current scene. **O** cycles Full, Reduced and Off; these keys can be rebound in Controls. Reduced keeps your own camera and movement. Off disables the camera/title spectacle and eclipse treatment. The world animation and encounter timing stay synchronized. Late arrivals see the remaining scene time. Everyone in the arena is protected during the shared entrance/defeat interval; your skip never skips another player's scene. Esc/menu, death, travel and disconnect restore local camera and controls.
 
@@ -94,7 +89,7 @@ Right-click an egg to spawn its creature. Give it three of its favorite gift to 
 
 All custom keys can be rebound in Options → Controls → Forgotten Island. Ground Datu uses ground movement rather than ascent/descent. Dismounts give altitude-scaled slow-falling and brief water-breathing protection. Bakunawa supplies air while swimming with a rider.
 
-The guide is craftable from a book and prismarine crystals; the whistle from a copper ingot and string. `/island guide` also gives a guide. Creatures have spawn eggs and `/summon forgottenisland:<id>` identifiers matching the inventory.
+The guide is craftable from a book and feather; the whistle from a copper ingot and string. `/island guide` also gives a guide. Creatures have spawn eggs and `/summon forgottenisland:<id>` identifiers matching the inventory.
 
 ## Repeatable showcase
 
@@ -131,6 +126,7 @@ python3 -m venv .tools-venv
 .tools-venv/bin/pip install -r tools/requirements-assets.txt
 .tools-venv/bin/python tools/generate_assets.py
 .tools-venv/bin/python tools/generate_adventure_assets.py
+.tools-venv/bin/python tools/generate_tranche_assets.py
 .tools-venv/bin/python tools/validate_assets.py
 .tools-venv/bin/python tools/validate_adventure_assets.py
 ```

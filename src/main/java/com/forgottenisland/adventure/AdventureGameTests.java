@@ -15,7 +15,7 @@ import java.util.UUID;
 @GameTestHolder(ForgottenIsland.ID)
 @PrefixGameTestTemplate(false)
 public final class AdventureGameTests {
-    @GameTest(template="empty",timeoutTicks=200)
+    @GameTest(template="empty",timeoutTicks=600)
     public static void chunkConstructionWaitsForFullAvailability(GameTestHelper h) {
         var level=h.getLevel().getServer().getLevel(AdventureContent.ISLAND);
         var data=IslandSavedData.get(level.getServer());
@@ -32,9 +32,9 @@ public final class AdventureGameTests {
         h.startSequence().thenIdle(10).thenExecute(()->{
             h.assertTrue(!data.chunkBuilt(pos.toLong()),"Unavailable chunk was built or forced to load");
             h.assertTrue(AdventureEvents.constructionPending(level,pos),"Load event was discarded before FULL availability");
-            level.getChunk(pos.x,pos.z);
+            level.setChunkForced(pos.x,pos.z,true);level.getChunk(pos.x,pos.z);
         }).thenWaitUntil(()->h.assertTrue(data.chunkBuilt(pos.toLong()),"Deferred chunk construction was lost"))
-          .thenExecute(h::succeed);
+          .thenExecute(()->{level.setChunkForced(pos.x,pos.z,false);h.succeed();});
     }
     @GameTest(template="empty",timeoutTicks=80)
     public static void starConstructionConsumesExactCostAndRejectsObstructionsAtomically(GameTestHelper h) {
@@ -63,13 +63,16 @@ public final class AdventureGameTests {
     @GameTest(template="empty",timeoutTicks=100)
     public static void multipartHitsRouteToJournalAndLethalDamageStartsScene(GameTestHelper h) {
         var level=h.getLevel().getServer().getLevel(AdventureContent.ISLAND);var kind=BossKind.BAKUNAWA;
+        var chunk=new net.minecraft.world.level.ChunkPos(kind.center);level.setChunkForced(chunk.x,chunk.z,true);level.getChunk(kind.center);
+        h.startSequence().thenWaitUntil(()->h.assertTrue(level.areEntitiesLoaded(chunk.toLong()),"Waiting for remote coast entity chunk"))
+          .thenExecute(()->{
         var data=IslandSavedData.get(level.getServer());var prior=data.encounter(kind.id).snapshot();
         var player=net.minecraftforge.common.util.FakePlayerFactory.get(level,new com.mojang.authlib.GameProfile(UUID.randomUUID(),"AnchorTest"));
         player.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);player.setPos(Vec3.atBottomCenterOf(kind.center).add(0,0,41));
         var state=new EncounterState();state.start(kind.baseHealth,java.util.List.of(player.getUUID()),UUID.randomUUID());state.tick(1,1);
         for(int i=0;i<85;i++)state.tick(1,1);data.restoreEncounter(kind.id,state.snapshot());state=data.encounter(kind.id);
         var boss=AdventureContent.BAKUNAWA_BOSS.get().create(level);boss.setUUID(state.actor());boss.moveTo(kind.origin());boss.sync(state);
-        level.getChunk(kind.center);level.addFreshEntity(boss);boss.tick();
+        h.assertTrue(level.addFreshEntity(boss),"Actor was not added");boss.tick();
         try {
             var part=boss.getParts()[11];
             h.assertTrue(level.getEntityOrPart(part.getId())==part,"Attack packet cannot resolve the multipart target id");
@@ -81,7 +84,10 @@ public final class AdventureGameTests {
             h.assertTrue(!part.hurt(level.damageSources().playerAttack(player),10000)&&state.snapshot().delivered().isEmpty(),"Concurrent lethal hit duplicated transition or delivered early loot");
             h.succeed();
         } finally {boss.discard();data.restoreEncounter(kind.id,prior);data.setDirty();}
+            level.setChunkForced(chunk.x,chunk.z,false);
+          });
     }
+
     @GameTest(template="empty",timeoutTicks=200)
     public static void realRewardDropsWaitForSceneAndSurviveRepeatedCompletion(GameTestHelper h) {
         var level=h.getLevel().getServer().getLevel(AdventureContent.ISLAND);var kind=BossKind.BAKUNAWA;

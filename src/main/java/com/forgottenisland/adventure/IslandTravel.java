@@ -40,19 +40,21 @@ public final class IslandTravel {
             data.link(player.getUUID(),center.get());
             IslandWorld.prepareArrival(destination);
             transfer(player,destination,safeNear(destination,ARRIVAL).orElseGet(()->fallback(destination,ARRIVAL)));
+            player.sendSystemMessage(Component.literal("Explore east along the shore to the expanded festival (310, 65). Its lantern junction leads to Batiba's cave, Manang's mountain and Bakunawa's coast. The old district and your builds remain."));
         }
     }
     public static boolean home(ServerPlayer player) {
-        if(player.level().dimension()!=AdventureContent.ISLAND)return false;
+        if(player.level().dimension()!=AdventureContent.ISLAND&&player.level().dimension()!=AdventureContent.STOMACH)return false;
         ServerLevel overworld=player.server.overworld();
         BlockPos origin=IslandSavedData.get(player.server).departure(player.getUUID()).orElse(overworld.getSharedSpawnPos());
         Vec3 destination=safeNear(overworld,origin).orElseGet(()->safeNear(overworld,overworld.getSharedSpawnPos()).orElseGet(()->fallback(overworld,overworld.getSharedSpawnPos())));
+        BakunawaStomach.forget(player);
         transfer(player,overworld,destination);return true;
     }
     private static void transfer(ServerPlayer player,ServerLevel level,Vec3 pos) {
         player.stopRiding();player.fallDistance=0;player.setDeltaMovement(Vec3.ZERO);
         player.getPersistentData().putLong(COOLDOWN,player.server.overworld().getGameTime()+100);
-        player.teleportTo(level,pos.x,pos.y,pos.z,180,0);
+        BakunawaStomach.transfer(player,level,pos);
         player.connection.resetPosition();
         player.fallDistance=0;player.setDeltaMovement(Vec3.ZERO);
         player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE,100,4,false,false));
