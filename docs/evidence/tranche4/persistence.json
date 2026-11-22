@@ -1,0 +1,126 @@
+{
+  "dedicated": {
+    "bakunawa": {
+      "Phase": 1,
+      "Attempt": 2,
+      "Delivered": [
+        "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:crystal_sword",
+        "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:bakunawa_skull",
+        "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:crystal_sword",
+        "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:bakunawa_skull"
+      ],
+      "Health": 0.0,
+      "Ticks": 0,
+      "Actor": [
+        220694091,
+        121785741,
+        -1216901980,
+        -1541802583
+      ],
+      "Stage": "COMPLETE",
+      "Participants": [
+        {
+          "Id": [
+            940439953,
+            -167562164,
+            -1601161573,
+            -1389718966
+          ]
+        },
+        {
+          "Id": [
+            301266199,
+            -2059649805,
+            -1608804992,
+            -1648951199
+          ]
+        }
+      ],
+      "Collected": [],
+      "MaxHealth": 600.0
+    },
+    "exits": [
+      "bakunawa_boss"
+    ],
+    "mount": {
+      "id": "forgottenisland:bakunawa",
+      "UUID": [
+        -1924110937,
+        -952283296,
+        -1271705528,
+        720750984
+      ],
+      "Owner": [
+        940439953,
+        -167562164,
+        -1601161573,
+        -1389718966
+      ],
+      "Age": 0,
+      "Friendship": 3
+    },
+    "dimension": "minecraft:overworld"
+  },
+  "singleplayer": {
+    "bakunawa": {
+      "Phase": 1,
+      "Attempt": 2,
+      "Delivered": [
+        "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:crystal_sword",
+        "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:bakunawa_skull",
+        "bakunawa_boss:2:11f4f517-853c-3cf3-a01b-95809db70061:crystal_sword",
+        "bakunawa_boss:2:380df991-f603-344c-a090-369bad2a924a:bakunawa_skull"
+      ],
+      "Health": 0.0,
+      "Ticks": 0,
+      "Actor": [
+        220694091,
+        121785741,
+        -1216901980,
+        -1541802583
+      ],
+      "Stage": "COMPLETE",
+      "Participants": [
+        {
+          "Id": [
+            940439953,
+            -167562164,
+            -1601161573,
+            -1389718966
+          ]
+        },
+        {
+          "Id": [
+            301266199,
+            -2059649805,
+            -1608804992,
+            -1648951199
+          ]
+        }
+      ],
+      "Collected": [],
+      "MaxHealth": 600.0
+    },
+    "exits": [
+      "bakunawa_boss"
+    ],
+    "mount": {
+      "id": "forgottenisland:bakunawa",
+      "UUID": [
+        -1924110937,
+        -952283296,
+        -1271705528,
+        720750984
+      ],
+      "Owner": [
+        940439953,
+        -167562164,
+        -1601161573,
+        -1389718966
+      ],
+      "Age": 0,
+      "Friendship": 3
+    },
+    "dimension": "minecraft:overworld"
+  }
+}

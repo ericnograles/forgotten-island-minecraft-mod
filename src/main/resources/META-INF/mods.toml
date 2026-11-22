@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="See LICENSE and docs/asset-licenses.md"
 [[mods]]
 modId="forgottenisland"
-version="0.3.0"
+version="0.4.0"
 displayName="Forgotten Island: Wild Companions"
 authors="Forgotten Island mod contributors"
 description='''Whimsical companions inspired by Forgotten Island and Philippine folklore. An unofficial fan mod with original models, textures and sounds.'''

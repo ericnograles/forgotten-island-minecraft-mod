@@ -1,0 +1,128 @@
+[
+  {
+    "file": "crystal-armor.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.40.32.png",
+    "build": "arsenal iteration",
+    "sha256": "ee32dc7544b50a3c1c9416437139b816ad19339669edab0ff7d7f51b1887fae8"
+  },
+  {
+    "file": "sapphire-reveal.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.41.56.png",
+    "build": "arsenal iteration",
+    "sha256": "01b8c06eac16ef6e61121dc1a9ddd9446c053a6fba33a9bebca4d17abb372ea4"
+  },
+  {
+    "file": "phoenix-impact.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.42.12.png",
+    "build": "arsenal iteration",
+    "sha256": "dd1566ed968ef253ac0179007c7496e4ef37c56ae941fbf84a9c57d7d7111593"
+  },
+  {
+    "file": "crystal-burst.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.42.21.png",
+    "build": "arsenal iteration",
+    "sha256": "22ad13fde0fdce76becd133d4131f2e29fb423520def884ecf4c569df06eef1d"
+  },
+  {
+    "file": "entrance-reaction.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.49.35.png",
+    "build": "boss visual iteration",
+    "sha256": "caf53ebcd0c4b504b3537a9d1fac3e82a13f4a6ed8dba67c686448d439c3cb9a"
+  },
+  {
+    "file": "chomp-jaw.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.49.41.png",
+    "build": "boss visual iteration",
+    "sha256": "1ba36e1ba2dd5c456c68e8db69ece1e913b2ec969b66bb684761151332280f02"
+  },
+  {
+    "file": "crystal-escape.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.51.35.png",
+    "build": "boss visual iteration",
+    "sha256": "2e06466157540993a7cad34456cf0c875f8fd2293cb5f071df7286897887a35d"
+  },
+  {
+    "file": "final-boss.png",
+    "source": "build/production-client/observer-game/screenshots/2026-11-22_09.57.42.png",
+    "build": "final JAR",
+    "sha256": "57b27205f4c4417b91e07997d4124883fee79165699f9253b77b573fd83b1298"
+  },
+  {
+    "file": "tail-whip.png",
+    "source": "build/production-client/observer-game/screenshots/2026-11-22_09.59.11.png",
+    "build": "final JAR",
+    "sha256": "71daca65c0d9fc76b57d21d8d082c60c56c152f351941742c58531c9b2408228"
+  },
+  {
+    "file": "defeat-flash.png",
+    "source": "build/production-client/observer-game/screenshots/2026-11-22_09.59.53.png",
+    "build": "final JAR",
+    "sha256": "64d3dd3c1c73f412df533472d3e1992d4f86f0ac2924eabb120bc5a400309d0c"
+  },
+  {
+    "file": "defeat-split.png",
+    "source": "build/production-client/observer-game/screenshots/2026-11-22_09.59.56.png",
+    "build": "final JAR",
+    "sha256": "5c9268723466d5ac2cc590ab3c447da1b0452175a3d2273956de25bdf9a8bdd7"
+  },
+  {
+    "file": "placed-egg.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.58.03.png",
+    "build": "final JAR",
+    "sha256": "45b8cb699bf21bc0e93ba77a17aed98ec6e1a778ad69806c56e5d21e6a8b872a"
+  },
+  {
+    "file": "hatching-guide.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.58.14.png",
+    "build": "final JAR",
+    "sha256": "043487a280a741fa859cb5d7f5217f23685ad1a226463887dd6aa88a1e6b4f2e"
+  },
+  {
+    "file": "armor-guide.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.58.21.png",
+    "build": "final JAR",
+    "sha256": "b4450c36cd42901f7b9392f03c098a2c05275c7caa2c2241777ca53bdd663979"
+  },
+  {
+    "file": "crafting-guide.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.58.22.png",
+    "build": "final JAR",
+    "sha256": "ad805644e25a3f39e9e019e51e4d9969574bc0540917a4fdb00e86c78e47e14a"
+  },
+  {
+    "file": "sword-guide.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.58.23.png",
+    "build": "final JAR",
+    "sha256": "a0bba1f1d5c34a91658a6c6eca28f374ad1a3123a77037967323e4d2064226c2"
+  },
+  {
+    "file": "boss-guide.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_09.58.25.png",
+    "build": "final JAR",
+    "sha256": "e92bb70c70dcaffc9f5df7fd1ea0c52ad5cdbeb8d7033b81e24d85dd3dca64d6"
+  },
+  {
+    "file": "friendly-hatchling.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_10.00.59.png",
+    "build": "final JAR",
+    "sha256": "ec98cc2d8adbb999089cd31f2ffa68216d672166432101552dad0e12b83a1454"
+  },
+  {
+    "file": "feeding-growth.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_10.01.12.png",
+    "build": "final JAR",
+    "sha256": "1b07547c70c64ee05d3f696164a1345550912c7835f6266f0b827ecaff61e837"
+  },
+  {
+    "file": "grown-mount.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_10.01.16.png",
+    "build": "final JAR",
+    "sha256": "a87b4b7f8a9ae08aa831d9651b820c62540268f425b8c4e58ff1a8052bcc3fa9"
+  },
+  {
+    "file": "singleplayer-reload-flight.png",
+    "source": "build/production-client/game/screenshots/2026-11-22_10.03.21.png",
+    "build": "final JAR",
+    "sha256": "0856043d58561eef4d3c4d576d36d8c62ad5da6bae44a5a215883c0dbaf0a991"
+  }
+]

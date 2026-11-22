@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " C ",
+    "CSC",
+    " A "
+  ],
+  "key": {
+    "C": {
+      "item": "forgottenisland:prismatic_crystal"
+    },
+    "S": {
+      "item": "minecraft:netherite_sword"
+    },
+    "A": {
+      "item": "minecraft:lapis_lazuli"
+    }
+  },
+  "result": {
+    "item": "forgottenisland:sapphire_soul_sword",
+    "count": 1
+  }
+}

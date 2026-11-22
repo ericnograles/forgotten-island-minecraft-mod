@@ -1,0 +1,4 @@
+PASS: 13 species; 199 bones; 420 boxes; matching editable models, textures, eggs, labels and mono OGG calls.
+PASS: adventure recipes, dimension/biome, blocks, animated portal, reward icons, two themed meters, moon sprite, six original boss sounds, loot tables, JSON and festival ambience.
+PASS: inexpensive necklace recipe/art, interior dimension and blocks, Holy Beam mitigation tags, three regional soundscapes.
+PASS: 0.4 arsenal art and nine recipes, four horned egg stages, wearable armor, boss skeleton/UVs/emissive atlas and original roar.

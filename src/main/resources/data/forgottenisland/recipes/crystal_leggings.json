@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " C ",
+    "CAC",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "forgottenisland:prismatic_crystal"
+    },
+    "A": {
+      "item": "minecraft:netherite_leggings"
+    }
+  },
+  "result": {
+    "item": "forgottenisland:crystal_leggings",
+    "count": 1
+  }
+}

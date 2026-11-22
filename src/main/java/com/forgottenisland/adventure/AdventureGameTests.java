@@ -100,6 +100,10 @@ public final class AdventureGameTests {
             for(int x=(altar.getX()-5)>>4;x<=(altar.getX()+5)>>4;x++)for(int z=(altar.getZ()-6)>>4;z<=(altar.getZ()+6)>>4;z++)
                 h.assertTrue(level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(x,z)),"Waiting for reward entity chunks");
         }).thenExecute(()->{
+            // This test owns its disposable dais fixture. A previous run's portals must not
+            // look like player construction when testing a brand-new reward journal.
+            for(int dx:new int[]{0,-14,14})for(int x=-5;x<=5;x++)for(int z=-6;z<=6;z++)for(int y=-1;y<=5;y++)
+                level.setBlockAndUpdate(altar.offset(dx+x,y,z),y==-1?Blocks.SMOOTH_QUARTZ.defaultBlockState():Blocks.AIR.defaultBlockState());
             BossEncounters.finish(level,kind,state,data);
             h.assertTrue(state.snapshot().delivered().isEmpty(),"Reward delivered before the defeat scene ended");
             state.tick(1,1);BossEncounters.finish(level,kind,state,data);

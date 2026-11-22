@@ -179,5 +179,11 @@
     "sounds": [
       "forgottenisland:coast_ambience"
     ]
+  },
+  "bakunawa_roar": {
+    "subtitle": "subtitles.forgottenisland.bakunawa_roar",
+    "sounds": [
+      "forgottenisland:bakunawa_roar"
+    ]
   }
 }

@@ -28,36 +28,46 @@ public final class BossModel extends EntityModel<IslandBoss> {
             p("upper/head").xRot-=boss.exposed()?.1f:.25f;
             p("upper/arm_left").xRot-=boss.exposed()?.2f:1.1f;p("upper/arm_right").xRot-=boss.exposed()?.2f:1.1f;
             base.y+=Mth.sin(age*.07f)*.2f;
-        } else {
-            var head=p("head");head.xScale=head.yScale=head.zScale=1.25f;
-            var offset=boss.headOffset();head.x+=offset.x*16/9;head.y-=offset.y*16/9;head.z-=offset.z*16/9;
-            String key="segment0";
-            for(int i=0;i<9;i++) {
-                p(key).yRot+=Mth.sin(boss.clock()*.025f-i*.45f)*.12f;
-                p(key).xRot+=Mth.sin(boss.clock()*.03f-i*.4f)*.012f;
-                if(i<8)key+="/segment"+(i+1);
+        } else animateBakunawa(boss,age);
+    }
+    private void at(ModelPart part,net.minecraft.world.phys.Vec3 offset){part.x=(float)(offset.x*16/9);part.y=(float)(-offset.y*16/9);part.z=(float)(-offset.z*16/9);}
+    private void animateBakunawa(IslandBoss boss,float age){
+        float partial=Mth.clamp(age-boss.tickCount,0,1),tick=boss.localClock()+partial,scene=boss.clock()+partial;
+        var head=p("head");at(head,boss.headPoint(partial).subtract(boss.position()));
+        boolean defeat=boss.stage()==EncounterState.Stage.DEFEAT;
+        double split=defeat?BakunawaMoves.smooth((scene-75)/45.0):0;
+        head.x+=(float)(split*22);head.zRot+=(float)(split*.65);head.y-=(float)(split*9);
+        head.visible=!defeat||scene<168;
+        float jaw=.12f+Mth.sin(age*.06f)*.04f;
+        if(boss.stage()==EncounterState.Stage.ENTRANCE){
+            float roar=(float)(BakunawaMoves.smooth((scene-115)/12.0)*(1-BakunawaMoves.smooth((scene-165)/20.0)));
+            jaw+=roar*1.05f;head.xRot-=roar*.24f;
+        }else if(defeat){jaw=.55f;head.xRot-=scene*.002f;}
+        else if(boss.stage()==EncounterState.Stage.COMBAT){
+            switch(boss.attack()){
+                case 0 -> {jaw=tick<60?.15f+(float)BakunawaMoves.smooth(tick/40)*1.05f:tick<67?.04f:.12f;head.xRot+=(float)(tick>=67&&tick<95?Math.sin((tick-67)/28*Math.PI)*.3:0);}
+                case 2,7 -> {jaw=tick<60?.2f+tick*.012f:tick<(boss.attack()==7?120:72)?.95f:.2f;head.xRot-=tick>=60&&tick<120?.07f*Math.abs(Mth.sin(age*.8f)):0;}
+                case 3,6 -> {jaw=tick<28?.2f+tick*.02f:tick<86?.75f+Mth.sin(tick*.4f)*.12f:.15f;head.xRot+=tick<35?-.2f:.08f;}
+                case 8 -> {jaw=.25f;head.xRot=-.2f;}
+                case 10 -> {jaw=.5f;head.zRot=Mth.sin((tick-52)*.14f)*(float)BakunawaMoves.lunge(tick)*.6f;}
+                default -> {}
             }
-            p("head/jaw").xRot+=boss.phase()==2?.35f:.12f+Mth.sin(age*.06f)*.07f;
-            if(boss.stage()==EncounterState.Stage.COMBAT){
-                int attack=boss.attack(),tick=boss.localClock();
-                if(attack==0){
-                    p("head/jaw").xRot=(float)(tick<60?.15+BakunawaMoves.smooth(tick/40.0)*1.05:tick<67?.04:.12);
-                    p("head").xRot+=(float)(tick>=67&&tick<95?Math.sin((tick-67)/28.0*Math.PI)*.35:0);
-                    p("segment0").xScale=p("segment0").yScale=1+(tick>=67&&tick<95?.25f*Mth.sin((tick-67)/28f*Mth.PI):0);
-                }else if(attack==1){
-                    p("fin_left").zRot+=tick<60?tick*.008f:.48f*(1-(float)BakunawaMoves.smooth((tick-60)/32.0));
-                    p("fin_right").zRot-=tick<60?tick*.008f:.48f*(1-(float)BakunawaMoves.smooth((tick-60)/32.0));
-                }else if(attack==2){
-                    p("head/jaw").xRot=tick<60?.2f+tick*.01f:tick<72?.85f:.2f;
-                    p("head").xRot+=tick>=60&&tick<72?-.12f:0;
-                }
-            }
-            p("fin_left").zRot+=Mth.sin(age*.05f)*.14f;p("fin_right").zRot-=Mth.sin(age*.05f)*.14f;
-            if(boss.stage()==EncounterState.Stage.ENTRANCE) {
-                float rise=1-Mth.clamp(t/90,0,1);base.y+=rise*42;p("head").xRot-=Mth.sin(t/160*Mth.PI)*.45f;p("head/jaw").xRot+=Mth.sin(t/160*Mth.PI)*.65f;
-            }
-            if(boss.exposed())p("head").y+=Mth.sin((boss.localClock()-80)/(float)(boss.kind.cycle(boss.phase())-80)*Mth.PI)*6;
-            if(boss.stage()==EncounterState.Stage.DEFEAT){base.y-=t*.10f;p("head").xRot+=t*.004f;p("head/jaw").xRot+=.4f;}
+        }
+        p("head/jaw").xRot=jaw;
+        for(int i=0;i<9;i++){
+            var part=p("segment"+i);var point=boss.bodyPoint(i,partial);var delta=boss.bodyPoint(i+1,partial).subtract(point);
+            at(part,point.subtract(boss.position()));
+            part.yRot=(float)Math.atan2(-delta.x,-delta.z);part.xRot=(float)Math.atan2(delta.y,delta.horizontalDistance());
+            part.zScale=(float)Math.max(.5,delta.length()/7.875+.12);
+            if(defeat){part.x+=(i%2==0?1:-1)*split*(12+i*3);part.zRot+=(i%2==0?1:-1)*split*.5;part.y-=(float)(split*8);}
+            part.visible=!defeat||scene<168;
+        }
+        var neck=boss.bodyPoint(1,partial).subtract(boss.position());
+        for(String name:java.util.List.of("fin_left","fin_right")){
+            int side=name.endsWith("left")?-1:1;var fin=p(name);at(fin,neck.add(side*4,0,0));
+            fin.zRot=side*(.25f+Mth.sin(age*.08f)*.12f+(boss.warded()?.7f:0));
+            if(boss.stage()==EncounterState.Stage.COMBAT&&boss.attack()==1)fin.zRot+=side*(float)Math.sin(Math.min(1,tick/90)*Math.PI)*.8f;
+            fin.visible=!defeat||scene<168;
         }
     }
     @Override public void renderToBuffer(PoseStack pose,VertexConsumer v,int light,int overlay,float r,float g,float b,float alpha){root.render(pose,v,light,overlay,r,g,b,alpha);}

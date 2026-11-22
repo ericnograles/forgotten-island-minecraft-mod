@@ -33,6 +33,7 @@ public class IslandCreature extends TamableAnimal {
     private static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(IslandCreature.class,EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> STAY = SynchedEntityData.defineId(IslandCreature.class,EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> MARKET = SynchedEntityData.defineId(IslandCreature.class,EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> GROWTH = SynchedEntityData.defineId(IslandCreature.class,EntityDataSerializers.INT);
     public final Species species;
     private UUID giftGiver;
     private int verticalInput, inputAge;
@@ -55,6 +56,7 @@ public class IslandCreature extends TamableAnimal {
         entityData.define(ABILITY,0); entityData.define(COOLDOWN,0); entityData.define(VARIANT,0); entityData.define(FLYING,false);
         entityData.define(STAY,false);
         entityData.define(MARKET,false);
+        entityData.define(GROWTH,1000);
     }
     @Override protected void registerGoals() {
         goalSelector.addGoal(1,new SitWhenOrderedToGoal(this));
@@ -70,6 +72,13 @@ public class IslandCreature extends TamableAnimal {
         targetSelector.addGoal(2,new OwnerHurtTargetGoal(this));
     }
     public int friendship() {return entityData.get(FRIENDSHIP);}
+    public int growth(){return entityData.get(GROWTH);}
+    @Override public void onSyncedDataUpdated(EntityDataAccessor<?> key){super.onSyncedDataUpdated(key);if(key.equals(GROWTH)&&species!=null)refreshDimensions();}
+    @Override public float getScale(){return species==Species.BAKUNAWA?.35f+.65f*growth()/1000f:super.getScale();}
+    public void hatch(@Nullable UUID owner){
+        setAge(-com.forgottenisland.egg.BakunawaEggEntity.GROWTH_TICKS);entityData.set(GROWTH,0);refreshDimensions();
+        if(owner!=null){setTame(true);setOwnerUUID(owner);entityData.set(FRIENDSHIP,3);giftGiver=owner;}
+    }
     public boolean isMarketResident() {return entityData.get(MARKET);}
     public void setMarketResident() {entityData.set(MARKET,true);getPersistentData().putBoolean("IslandMarketResident",true);}
     @Override public boolean isOwnedBy(LivingEntity player) {return isTame() && getOwnerUUID()!=null && getOwnerUUID().equals(player.getUUID());}
@@ -113,7 +122,11 @@ public class IslandCreature extends TamableAnimal {
         if(held.is(species.gift)) {
             if(isTame()&&!isOwnedBy(p)) {say(p,"Already bonded to another adventurer."); return InteractionResult.FAIL;}
             if(!p.isCreative()) held.shrink(1);
-            if(isTame()) {heal(6); say(p,"A welcome snack!");}
+            if(isTame()) {
+                heal(6);
+                if(species==Species.BAKUNAWA&&getAge()<0){setAge(Math.min(0,getAge()+Math.max(1200,-getAge()/10)));say(p,"Growing stronger! "+((-getAge()+1199)/1200)+" minutes until adulthood.");}
+                else say(p,"A welcome snack!");
+            }
             else {
                 int progress=CompanionRules.giftProgress(giftGiver,p.getUUID(),friendship());
                 giftGiver=p.getUUID(); entityData.set(FRIENDSHIP,progress);
@@ -128,6 +141,7 @@ public class IslandCreature extends TamableAnimal {
                 if(p.isShiftKeyDown()) command(p,true); else requestAbility(p,false);
             } else if(p.isShiftKeyDown()) command(p,false);
             else if(held.isEmpty() && species.mount) {
+                if(species==Species.BAKUNAWA&&isBaby()){say(p,"Still growing! Feed prismarine crystals; ride when fully grown.");return InteractionResult.SUCCESS;}
                 if(p.startRiding(this)) {
                     setOrderedToSit(false); navigation.stop();
                     say(p,species.flies?"WASD steer • Space ascend • C descend • Shift dismount • R ability":"WASD steer • Shift dismount • R ability");
@@ -161,6 +175,10 @@ public class IslandCreature extends TamableAnimal {
         super.tick();
         if(reactionTicks>0) reactionTicks--;
         if(!level().isClientSide) {
+            if(species==Species.BAKUNAWA&&tickCount%20==0){
+                int growth=1000+Math.min(0,getAge())*1000/com.forgottenisland.egg.BakunawaEggEntity.GROWTH_TICKS;
+                if(growth()!=growth){entityData.set(GROWTH,Mth.clamp(growth,0,1000));refreshDimensions();}
+            }
             if(cooldown()>0) entityData.set(COOLDOWN,cooldown()-1);
             if(activeTicks()>0) {
                 entityData.set(ACTIVE,activeTicks()-1);
@@ -260,7 +278,7 @@ public class IslandCreature extends TamableAnimal {
         move.accept(passenger,seat.x,seat.y,seat.z);
     }
     @Override protected boolean canAddPassenger(Entity p) {
-        return species.mount && getPassengers().isEmpty() && p instanceof Player player && isOwnedBy(player)
+        return species.mount && !(species==Species.BAKUNAWA&&isBaby()) && getPassengers().isEmpty() && p instanceof Player player && isOwnedBy(player)
             &&clearRiderBox(p,p.getDimensions(Pose.STANDING).makeBoundingBox(seatPosition(p)));
     }
     @Override public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
@@ -305,6 +323,7 @@ public class IslandCreature extends TamableAnimal {
     }
     @Override public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+        if(species==Species.BAKUNAWA)entityData.set(GROWTH,Mth.clamp(1000+Math.min(0,getAge())*1000/com.forgottenisland.egg.BakunawaEggEntity.GROWTH_TICKS,0,1000));
         entityData.set(MARKET,tag.getBoolean("MarketResident")||tag.getCompound("ForgeData").getBoolean("IslandMarketResident"));
         // Vanilla restores its private orderedToSit field directly, bypassing the setter.
         entityData.set(STAY,tag.getBoolean("Sitting"));

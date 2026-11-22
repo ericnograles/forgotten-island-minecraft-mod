@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "forgottenisland:item/sapphire_soul_sword"
+  }
+}

@@ -23,7 +23,12 @@ public final class IslandLayout {
         return new Path(best,y);
     }
     public static double edge(int x,int z){return Math.pow((x-600)/450.0,2)+Math.pow((z+10)/350.0,2);}
-    public static boolean land(int x,int z){return x>=176&&edge(x,z)<1||x>=175&&x<=250&&Math.abs(z-64)<=8;}
+    public static boolean land(int x,int z){
+        // Untouched northern coast remains ocean for the serpent's emergence.
+        // Already-expanded chunks are never regenerated or excavated.
+        if(x>COAST_X-100&&z<COAST_Z-88)return false;
+        return x>=176&&edge(x,z)<1||x>=175&&x<=250&&Math.abs(z-64)<=8;
+    }
     public static boolean market(int x,int z){return Math.abs(x-MARKET_X)<68&&Math.abs(z-MARKET_Z)<64;}
     public static double mountain(int x,int z){return Math.hypot(x-MOUNTAIN_X,(z-MOUNTAIN_Z)*1.05);}
     public static double coast(int x,int z){return Math.hypot(x-COAST_X,z-COAST_Z);}

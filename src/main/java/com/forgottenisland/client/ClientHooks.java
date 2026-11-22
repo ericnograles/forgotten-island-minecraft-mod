@@ -31,6 +31,7 @@ public final class ClientHooks {
         ForgottenIsland.TYPES.forEach((s,t)->e.registerEntityRenderer(t.get(),c->new CreatureRenderer(c,s)));
         e.registerEntityRenderer(com.forgottenisland.adventure.AdventureContent.MANANG_BOSS.get(),c->new BossRenderer(c,com.forgottenisland.adventure.BossKind.MANANG));
         e.registerEntityRenderer(com.forgottenisland.adventure.AdventureContent.BAKUNAWA_BOSS.get(),c->new BossRenderer(c,com.forgottenisland.adventure.BossKind.BAKUNAWA));
+        e.registerEntityRenderer(com.forgottenisland.arsenal.ArsenalContent.FIREBALL.get(),c->new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(c,1.5f,true));
     }
     @SubscribeEvent public static void wearableLayers(EntityRenderersEvent.AddLayers e) {
         for(String skin:e.getSkins()) {

@@ -8,7 +8,7 @@
   "key.forgottenisland.descend": "Mount descend",
   "key.categories.forgottenisland": "Forgotten Island",
   "entity.forgottenisland.bakunawa": "Bakunawa",
-  "item.forgottenisland.bakunawa_spawn_egg": "Bakunawa Spawn Egg",
+  "item.forgottenisland.bakunawa_spawn_egg": "Bakunawa Hatching Egg",
   "subtitles.forgottenisland.bakunawa": "Bakunawa calls",
   "entity.forgottenisland.raww": "Raww",
   "item.forgottenisland.raww_spawn_egg": "Raww Spawn Egg",
@@ -70,5 +70,15 @@
   "death.attack.holy_beam.player": "%1$s was unmade by Bakunawa\u2019s Holy Beam while fighting %2$s",
   "subtitles.forgottenisland.cave_ambience": "Memory cave echoes",
   "subtitles.forgottenisland.mountain_ambience": "Wind across the twilight ridge",
-  "subtitles.forgottenisland.coast_ambience": "Waves roll under the sea arch"
+  "subtitles.forgottenisland.coast_ambience": "Waves roll under the sea arch",
+  "item.forgottenisland.prismatic_crystal": "Prismatic Crystal",
+  "item.forgottenisland.sapphire_soul_sword": "Sapphire Soul Sword",
+  "item.forgottenisland.phoenix_sword": "Phoenix Sword",
+  "block.forgottenisland.bakunawa_egg": "Bakunawa Egg",
+  "entity.forgottenisland.phoenix_fireball": "Phoenix Fireball",
+  "item.forgottenisland.crystal_helmet": "Crystal Helmet",
+  "item.forgottenisland.crystal_chestplate": "Crystal Chestplate",
+  "item.forgottenisland.crystal_leggings": "Crystal Leggings",
+  "item.forgottenisland.crystal_boots": "Crystal Boots",
+  "subtitles.forgottenisland.bakunawa_roar": "Bakunawa roars across the ocean"
 }

@@ -27,7 +27,7 @@ sound=sf.info(assets/'sounds/festival_ambience.ogg')
 assert sound.channels==1 and sound.samplerate==22050 and sound.duration==16
 for name in ('crystal_sword','manang_wings','bakunawa_skull'):
     assert (assets/f'models/item/{name}.json').is_file()
-    with Image.open(assets/f'textures/item/{name}.png') as image:assert image.size==(32,32) and image.mode=='RGBA'
+    with Image.open(assets/f'textures/item/{name}.png') as image:assert image.size==((64,64) if name=='crystal_sword' else (32,32)) and image.mode=='RGBA'
 for boss in ('manang','bakunawa'):
     with Image.open(assets/f'textures/gui/{boss}_meter.png') as image:assert image.size==(256,32) and image.mode=='RGBA'
 with Image.open(assets/'textures/entity/encounter_moon.png') as image:
@@ -51,3 +51,30 @@ assert 'ambient_loop_sound' not in biome['effects']
 for name in ('cave_ambience','mountain_ambience','coast_ambience'):
     info=sf.info(assets/f'sounds/{name}.ogg');assert info.channels==1 and info.samplerate==22050 and info.duration==12
 print('PASS: inexpensive necklace recipe/art, interior dimension and blocks, Holy Beam mitigation tags, three regional soundscapes.')
+for name in ('prismatic_crystal','sapphire_soul_sword','phoenix_sword','crystal_helmet','crystal_chestplate','crystal_leggings','crystal_boots','bakunawa_spawn_egg','crystal_sword'):
+    assert (assets/f'models/item/{name}.json').is_file()
+    with Image.open(assets/f'textures/item/{name}.png') as im:
+        assert im.mode=='RGBA' and im.size==((32,32) if name=='prismatic_crystal' else (64,64)),name
+    recipe=json.loads((root/f'data/forgottenisland/recipes/{name}.json').read_text())
+    assert recipe['result']['item']==f'forgottenisland:{name}'
+    assert (root/f'data/forgottenisland/advancements/recipes/{name}.json').is_file()
+for stage in range(4):
+    model=json.loads((assets/f'models/block/bakunawa_egg_{stage}.json').read_text())
+    assert len(model['elements'])>=5
+    with Image.open(assets/f'textures/block/bakunawa_egg_{stage}.png') as im:assert im.size==(32,32)
+for layer in (1,2):
+    with Image.open(assets/f'textures/models/armor/crystal_layer_{layer}.png') as im:assert im.size==(64,32)
+model=json.loads((assets/'models/creature/bakunawa_boss.json').read_text())
+assert (assets/'models/creature/bakunawa_boss.json').read_bytes()==(root.parents[2]/'assets-src/models/bakunawa_boss.json').read_bytes()
+parents={'root'}
+for bone in model['bones']:
+    assert bone['parent'] in parents and bone['name'] not in parents
+    parents.add(bone['name'])
+    for x,y,z,w,h,d,material in bone['boxes']:
+        assert min(w,h,d)>0 and 0<=material<8 and 2*(w+d)<=128 and h+d<=128
+assert {'head','jaw',*[f'segment{i}' for i in range(9)]}<=parents
+for suffix in ('','_glow'):
+    with Image.open(assets/f'textures/entity/bakunawa_boss{suffix}.png') as im:assert im.size==(1024,128) and im.mode=='RGBA'
+info=sf.info(assets/'sounds/bakunawa_roar.ogg')
+assert info.channels==1 and info.samplerate==22050 and 3.9<=info.duration<=4.1
+print('PASS: 0.4 arsenal art and nine recipes, four horned egg stages, wearable armor, boss skeleton/UVs/emissive atlas and original roar.')

@@ -48,7 +48,7 @@ public final class ForgottenIsland {
                 return builder.build(ID+":"+s.id);
             });
             TYPES.put(s,type);
-            EGGS.put(s, ITEMS.register(s.id+"_spawn_egg", () -> new ForgeSpawnEggItem(type,s.primaryColor,s.accentColor,new Item.Properties())));
+            EGGS.put(s, ITEMS.register(s.id+"_spawn_egg", () -> s==Species.BAKUNAWA?new com.forgottenisland.egg.BakunawaEggItem():new ForgeSpawnEggItem(type,s.primaryColor,s.accentColor,new Item.Properties())));
             CALLS.put(s, SOUNDS.register(s.id+"_call", () -> SoundEvent.createVariableRangeEvent(id(s.id+"_call"))));
         }
         TABS.register("wild_companions", () -> CreativeModeTab.builder().title(Component.translatable("tab.forgottenisland"))
@@ -61,6 +61,8 @@ public final class ForgottenIsland {
     public ForgottenIsland() {
         var bus=FMLJavaModLoadingContext.get().getModEventBus();
         AdventureContent.register(bus);
+        com.forgottenisland.egg.EggContent.register(bus);
+        com.forgottenisland.arsenal.ArsenalContent.init();
         ENTITIES.register(bus); ITEMS.register(bus); SOUNDS.register(bus); TABS.register(bus); PARTICLES.register(bus);
         bus.addListener(this::attributes);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, IslandConfig.SPEC);
