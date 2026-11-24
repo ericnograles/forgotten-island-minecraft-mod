@@ -1,6 +1,6 @@
 {
   "name": "Forgotten Island: Wild Companions",
-  "summary": "Befriend 13 magical companions, explore a lantern-lit island, and ride a rocket to the Moon for a rematch with Bakunawa.",
+  "summary": "Befriend 13 magical companions, explore a lantern-lit island, battle two bosses, forge crystal gear, and raise a flying Bakunawa.",
   "game": "Minecraft",
   "class": "Mods",
   "primary_category_suggestion": "Adventure and RPG",
@@ -27,5 +27,6 @@
   "project_id": 1825044,
   "project_url": "https://www.curseforge.com/minecraft/mc-mods/forgotten-island-wild-companions",
   "publication_receipt_url": "https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.6.0/curseforge-publication.json",
-  "status": "See the versioned release receipt for the submitted file ID and the author dashboard for moderation status."
+  "status": "CurseForge accepted the v0.6.0 Beta JAR and player-guide update on 2026-11-24. The release receipt verifies the file ID and checksum.",
+  "file_id": 9800084
 }

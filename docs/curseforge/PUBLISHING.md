@@ -34,3 +34,7 @@ Run `python3 -m unittest discover -s tools/publishing -p 'test_*.py' -v` for the
 On November 22, 2026, GitHub Actions uploaded `forgotten-island-0.5.0.jar` as a Beta for Minecraft 1.20.1 on Forge. The receipt identifies project `1825044`, file `9763079`, and the SHA-256 of the GitHub release JAR. [Publishing run](https://github.com/ericnograles/forgotten-island-minecraft-mod/actions/runs/45083293596) · [Publication receipt](https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.5.0/curseforge-publication.json)
 
 At submission, the author dashboard showed the file undergoing its malware scan and the new project awaiting moderator approval. The project uses CurseForge-only distribution. [Author file status](https://authors.curseforge.com/#/projects/1825044/files/9763079) · [Public listing after approval](https://www.curseforge.com/minecraft/mc-mods/forgotten-island-wild-companions)
+
+## Moon Pursuit submission
+
+On November 24, 2026, CurseForge accepted the 0.6.0 Beta as file `9800084` for project `1825044`. Its JAR SHA-256 is `4e3e68bcd1b05436d19a941c866069affa45eaf2214fd09db0732930a5f98d25`. The description workflow also submitted the updated player guide. [File receipt](https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.6.0/curseforge-publication.json) · [Player-guide sync](https://github.com/ericnograles/forgotten-island-minecraft-mod/actions/runs/45493780393) · [Author file status](https://authors.curseforge.com/#/projects/1825044/files/9800084)
