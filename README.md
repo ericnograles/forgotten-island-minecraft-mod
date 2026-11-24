@@ -1,8 +1,8 @@
 # Forgotten Island: Wild Companions
 
-[Download v0.6.0 for Forge 1.20.1](https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/tag/v0.6.0) · [Watch the five-minute narrated playthrough](https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.6.0/Forgotten-Island-0.6.0-Walkthrough.mp4)
+[Download v0.6.0 for Forge 1.20.1](https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/tag/v0.6.0) · [Watch the official five-minute documentary walkthrough](https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.6.0/Forgotten-Island-0.6.0-Walkthrough.mp4?cut=documentary)
 
-In the video, the coastal encounter begins at **2:21**, the respawn and moonrise at **2:38**, and the rocket at **2:50**. The first lunar strike lands at **3:20** and the storm form appears at **4:17**. The narrated playtest uses supplied gear, low starting health at the coast, and healing during the lunar fight.
+The walkthrough pairs British AI narration with gameplay audio and selectable English captions. The coastal encounter begins at **2:21**, the respawn and moonrise at **2:38**, and the rocket at **2:50**. The first lunar strike lands at **3:20** and the storm form appears at **4:17**. The narrated playtest uses supplied gear, low starting health at the coast, and healing during the lunar fight.
 
 The [CurseForge player guide](docs/curseforge/description.html) collects the installation, companions, controls, recipes, and boss instructions used by the listing. Maintainers can find release synchronization instructions in [CurseForge publishing](docs/curseforge/PUBLISHING.md).
 
