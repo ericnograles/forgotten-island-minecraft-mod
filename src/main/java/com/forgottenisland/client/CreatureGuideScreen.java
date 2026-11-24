@@ -11,7 +11,7 @@ import net.minecraft.network.chat.Component;
 
 public class CreatureGuideScreen extends Screen {
     private int page;
-    private static final int ADVENTURE_PAGES=15;
+    private static final int ADVENTURE_PAGES=16;
     private IslandCreature preview;
     private int panelHeight(){return Math.min(320,height-12);}
     public CreatureGuideScreen(){super(Component.literal("The Wild Companion Field Guide"));}
@@ -49,7 +49,7 @@ public class CreatureGuideScreen extends Screen {
         super.render(g,mx,my,partial);
     }
     private void adventure(GuiGraphics g,int left,int top,int index) {
-        String[] titles={"01 / THE HOMEWARD STAR NECKLACE","02 / FORM THE STAR","03 / SAFE PASSAGE","04 / FOUR ISLAND DESTINATIONS","05 / MANANG'S TWILIGHT SUMMIT","06 / BAKUNAWA'S MOONBREAK COAST","07 / INSIDE THE DEVOURER","08 / REWARDS & SHARED ADVENTURES","09 / BAKUNAWA: NEW MOVES","10 / THREE LEGENDARY SWORDS","11 / CRAFT THE CRYSTALS & SWORDS","12 / CRYSTAL ARMOR","13 / HATCH A FRIEND","14 / TWO HEALTH BARS","15 / BOSS SPAWN EGGS"};
+        String[] titles={"01 / THE HOMEWARD STAR NECKLACE","02 / FORM THE STAR","03 / SAFE PASSAGE","04 / FOUR ISLAND DESTINATIONS","05 / MANANG'S TWILIGHT SUMMIT","06 / BAKUNAWA'S MOONBREAK COAST","07 / INSIDE THE DEVOURER","08 / REWARDS & SHARED ADVENTURES","09 / BAKUNAWA: NEW MOVES","10 / THREE LEGENDARY SWORDS","11 / CRAFT THE CRYSTALS & SWORDS","12 / CRYSTAL ARMOR","13 / HATCH A FRIEND","14 / TWO HEALTH BARS","15 / BOSS SPAWN EGGS","16 / THE MOON PURSUIT"};
         String[] pages={
             "Craft a Homeward Star Necklace:\n\nS . S    S = string (2)\n. C .    C = copper ingot (1)\n. T .    T = torch (1)\n\nUse it on the top of dry Overworld ground. A luminous floor star forms in two seconds. No frame, compass direction, amethyst or glow ink is needed.\n\nEach necklace makes 64 stars. Craft this field guide with a book and a feather.",
             "Choose open ground with three blocks of space around you. Small slopes work; the star can float one block higher. No large flat platform is required.\n\nStay near the star and keep the necklace in hand while it forms. Jump down into the light when it is ready.\n\nWalls, trees, water and protected land block placement. If something obstructs formation, no charge is spent and no blocks change.\n\nOld Parol Stone stars remain usable with glow ink.",
@@ -65,7 +65,8 @@ public class CreatureGuideScreen extends Screen {
             "Crystal Armor strength: helmet 100, chestplate 900, leggings 250, boots 69. Four pieces total 1,319.\n\nArmor recipe:\n C     C = Prismatic Crystal\nCAC    A = matching netherite armor\n C\n\nFull strength is honored beyond the normal attribute limit. Armor still reduces damage by at most 80%; Holy Beam bypasses it. Protection enchantments follow their normal rules.\n\nRepair with Prismatic Crystals or Mending. The chestplate and Manang Wings share the chest slot.",
             "Craft a Bakunawa Hatching Egg:\nPAP    P = prismarine crystal\nPEP    A = amethyst shard\n P     E = chicken egg\n\nPlace it with open space above. The shell cracks over 60 loaded seconds, then your bonded hatchling emerges. A blocked egg waits safely.\n\nGrowth takes 20 loaded minutes. Feed your baby prismarine crystals to advance growth; each snack spends one crystal. Fully grown Bakunawa can be ridden.\n\nOwnership, incubation and age survive saving. Existing adult companions stay adults. Breaking an egg restarts incubation.",
             "Enter either marked arena in Creative, Survival or Adventure. Creative visitors can watch the entrance and switch to Survival here to fight.\n\nBakunawa has 400 HP, then 500 HP. During its three-second transformation, watch the wings open. Dodge three gold strike circles or sidestep the charged breath line.\n\nWhen the tired head settles at the center, strike the jaw or body. A rested hit deals 2.5 times an airborne hit. Storm hide absorbs another 15%. Powerful swords face diminishing returns.",
-            "Creative menu boss eggs start independent fights. Choose Bakunawa or Phase Two Bakunawa above deep water with open sky to the north. Choose Manang or Separated Manang on level, clear ground.\n\nThe arena stays where you use the egg. Test victories grant no island rewards. Friendly eggs still summon companions or hatch a bonded Bakunawa.\n\nThe three stomach crystals belong to your own fight. Break them to return to your original dimension."
+            "Creative menu boss eggs start independent fights. Choose Bakunawa or Phase Two Bakunawa above deep water with open sky to the north. Choose Manang or Separated Manang on level, clear ground.\n\nThe arena stays where you use the egg. Test victories grant no island rewards. Friendly eggs still summon companions or hatch a bonded Bakunawa.\n\nThe three stomach crystals belong to your own fight. Break them to return to your original dimension.",
+            "If Bakunawa kills you, watch the sky after you respawn. Take your Moon Rocket outside and use it to board. Stay aboard until touchdown.\n\nOn the Moon, wait for Bakunawa to lower its head. Hit its jaw to interrupt the bite and start your rematch.\n\nUse /island rocket to replace a lost ship before landing. Use /island home to return."
         };
         g.drawString(font,titles[index],left+15,top+45,0xffffdf9a,false);
         text(g,pages[index],left+16,top+64,308);

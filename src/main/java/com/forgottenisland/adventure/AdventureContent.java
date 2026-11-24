@@ -16,7 +16,12 @@ public final class AdventureContent {
     public static final ResourceKey<Level> ISLAND = ResourceKey.create(Registries.DIMENSION,ForgottenIsland.id("forgotten_island"));
     public static final ResourceKey<Level> HIGHLANDS=ResourceKey.create(Registries.DIMENSION,ForgottenIsland.id("highlands"));
     private static final DeferredRegister<com.mojang.serialization.Codec<? extends net.minecraft.world.level.chunk.ChunkGenerator>> GENERATORS=DeferredRegister.create(Registries.CHUNK_GENERATOR,ForgottenIsland.ID);
-    static { GENERATORS.register("mountains",()->MountainGenerator.CODEC); }
+    static { GENERATORS.register("mountains",()->MountainGenerator.CODEC); GENERATORS.register("lunar_craters", () -> LunarGenerator.CODEC); }
+    public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, ForgottenIsland.id("moon"));
+    public static final RegistryObject<Item> MOON_ROCKET = ForgottenIsland.ITEMS.register("moon_rocket", MoonRocketItem::new);
+    public static final RegistryObject<EntityType<MoonRocket>> ROCKET = ForgottenIsland.ENTITIES.register("moon_rocket",
+        () -> EntityType.Builder.<MoonRocket>of(MoonRocket::new, MobCategory.MISC).sized(1.5f, 2.4f)
+            .clientTrackingRange(10).updateInterval(1).fireImmune().build("forgottenisland:moon_rocket"));
     public static final ResourceKey<Level> STOMACH = ResourceKey.create(Registries.DIMENSION,ForgottenIsland.id("bakunawa_interior"));
     public static final DeferredRegister<Block> BLOCKS=DeferredRegister.create(ForgeRegistries.BLOCKS,ForgottenIsland.ID);
     public static final RegistryObject<Block> PAROL_STONE=BLOCKS.register("parol_stone",()->new StarFrameBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).strength(2).lightLevel(s->7)));

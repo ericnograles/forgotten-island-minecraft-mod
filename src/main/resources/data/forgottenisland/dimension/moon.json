@@ -1,0 +1,26 @@
+{
+  "type": "forgottenisland:moon",
+  "generator": {
+    "type": "forgottenisland:lunar_craters",
+    "settings": {
+      "biome": "forgottenisland:moon",
+      "lakes": false,
+      "features": false,
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        },
+        {
+          "block": "minecraft:basalt",
+          "height": 59
+        },
+        {
+          "block": "minecraft:tuff",
+          "height": 4
+        }
+      ],
+      "structure_overrides": []
+    }
+  }
+}

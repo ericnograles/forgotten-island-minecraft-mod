@@ -8,7 +8,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import java.util.function.Supplier;
 
 public final class IslandNetwork {
-    public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(ForgottenIsland.id("companions"),()->"1","1"::equals,"1"::equals);
+    public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(ForgottenIsland.id("companions"),()->"2","2"::equals,"2"::equals);
     public record Request(int entityId, boolean secondary) {
         public static void encode(Request p,FriendlyByteBuf b) {b.writeVarInt(p.entityId);b.writeBoolean(p.secondary);}
         public static Request decode(FriendlyByteBuf b) {return new Request(b.readVarInt(),b.readBoolean());}
@@ -31,7 +31,12 @@ public final class IslandNetwork {
             });context.setPacketHandled(true);
         }
     }
+    public record Moonrise() {}
     public static void register() {
+        CHANNEL.messageBuilder(Moonrise.class,2,NetworkDirection.PLAY_TO_CLIENT)
+            .encoder((msg,buf) -> {}).decoder(buf -> new Moonrise())
+            .consumerMainThread((msg,ctx) -> net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(
+                net.minecraftforge.api.distmarker.Dist.CLIENT, () -> com.forgottenisland.client.MoonriseScreen::show)).add();
         CHANNEL.messageBuilder(Request.class,0,NetworkDirection.PLAY_TO_SERVER).encoder(Request::encode).decoder(Request::decode).consumerNetworkThread(Request::handle).add();
         CHANNEL.messageBuilder(Ride.class,1,NetworkDirection.PLAY_TO_SERVER).encoder(Ride::encode).decoder(Ride::decode).consumerNetworkThread(Ride::handle).add();
     }

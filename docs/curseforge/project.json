@@ -1,6 +1,6 @@
 {
   "name": "Forgotten Island: Wild Companions",
-  "summary": "Befriend 13 magical companions, explore a lantern-lit island, battle two bosses, forge crystal gear, and raise a flying Bakunawa.",
+  "summary": "Befriend 13 magical companions, explore a lantern-lit island, and ride a rocket to the Moon for a rematch with Bakunawa.",
   "game": "Minecraft",
   "class": "Mods",
   "primary_category_suggestion": "Adventure and RPG",
@@ -15,18 +15,17 @@
   "java_version": "17",
   "environment": "Client and server",
   "license": "Use Custom and paste the complete repository LICENSE, including the MIT text and third-party rights clarification.",
-  "file_name": "forgotten-island-0.5.0.jar",
-  "file_display_name": "Forgotten Island 0.5.0 - Forge 1.20.1",
+  "file_name": "forgotten-island-0.6.0.jar",
+  "file_display_name": "Forgotten Island 0.6.0 - Forge 1.20.1",
   "release_type": "Beta",
   "required_mod_dependencies": [],
   "experimental": false,
   "source_url": "https://github.com/ericnograles/forgotten-island-minecraft-mod",
   "issues_url": "https://github.com/ericnograles/forgotten-island-minecraft-mod/issues",
   "wiki_url": "https://github.com/ericnograles/forgotten-island-minecraft-mod/blob/main/README.md",
-  "walkthrough_url": "https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.5.0/Forgotten-Island-0.5.0-Walkthrough.mp4",
+  "walkthrough_url": "https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.6.0/Forgotten-Island-0.6.0-Walkthrough.mp4",
   "project_id": 1825044,
   "project_url": "https://www.curseforge.com/minecraft/mc-mods/forgotten-island-wild-companions",
-  "file_id": 9763079,
-  "publication_receipt_url": "https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.5.0/curseforge-publication.json",
-  "status": "Submitted 0.5.0 Beta through GitHub Actions on 2026-11-22. At submission, the file was scanning and the new project awaited moderator approval."
+  "publication_receipt_url": "https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.6.0/curseforge-publication.json",
+  "status": "See the versioned release receipt for the submitted file ID and the author dashboard for moderation status."
 }

@@ -1,0 +1,8 @@
+Forgotten Island 0.6.0 — Moon Pursuit
+Minecraft Java 1.20.1 · Forge 47.4.10 · Java 17
+
+Bakunawa now opens a second encounter when it defeats you. After respawning, watch the serpent climb toward the Moon. Equip the Moon Rocket you receive and use it under open sky to board and launch.
+
+Land in a crater, watch Bakunawa try to swallow the Moon, then strike its lowered jaw to interrupt the bite. The rematch uses both Bakunawa combat forms. Each pilot arriving while another crater is occupied gets a separate landing site.
+
+Use /island rocket to recover a lost rocket before landing and /island home to return. Back up your 0.5 world and replace the previous JAR on the server and all clients.

@@ -37,6 +37,12 @@ public final class EncounterState {
         if(stage==Stage.DEFEAT&&ticks>=defeatLength){stage=Stage.COMPLETE;ticks=0;return true;}
         return false;
     }
+    public boolean interruptMoonBite() {
+        if (stage != Stage.ENTRANCE || ticks < MoonPursuit.BITE_TICKS) return false;
+        stage = Stage.COMBAT;
+        ticks = 0;
+        return true;
+    }
     public void directForm(boolean serpent){
         if(stage!=Stage.ENTRANCE)return;
         phase=2;

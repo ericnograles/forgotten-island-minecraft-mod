@@ -46,6 +46,7 @@ public final class BossModel extends EntityModel<IslandBoss> {
         float jaw=.12f+Mth.sin(age*.06f)*.04f;
         if(boss.stage()==EncounterState.Stage.ENTRANCE){
             float roar=(float)(BakunawaMoves.smooth((scene-115)/12.0)*(1-BakunawaMoves.smooth((scene-165)/20.0)));
+            if (boss.lunar()) roar=(float)(.8+.15*Math.sin(scene*.09));
             jaw+=roar*1.05f;head.xRot-=roar*.24f;
         }else if(defeat){jaw=.55f;head.xRot-=scene*.002f;}
         else if(boss.stage()==EncounterState.Stage.COMBAT){

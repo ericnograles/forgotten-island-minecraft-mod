@@ -1,12 +1,14 @@
 # Forgotten Island: Wild Companions
 
-[Watch or download the narrated 0.5.0 walkthrough (4 min 45 sec)](https://github.com/ericnograles/forgotten-island-minecraft-mod/raw/refs/heads/main/Forgotten-Island-0.5.0-Walkthrough.mp4)
+[Download v0.6.0 for Forge 1.20.1](https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/tag/v0.6.0) · [Watch the five-minute narrated playthrough](https://github.com/ericnograles/forgotten-island-minecraft-mod/releases/download/v0.6.0/Forgotten-Island-0.6.0-Walkthrough.mp4)
+
+In the video, the coastal encounter begins at **2:21**, the respawn and moonrise at **2:38**, and the rocket at **2:50**. The first lunar strike lands at **3:20** and the storm form appears at **4:17**. The narrated playtest uses supplied gear, low starting health at the coast, and healing during the lunar fight.
 
 The [CurseForge player guide](docs/curseforge/description.html) collects the installation, companions, controls, recipes, and boss instructions used by the listing. Maintainers can find release synchronization instructions in [CurseForge publishing](docs/curseforge/PUBLISHING.md).
 
-Version **0.5.0** brings the festival into a mountain basin on a 100,000 × 80,000-block island. Manang guards the summit. At Moonbreak Coast, Bakunawa breaches the inlet, brings its jaw within sword reach after attacks and transforms into a larger winged lightning serpent when its first health bar runs out.
+**New in 0.6.0 — Moon Pursuit.** Losing to Bakunawa opens a second route through the encounter. After you respawn, watch the serpent rise toward the Moon. Use the Moon Rocket under open sky, ride it to a lunar impact basin and strike the lowered jaw to interrupt the serpent’s bite. That first hit starts a fresh two-form fight.
 
-See the [0.5 field notes and verification ledger](docs/adventure-tranche5.md) for terrain, balance, migration and playtest results.
+The mountain market, Twilight Summit and Moonbreak Coast are still accessible through the Homeward Star. For the previous highlands release, see the [0.5 field notes](docs/adventure-tranche5.md).
 
 An unofficial Minecraft Java mod inspired by DreamWorks' *Forgotten Island* and Philippine folklore. **Thirteen playable creatures** with original models, companion abilities and three rideable creatures. See [the verification ledger](docs/verification.md) for automated tests, single-player and multiplayer evidence, and remaining limits.
 
@@ -17,7 +19,7 @@ The current build includes **thirteen creatures**: Bakunawa, Raww, Manang, Sarim
 Requires **Minecraft Java Edition 1.20.1**, **Java 17**, and **Forge 47.4.10** (the pinned test version). No animation or other mod dependencies are required. The declared Forge range is 47.4.10–47.x; other Forge releases have not been tested.
 
 1. Install the matching [official Forge client](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html).
-2. Copy `forgotten-island-0.5.0.jar` from the release archive (or `build/libs` after building the source) into that Minecraft profile's `mods` folder.
+2. Copy `forgotten-island-0.6.0.jar` from the release archive (or `build/libs` after building the source) into that Minecraft profile's `mods` folder.
 3. Launch the Forge profile. Put the same JAR on a Forge server and every connecting client for multiplayer.
 4. In Survival, craft the field guide and follow the portal plan below. For the original companion showcase, use the **Forgotten Island** tab on the second Creative-tab page.
 
@@ -44,7 +46,7 @@ The necklace brings you to the festival at **(310, 65, 85)**. The market’s eas
 | Moonbreak Coast | 820, 65, −65 | Follow the eastern trail past the sea arch. Approach from the south and face the open inlet. |
 | Homeward star | 310, 64, 99 | Jump into the market star to return to your personal Overworld portal. |
 
-Outside the festival basin, follow forested ridges, riverbeds and mossy lantern arches. The terrain generates on demand. Back up a 0.4 save before installing the same new JAR on all clients and the server. The original island has its own dimension and keeps its builds and residents. From either island, use `/island harbor` for the old district and `/island market` for the highlands. Existing completions and reward claims carry forward.
+Outside the festival basin, follow forested ridges, riverbeds and mossy lantern arches. The terrain generates on demand. When upgrading from 0.5, back up your world, then replace the old JAR on the server and every client. The original island has its own dimension and keeps its builds and residents. From either island, use `/island harbor` for the old district and `/island market` for the highlands. Existing completions and reward claims carry forward.
 
 ## Encounters and rewards
 
@@ -53,6 +55,8 @@ Both bosses greet Creative, Survival and Adventure visitors. A Creative-only gro
 **Manang** has 220 solo HP. Leave the Shadow Dive circle, jump the Shriek ring and move behind Wing Cut. Strike her lower body when she folds her wings. At half health the attacks quicken. Her blue-violet face, arched brows, fangs and swinging dark hair are shared with the friendly companion.
 
 **Bakunawa** begins with 400 solo HP. After each attack, meet its exhausted jaw in the center and strike the visible body. A charged iron sword deals 9 damage in recovery. Stronger swords retain an advantage with diminishing returns against boss hide. Empty the first bar to trigger a three-second transformation and a fresh 500 HP bar. The larger storm form opens with Lightning Strike, followed by Lightning Breath. Leave the three yellow circles or sidestep the charged line. Its hide absorbs another 15%. Only the final defeat splits the serpent and opens the reward dais.
+
+**Moon pursuit.** If Bakunawa kills you, respawn to see it rise toward the Moon. Equip the Moon Rocket you receive and use it under open sky. Stay aboard through launch and landing. In the lunar crater, watch the jaws close around the Moon, then hit the lowered jaw yourself to begin the rematch. Defeat both forms to free the Moon. The coastal fight awards the island loot. Other arrivals get their own crater while yours is occupied. You can return with `/island home`. If you lose the rocket before landing, `/island rocket` replaces it. [Watch the 39-second moon pursuit preview](Forgotten-Island-Moon-Pursuit-Walkthrough.mp4).
 
 Chomp, Moon Rocks and Fireballs deal 9 HP before armor, Tentacles 7, Tail Whip and Horn Slash 5. Atomic Breath pulses for 1 HP per second. Golden Ward protects the serpent for five seconds. Lunar Tide and Eclipse Breath retain their ground warnings. Lightning Strike deals up to 9 HP per volley and Lightning Breath deals 8 HP per discharge.
 
@@ -150,7 +154,8 @@ python3 -m venv .tools-venv
 .tools-venv/bin/python tools/generate_adventure_assets.py
 .tools-venv/bin/python tools/generate_tranche_assets.py
 .tools-venv/bin/python tools/generate_tranche4_assets.py
-python tools/generate_tranche5_assets.py
+.tools-venv/bin/python tools/generate_tranche5_assets.py
+.tools-venv/bin/python tools/generate_moon_assets.py
 .tools-venv/bin/python tools/validate_assets.py
 .tools-venv/bin/python tools/validate_adventure_assets.py
 ```

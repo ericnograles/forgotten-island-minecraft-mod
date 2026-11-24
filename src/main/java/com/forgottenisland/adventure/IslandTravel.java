@@ -45,7 +45,7 @@ public final class IslandTravel {
         }
     }
     public static boolean home(ServerPlayer player) {
-        if(player.level().dimension()!=AdventureContent.ISLAND&&player.level().dimension()!=AdventureContent.HIGHLANDS&&player.level().dimension()!=AdventureContent.STOMACH)return false;
+        if(player.level().dimension()!=AdventureContent.ISLAND&&player.level().dimension()!=AdventureContent.HIGHLANDS&&player.level().dimension()!=AdventureContent.STOMACH&&player.level().dimension()!=AdventureContent.MOON)return false;
         ServerLevel overworld=player.server.overworld();
         BlockPos origin=IslandSavedData.get(player.server).departure(player.getUUID()).orElse(overworld.getSharedSpawnPos());
         Vec3 destination=safeNear(overworld,origin).orElseGet(()->safeNear(overworld,overworld.getSharedSpawnPos()).orElseGet(()->fallback(overworld,overworld.getSharedSpawnPos())));

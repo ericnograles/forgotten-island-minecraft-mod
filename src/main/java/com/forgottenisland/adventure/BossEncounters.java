@@ -65,7 +65,7 @@ public final class BossEncounters {
         var runtime=RUNTIME.computeIfAbsent(level,k->new HashMap<>());
         var r=runtime.computeIfAbsent(a.id(),k->new Runtime(kind));
         var players=level.getServer().getPlayerList().getPlayers().stream().filter(p->p.isAlive()&&!p.isSpectator()&&
-            (p.level()==level&&a.contains(p.position())||kind==BossKind.BAKUNAWA&&BakunawaStomach.participating(p,a.id(),state.attempt()))).toList();
+            (p.level()==level&&a.contains(p.position())&&!(p.getVehicle() instanceof MoonRocket)||kind==BossKind.BAKUNAWA&&BakunawaStomach.participating(p,a.id(),state.attempt()))).toList();
         boolean approach=level.players().stream().anyMatch(p->!p.isSpectator()&&p.distanceToSqr(Vec3.atCenterOf(a.center()))<Math.pow(kind.radius+36,2));
         boolean active=state.stage()!=EncounterState.Stage.READY&&state.stage()!=EncounterState.Stage.COMPLETE;
         var chunk=new ChunkPos(a.center());
@@ -73,7 +73,7 @@ public final class BossEncounters {
             level.getChunkSource().removeRegionTicket(TICKET,chunk,2,a.id());r.meter.removeAllPlayers();return;
         }
         if(active||approach&&state.stage()==EncounterState.Stage.READY)level.getChunkSource().addRegionTicket(TICKET,chunk,2,a.id());
-        if(state.stage()==EncounterState.Stage.READY&&approach&&(level.getGameTime()>=r.nextPlacement||!players.isEmpty()&&r.emptyTicks==0)){
+        if(!a.lunar()&&state.stage()==EncounterState.Stage.READY&&approach&&(level.getGameTime()>=r.nextPlacement||!players.isEmpty()&&r.emptyTicks==0)){
             r.obstruction=BossEggItem.placement(level,kind,a.center());
             r.nextPlacement=level.getGameTime()+40;
         }
@@ -88,14 +88,17 @@ public final class BossEncounters {
                 var actor=level.getEntity(state.actor());if(actor!=null)actor.discard();
                 if(kind==BossKind.BAKUNAWA)data.interior(a.id()).release();
                 state.retry();r.meter.removeAllPlayers();level.getChunkSource().removeRegionTicket(TICKET,chunk,2,a.id());
-                if(a.testing()){data.removeTest(a);runtime.remove(a.id());}data.setDirty();return;
+                if(a.testing() || a.lunar()){data.removeTest(a);runtime.remove(a.id());}data.setDirty();return;
             }
             for(var p:players)if(!state.participants().contains(p.getUUID())){state.join(p.getUUID());data.setDirty();}
             if(level.areEntitiesLoaded(chunk.toLong())){
                 var actor=level.getEntity(state.actor()) instanceof IslandBoss boss?boss:spawn(level,a,state);
                 if(actor!=null){
                     boolean fighting=players.stream().anyMatch(p->!p.isCreative());
-                    if(state.stage()!=EncounterState.Stage.COMBAT||fighting){state.tick(kind.entranceLength,kind.defeatLength);data.setDirty();}
+                    boolean awaitingStrike = a.lunar() && state.stage() == EncounterState.Stage.ENTRANCE && state.ticks() >= MoonPursuit.BITE_TICKS;
+                    if (!awaitingStrike && (state.stage()!=EncounterState.Stage.COMBAT||fighting)) {
+                        state.tick(kind.entranceLength,kind.defeatLength);data.setDirty();
+                    }
                     actor.sync(state);
                 }
             }
@@ -104,6 +107,11 @@ public final class BossEncounters {
             if(kind==BossKind.BAKUNAWA&&data.interior(a.id()).crystals()!=0){data.interior(a.id()).release();data.setDirty();}
             var actor=state.actor()==null?null:level.getEntity(state.actor());if(actor!=null)actor.discard();
             if(a.testing()){data.removeTest(a);runtime.remove(a.id());}
+            else if (a.lunar()) {
+                for (var p : players) p.sendSystemMessage(Component.literal("The Moon is free. Use /island home to return."));
+                data.removeTest(a);
+                runtime.remove(a.id());
+            }
             else if(!players.isEmpty()||active)finish(level,kind,state,data);
             level.getChunkSource().removeRegionTicket(TICKET,chunk,2,a.id());r.meter.removeAllPlayers();return;
         }
@@ -111,7 +119,7 @@ public final class BossEncounters {
         for(var p:List.copyOf(r.meter.getPlayers()))if(!ids.contains(p.getUUID()))r.meter.removePlayer(p);
         r.meter.setProgress(state.health()/state.maxHealth());
         String label=switch(state.stage()){
-            case ENTRANCE -> "AWAKENING"; case TRANSFORM -> "METAMORPHOSIS"; case DEFEAT -> "RELEASE";
+            case ENTRANCE -> a.lunar() ? (state.ticks() >= MoonPursuit.BITE_TICKS ? "STRIKE THE JAW" : "THE MOON IN ITS JAWS") : "AWAKENING"; case TRANSFORM -> "METAMORPHOSIS"; case DEFEAT -> "RELEASE";
             default -> state.phase()==1?"I · WATCH THE WARNINGS":kind==BossKind.MANANG?"II · SEVERED FURY":"II · LIGHTNING";
         };
         r.meter.setName(Component.literal(kind.title+"  |  "+label));

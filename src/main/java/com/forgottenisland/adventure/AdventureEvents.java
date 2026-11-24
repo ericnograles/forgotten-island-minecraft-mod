@@ -25,7 +25,7 @@ public final class AdventureEvents {
         var queue=PENDING.get(level);return queue!=null&&queue.contains(pos);
     }
     @SubscribeEvent public static void noExplodingBeds(PlayerInteractEvent.RightClickBlock e) {
-        if(e.getLevel().dimension()!=AdventureContent.ISLAND&&e.getLevel().dimension()!=AdventureContent.HIGHLANDS)return;
+        if(e.getLevel().dimension()!=AdventureContent.ISLAND&&e.getLevel().dimension()!=AdventureContent.HIGHLANDS&&e.getLevel().dimension()!=AdventureContent.MOON)return;
         var block=e.getLevel().getBlockState(e.getPos()).getBlock();
         if(block instanceof net.minecraft.world.level.block.BedBlock||block instanceof net.minecraft.world.level.block.RespawnAnchorBlock) {
             e.setCanceled(true);e.setCancellationResult(InteractionResult.FAIL);
@@ -65,6 +65,9 @@ public final class AdventureEvents {
         StarNecklaceItem.clear(e.getServer());
     }
     @SubscribeEvent public static void commands(RegisterCommandsEvent e) {
+        e.getDispatcher().register(Commands.literal("island").then(Commands.literal("rocket").executes(c -> {
+            MoonPursuit.recoverRocket(c.getSource().getPlayerOrException()); return 1;
+        })));
         for(boolean legacy:new boolean[]{true,false}){
             e.getDispatcher().register(Commands.literal("island").then(Commands.literal(legacy?"harbor":"market").executes(c->{
                 var p=c.getSource().getPlayerOrException();

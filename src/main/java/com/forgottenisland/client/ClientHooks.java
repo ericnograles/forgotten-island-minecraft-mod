@@ -28,6 +28,7 @@ public final class ClientHooks {
         for(var kind:com.forgottenisland.adventure.BossKind.values())e.registerLayerDefinition(BossModel.layer(kind),()->CreatureModel.bake(kind.species,true));
     }
     @SubscribeEvent public static void renderers(EntityRenderersEvent.RegisterRenderers e){
+        e.registerEntityRenderer(com.forgottenisland.adventure.AdventureContent.ROCKET.get(),MoonRocketRenderer::new);
         ForgottenIsland.TYPES.forEach((s,t)->e.registerEntityRenderer(t.get(),c->new CreatureRenderer(c,s)));
         e.registerEntityRenderer(com.forgottenisland.adventure.AdventureContent.MANANG_BOSS.get(),c->new BossRenderer(c,com.forgottenisland.adventure.BossKind.MANANG));
         e.registerEntityRenderer(com.forgottenisland.adventure.AdventureContent.BAKUNAWA_BOSS.get(),c->new BossRenderer(c,com.forgottenisland.adventure.BossKind.BAKUNAWA));

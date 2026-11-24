@@ -50,6 +50,13 @@ public final class IslandSavedData extends SavedData {
     public boolean exitBuilt(String boss){return exits.contains(boss);}
     public void markExitBuilt(String boss){exits.add(boss);setDirty();}
     public EncounterState encounter(String boss) {return encounters.computeIfAbsent(boss,k->new EncounterState());}
+    // Lunar encounters use the saved arena journal, independently of the twelve egg slots.
+    Arena openMoonBattle(BlockPos center) {
+        var arena = new Arena(UUID.randomUUID().toString(), BossKind.BAKUNAWA, AdventureContent.MOON, center, 0, false);
+        tests.put(arena.id(), arena);
+        setDirty();
+        return arena;
+    }
     void restoreEncounter(String boss,EncounterState.Snapshot snapshot){encounters.put(boss,EncounterState.restore(snapshot));}
     public boolean chunkBuilt(long pos) {return builtChunks.contains(pos);}
     public void markChunkBuilt(long pos) {builtChunks.add(pos);setDirty();}

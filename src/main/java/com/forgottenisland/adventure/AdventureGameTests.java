@@ -85,7 +85,9 @@ public final class AdventureGameTests {
 
     @GameTest(template="empty",timeoutTicks=200)
     public static void realRewardDropsWaitForSceneAndSurviveRepeatedCompletion(GameTestHelper h) {
-        var level=h.getLevel().getServer().getLevel(AdventureContent.ISLAND);var kind=BossKind.BAKUNAWA;
+        // Exercise real item delivery in the disposable GameTest world. The legacy island
+        // remembers protected columns independently of the fresh encounter journal below.
+        var level=h.getLevel();var kind=BossKind.BAKUNAWA;
         var data=new IslandSavedData();var state=data.encounter(kind.id);
         UUID first=UUID.randomUUID(),second=UUID.randomUUID();
         state.start(kind.baseHealth,java.util.List.of(first,second),UUID.randomUUID());state.tick(1,1);state.recordHealth(0);

@@ -5,7 +5,7 @@ from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.5.0"
+VERSION = "0.6.0"
 JAR = ROOT / "build" / "libs" / f"forgotten-island-{VERSION}.jar"
 OUTPUT = ROOT / "build" / "distributions"
 SOURCE_ROOTS = (
@@ -62,6 +62,9 @@ def main():
                         p.name == "gradlew") for p in files_under(SOURCE_ROOTS)])
     checksums = [(JAR.name, jar_hash)] + [
         (p.name, sha256(p.read_bytes()).hexdigest()) for p in (release, source)]
+    walkthrough = ROOT / f"Forgotten-Island-{VERSION}-Walkthrough.mp4"
+    if walkthrough.is_file():
+        checksums.append((walkthrough.name, sha256(walkthrough.read_bytes()).hexdigest()))
     (OUTPUT / "SHA256SUMS.txt").write_text(
         "".join(f"{digest}  {name}\n" for name, digest in checksums))
     for path in (release, source):

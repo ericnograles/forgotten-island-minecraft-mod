@@ -54,10 +54,10 @@ public final class BossPresentation {
         for(var entity:mc.level.entitiesForRendering())if(entity instanceof IslandBoss boss&&boss.inside(mc.player.position())) {
             if(nearby==null||boss.distanceToSqr(mc.player)<nearby.distanceToSqr(mc.player))nearby=boss;
         }
-        if(scene!=null&&(mc.screen!=null||scene.level!=mc.level||!mc.player.isAlive()||scene.boss.isRemoved()||!scene.key.equals(key(scene.boss))||!scene.boss.inside(mc.player.position())||++scene.elapsed>Math.max(scene.boss.kind.entranceLength,scene.boss.kind.defeatLength)+40)){skipped.add(scene.key);restore(mc);}
+        if(scene!=null&&(mc.screen!=null||scene.level!=mc.level||!mc.player.isAlive()||scene.boss.isRemoved()||scene.boss.awaitingMoonStrike()||!scene.key.equals(key(scene.boss))||!scene.boss.inside(mc.player.position())||++scene.elapsed>Math.max(scene.boss.kind.entranceLength,scene.boss.kind.defeatLength)+40)){skipped.add(scene.key);restore(mc);}
         if(scene==null&&mc.screen==null&&nearby!=null&&mc.player.isAlive()&&!mc.player.isSpectator()
             &&(nearby.stage()==EncounterState.Stage.ENTRANCE||nearby.stage()==EncounterState.Stage.DEFEAT)
-            &&AdventureClientConfig.CINEMATICS.get()!=AdventureClientConfig.Cinematics.OFF&&!skipped.contains(key(nearby)))scene=new Scene(mc,nearby);
+            &&!nearby.awaitingMoonStrike()&&AdventureClientConfig.CINEMATICS.get()!=AdventureClientConfig.Cinematics.OFF&&!skipped.contains(key(nearby)))scene=new Scene(mc,nearby);
         if(scene!=null&&scene.mode==AdventureClientConfig.Cinematics.FULL)camera(mc,scene,0);
         if(skipped.size()>128)skipped.clear();
     }
@@ -82,7 +82,11 @@ public final class BossPresentation {
             else {position=center.add(8-ease*4,5+ease*2,10+ease*4);look=center.add(0,3-ease,0);}
         } else {
             double clock=b.clock()+partial;var origin=b.origin();
-            if(entrance&&clock<40){position=origin.add(28,7,35);look=b.headPoint(partial);}
+            if(entrance && b.lunar()) {
+                double sweep=BakunawaMoves.smooth(clock/MoonPursuit.BITE_TICKS);
+                position=center.add(35-17*sweep,13-6*sweep,24);
+                look=b.headPoint(partial).add(0,-1,6);
+            }else if(entrance&&clock<40){position=origin.add(28,7,35);look=b.headPoint(partial);}
             else if(entrance&&clock<174){
                 double reveal=BakunawaMoves.smooth((clock-40)/100);position=origin.add(48-reveal*8,12+reveal*12,85+reveal*15);look=b.headPoint(partial).add(0,-3,0);
             }else if(entrance&&clock<200){
@@ -152,10 +156,10 @@ public final class BossPresentation {
             if(scene.mode==AdventureClientConfig.Cinematics.FULL){g.fill(0,0,w,29,0xef080e1d);g.fill(0,h-43,w,h,0xef080e1d);}
             String name=scene.boss.kind==BossKind.MANANG?"MANANG":"BAKUNAWA";
             int captionY=scene.mode==AdventureClientConfig.Cinematics.FULL?h-34:h-102;
-            g.drawCenteredString(mc.font,name+(entrance?" AWAKENS":" · THE ISLAND REMEMBERS"),w/2,captionY,0xfff5d68d);
+            g.drawCenteredString(mc.font,scene.boss.lunar() && entrance ? "BAKUNAWA · THE MOON IN ITS JAWS" : name+(entrance?" AWAKENS":" · THE ISLAND REMEMBERS"),w/2,captionY,0xfff5d68d);
             g.drawCenteredString(mc.font,"K · Skip your scene    O · Camera mode",w/2,captionY+16,0xffb4d9d8);
         }
-        if(nearby!=null&&nearby.kind==BossKind.BAKUNAWA&&AdventureClientConfig.CINEMATICS.get()!=AdventureClientConfig.Cinematics.OFF
+        if(nearby!=null&&!nearby.lunar()&&nearby.kind==BossKind.BAKUNAWA&&AdventureClientConfig.CINEMATICS.get()!=AdventureClientConfig.Cinematics.OFF
             &&(nearby.phase()==2||scene!=null)) {
             double progress=scene!=null?Mth.clamp(nearby.clock()/(float)nearby.kind.entranceLength,0,1):.72;
             int x=w-58,y=83;disc(g,x,y,23,0xfff4dfaf);disc(g,x-37+(int)(progress*40),y,24,0xff15162e);

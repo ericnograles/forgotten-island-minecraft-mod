@@ -79,6 +79,8 @@ public final class IslandBoss extends Monster {
     public boolean exposed(){return stage()==EncounterState.Stage.COMBAT&&localClock()>=(kind==BossKind.BAKUNAWA?BakunawaMoves.recovery(attack()):80);}
     public boolean warded(){return kind==BossKind.BAKUNAWA&&stage()==EncounterState.Stage.COMBAT&&BakunawaMoves.shield(attack(),localClock());}
     public Vec3 aim(){return new Vec3(entityData.get(AIM_X),center().getY(),entityData.get(AIM_Z));}
+    public boolean lunar() { return level().dimension() == AdventureContent.MOON && kind == BossKind.BAKUNAWA; }
+    public boolean awaitingMoonStrike() { return lunar() && stage() == EncounterState.Stage.ENTRANCE && clock() >= MoonPursuit.BITE_TICKS; }
     public double emergence(){return emergence(0);}
     public double emergence(double partial){
         if(stage()!=EncounterState.Stage.ENTRANCE)return 0;
@@ -89,6 +91,10 @@ public final class IslandBoss extends Monster {
     public Vec3 headPoint(double partial){
         double t=localClock()+partial, size=sizeFactor();
         var home=origin().add(0,22+emergence(partial)+6*releaseLift(partial),22);
+        if (lunar() && stage() == EncounterState.Stage.ENTRANCE) {
+            Vec3 rim = Vec3.atBottomCenterOf(center());
+            return rim.add(0, 17, -27).lerp(rim.add(0, 3.8, -7), BakunawaMoves.smooth((clock()+partial-40)/68));
+        }
         if(stage()!=EncounterState.Stage.COMBAT)return home;
         var perch=Vec3.atBottomCenterOf(center()).add(0,4.5*size,-7*size);
         double rest=BakunawaMoves.smooth((t-BakunawaMoves.recovery(attack())+16)/16)
@@ -176,9 +182,14 @@ public final class IslandBoss extends Monster {
     }
     @Override public boolean hurt(DamageSource source,float amount){return kind==BossKind.MANANG&&hurtPart(source,amount,true);}
     public boolean hurtPart(DamageSource source,float amount,boolean weak) {
-        if(level().isClientSide||stage()!=EncounterState.Stage.COMBAT||!(source.getEntity() instanceof ServerPlayer p)||!inside(p.position())||p.isSpectator()||p.isCreative())return false;
+        if(level().isClientSide||(stage()!=EncounterState.Stage.COMBAT&&!awaitingMoonStrike())||!(source.getEntity() instanceof ServerPlayer p)||!inside(p.position())||p.isSpectator()||p.isCreative())return false;
         var data=IslandSavedData.get(p.server);var state=data.encounter(encounterId());
         if(!state.participants().contains(p.getUUID()))return false;
+        if (awaitingMoonStrike()) {
+            if (source.getDirectEntity()!=p || !state.interruptMoonBite()) return false;
+            sync(state);
+            sound(AdventureContent.BAKUNAWA_ROAR.get(),1.3f,.85f);
+        }
         if(warded()){p.displayClientMessage(Component.literal("Bakunawa's golden ward is invincible — wait for it to fade!"),true);return false;}
         if(weak&&!exposed()) {
             p.displayClientMessage(Component.literal("Her wings shield the lower body. Strike after the attack!"),true);return false;
@@ -260,7 +271,7 @@ public final class IslandBoss extends Monster {
                 level.sendParticles(ParticleTypes.CLOUD,aim().x,aim().y+2,aim().z,50,3,1,3,.12);
                 for(var p:players)if(p.position().subtract(aim()).horizontalDistanceSqr()<16&&Math.abs(p.getY()-aim().y)<4&&struck.add(p.getUUID())){
                     p.hurt(damageSources().mobAttack(this),BakunawaMoves.CHOMP_DAMAGE);
-                    if(p.isAlive())BakunawaStomach.swallow(this,p);
+                    if(p.isAlive()) { if(lunar())p.knockback(.8, getX()-p.getX(), getZ()-p.getZ()); else BakunawaStomach.swallow(this,p); }
                 }
             }
         }else if(attack==1){
@@ -364,7 +375,7 @@ public final class IslandBoss extends Monster {
     private void warn(List<ServerPlayer> players,int attack) {
         String[] m={"SHADOW DIVE · leave the marked circle","SHRIEK · jump over the expanding ring","WING CUT · move out of her facing arc"};
         String[] b={"CHOMP · leave the amber circle! Crystals free swallowed players","TENTACLES · leave the five blue circles","HOLY BEAM · sidestep the white aim line! Two unblocked hits are lethal","MOON ROCKS · leave the landing circle","LUNAR TIDE · jump over the blue ring","ECLIPSE BREATH · move sideways out of the beam","FIREBALLS · leave the three orange targets","ATOMIC BREATH · leave the blue line; sustained contact hurts each second","GOLDEN WARD · invincible for five seconds; prepare for the opening","TAIL WHIP · move away from the yellow sweep","HORN SLASH · leave the red crescent","LIGHTNING STRIKE · leave all three gold circles","LIGHTNING BREATH · step across the charged line"};
-        for(var p:players)p.displayClientMessage(Component.literal((kind==BossKind.MANANG?m:b)[attack]),true);
+        for(var p:players)p.displayClientMessage(Component.literal(lunar() && attack==0 ? "CHOMP · dodge the jaws!" : (kind==BossKind.MANANG?m:b)[attack]),true);
     }
     private void cinematicEffects(ServerLevel level) {
         if(kind==BossKind.BAKUNAWA){bakunawaCinematic(level);return;}
@@ -377,6 +388,22 @@ public final class IslandBoss extends Monster {
     }
     private void bakunawaCinematic(ServerLevel level){
         boolean entrance=stage()==EncounterState.Stage.ENTRANCE;int t=clock();var water=origin().add(0,-2,22);
+        if (entrance && lunar()) {
+            if (t==18) sound(AdventureContent.MOON_DEVOUR.get(),1.2f,.65f);
+            if (t < MoonPursuit.BITE_TICKS && t%4==0) {
+                var jaw=mouth();
+                level.sendParticles(ParticleTypes.END_ROD,jaw.x,jaw.y+1,jaw.z,12,2,.7,2,.03);
+                // Fragments spiral up from the regolith into the open jaw.
+                for (int i=0; i<12; i++) {
+                    double lift=((t+i*9)%48)/48.0, angle=i*2.4+t*.09, radius=(1-lift)*8;
+                    double x=jaw.x+Math.cos(angle)*radius, z=jaw.z+Math.sin(angle)*radius;
+                    double y=center().getY()+.1+Math.max(.5,jaw.y-center().getY())*lift;
+                    level.sendParticles(new net.minecraft.core.particles.BlockParticleOption(ParticleTypes.BLOCK,
+                        net.minecraft.world.level.block.Blocks.CALCITE.defaultBlockState()),x,y,z,3,.2,.1,.2,.02);
+                }
+            }
+            return;
+        }
         if(entrance){
             if(t==1)sound(AdventureContent.MOON_DEVOUR.get(),1.2f,.55f);
             if(t<120&&t%4==0){ring(level,water,3+t*.16,ParticleTypes.SPLASH,90);sceneParticles(level,ParticleTypes.SPLASH,water.add(0,1,0),36,4,2,.20);sceneParticles(level,ParticleTypes.CLOUD,water.add(0,2,0),12,6,1,.06);}

@@ -92,3 +92,16 @@ for name in ('bakunawa_boss','phase_two_bakunawa_boss','manang_boss','separated_
     assert (assets/f'models/item/{key}.json').is_file() and (assets/f'textures/item/{key}.png').is_file()
     assert not (root/f'data/forgottenisland/recipes/{key}.json').exists()
 print('PASS: 0.5 highland generator data, facial rig, storm wings and emissive atlas, four independent boss egg assets.')
+moon = json.loads((root / 'data/forgottenisland/dimension/moon.json').read_text())
+assert moon['type'] == moon['generator']['settings']['biome'] == 'forgottenisland:moon'
+assert moon['generator']['type'] == 'forgottenisland:lunar_craters'
+for resource in ('dimension_type/moon', 'worldgen/biome/moon'):
+    assert (root / f'data/forgottenisland/{resource}.json').is_file()
+for texture in ('moonrise_sky', 'moonrise_serpent'):
+    with Image.open(assets / f'textures/gui/{texture}.png') as image:
+        image.verify()
+rocket = json.loads((assets / 'models/item/moon_rocket.json').read_text())
+for element in rocket['elements']:
+    for face in element['faces'].values():
+        assert face['texture'][1:] in rocket['textures']
+print('PASS: lunar dimension, generator and biome references, moonrise art and rocket model materials.')

@@ -18,6 +18,30 @@ import java.util.*;
 @GameTestHolder(ForgottenIsland.ID)
 @PrefixGameTestTemplate(false)
 public class HighlandGameTests {
+    @GameTest(template="empty")
+    public static void lunarRematchesSurviveReloadAndWaitForAPlayerStrike(GameTestHelper h) {
+        var data = new IslandSavedData();
+        var first = data.openMoonBattle(new BlockPos(0,65,0));
+        var second = data.openMoonBattle(new BlockPos(LunarGenerator.BASIN_SPACING,65,0));
+        var pilot = UUID.randomUUID();
+        var state = data.encounter(first.id());
+        state.start(400,List.of(pilot),UUID.randomUUID());
+        h.assertTrue(!state.interruptMoonBite(),"Player interrupted the landing cinematic early");
+        for (int t=0; t<MoonPursuit.BITE_TICKS; t++) state.tick(BossKind.BAKUNAWA.entranceLength,200);
+        var restored = IslandSavedData.load(data.save(new CompoundTag()));
+        var waiting = restored.encounter(first.id());
+        h.assertTrue(restored.arena(first.id()).lunar() && restored.arena(second.id()).center().equals(second.center()),
+            "Lunar arena identity or position was lost on reload");
+        h.assertTrue(waiting.stage()==EncounterState.Stage.ENTRANCE && waiting.interruptMoonBite(),
+            "Reloaded bite did not wait for its opening hit");
+        h.assertTrue(waiting.stage()==EncounterState.Stage.COMBAT && !waiting.interruptMoonBite(),
+            "Second hit restarted combat");
+        restored.removeTest(first);
+        h.assertTrue(restored.arena(second.id())!=null && restored.encounter(BossKind.BAKUNAWA.id).stage()==EncounterState.Stage.READY,
+            "Completing a lunar encounter changed another arena");
+        h.succeed();
+    }
+
     @GameTest(template="empty",timeoutTicks=100)
     public static void mountainArenasAndObstruction(GameTestHelper h){
         var l=h.getLevel().getServer().getLevel(AdventureContent.HIGHLANDS);

@@ -20,7 +20,7 @@ public final class BossPart extends PartEntity<IslandBoss> {
         setPos(at);
         setBoundingBox(size.scale((float)getParent().sizeFactor()).makeBoundingBox(at));
     }
-    @Override public boolean isPickable(){return getParent().stage()==EncounterState.Stage.COMBAT;}
+    @Override public boolean isPickable(){return getParent().stage()==EncounterState.Stage.COMBAT || getParent().awaitingMoonStrike();}
     @Override public boolean canBeCollidedWith(){return getParent().stage()==EncounterState.Stage.COMBAT;}
     @Override public boolean hurt(DamageSource source,float amount){return getParent().hurtPart(source,amount,weak);}
     @Override public boolean is(Entity other){return this==other||getParent()==other;}

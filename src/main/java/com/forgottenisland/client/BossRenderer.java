@@ -112,7 +112,7 @@ public final class BossRenderer extends MobRenderer<IslandBoss,BossModel> {
     }
     private void cinematicWaves(IslandBoss boss,float partial,PoseStack pose,MultiBufferSource buffers){
         float t=boss.clock()+partial;
-        if(boss.stage()==EncounterState.Stage.ENTRANCE&&t<125){
+        if(!boss.lunar()&&boss.stage()==EncounterState.Stage.ENTRANCE&&t<125){
             for(int i=0;i<3;i++){float radius=((t+i*12)%48)*.7f;ring(pose,buffers,boss.origin().subtract(boss.position()).add(0,-2,22),radius,.22f,.65f,.9f,1,.45f*(1-radius/34),0);}
         }else if(boss.stage()==EncounterState.Stage.DEFEAT&&t>=130&&t<168){
             var center=boss.bodyPoint(4,partial).subtract(boss.position());
@@ -133,9 +133,11 @@ public final class BossRenderer extends MobRenderer<IslandBoss,BossModel> {
     }
     private void moon(IslandBoss boss,float partial,PoseStack pose,MultiBufferSource buffers) {
         boolean entrance=boss.stage()==EncounterState.Stage.ENTRANCE,defeat=boss.stage()==EncounterState.Stage.DEFEAT;
-        if(!defeat||boss.clock()>=130)return;
+        boolean bite = boss.lunar() && entrance;
+        if(!bite && (!defeat||boss.clock()>=130))return;
         float t=(boss.clock()+partial)/(entrance?boss.kind.entranceLength:boss.kind.defeatLength);
         float swallow=Mth.clamp((t-.15f)/.65f,0,1),radius=entrance?5*(1-swallow):Mth.clamp(t*6,0,4);
+        if (bite) radius=(float)(8.5-5.8*BakunawaMoves.smooth((boss.clock()+partial-30)/80.));
         if(radius<.05f)return;
         var point=boss.mouth().subtract(boss.position());pose.pushPose();pose.translate(point.x,point.y+3,point.z+2);
         pose.mulPose(entityRenderDispatcher.cameraOrientation());pose.scale(radius,radius,radius);
